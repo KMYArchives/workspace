@@ -1,0 +1,52 @@
+.top-bar{
+	top: 0;
+	position: fixed;
+	height: $padding_base * 3;
+	line-height: $padding_base * 3;
+	margin-left: $header_size + $left_box_size;
+	width: calc(100% - $header_size + $left_box_size);
+
+	.right{
+		right: 0;
+		position: fixed;
+
+		.far, .fas{
+			float: left;
+			cursor: pointer;
+			text-align: center;
+			width: $padding_base * 3;
+			height: $padding_base * 3;
+			line-height: $padding_base * 3;
+			@include hover($firstColor);
+		}
+	}
+
+	.actived{
+		background: $firstColor;
+		.avatar{ @include filter(grayscale, 100%); }
+	}
+
+	.username{
+		right: 0;
+		display: flex;
+		cursor: pointer;
+		position: fixed;
+		align-items: center;
+		display: -webkit-flex;
+		justify-content: center;
+		width: $padding_base * 3.5;
+		height: $padding_base * 3.5;
+		font-size: $smallFont + .05;
+
+		.avatar{
+			width: $padding_base * 2.2;
+			height: $padding_base * 2.2;
+			@include border-radius(50%);
+		}
+		
+		@include hover($firstColor);
+		&:hover, &:focus{
+			.avatar{ @include filter(grayscale, 100%); }
+		}
+	}
+}

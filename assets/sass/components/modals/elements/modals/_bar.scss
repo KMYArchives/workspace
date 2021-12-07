@@ -1,0 +1,94 @@
+.bar{
+	width: 100%;
+	z-index: 9999999;
+	position: relative;
+	background: $secondColor;
+	font-size: $smallFont + .05;
+	height: $padding_base * 2.5;
+	line-height: $padding_base * 2.5;
+	border-bottom: $border_size solid $borderColor;
+
+	.icon{
+		float: left;
+		cursor: pointer;
+		text-align: center;
+		width: auto !important;
+		border-right: $border_size solid $borderColor;
+
+		@include hover($firstColor);
+		.fas, .far, .fab{ width: $header_size; }
+	}
+
+	.item{
+		float: left;
+		width: 8.5em;
+		color: inherit;
+		cursor: pointer;
+		text-align: center;
+		text-decoration: none;
+		font-size: $smallFont + .05;
+		border-right: $border_size solid $borderColor;
+		@include hover($firstColor);
+	}
+
+	input{
+		height: 94%;
+		float: right;
+		border: none;
+		width: 10.5em;
+		color: inherit;
+		text-align: left;
+		padding-left: $padding_base;
+		font-size: $smallFont + .05;
+		padding-right: $padding_base;
+		border-left: $border_size solid $borderColor;
+		@include hover($firstColor);
+	}
+
+	.right{
+		float: right !important;
+		border-right: 0 !important; 
+		border-left: $border_size solid $borderColor;
+	}
+
+	.label{
+		float: left;
+		width: auto;
+		text-align: center;
+		font-size: $smallFont + .05;
+		padding-right: $padding_base;
+		margin-left: $padding_base + $padding2;
+	}
+
+	select{
+		width: 16em;
+		float: left;
+		border: none;
+		height: 100%;
+		color: inherit;
+		cursor: pointer;
+		text-align: left;
+		padding-left: $padding_base;
+		font-size: $smallFont + .05;
+		padding-right: $padding_base;
+		border-right: $border_size solid $borderColor;
+
+		@include select;
+		@include hover($firstColor);
+	}
+
+	.message{
+		float: right;
+		text-align: center;
+		padding-left: $padding_base;
+		padding-right: $padding_base;
+	}
+
+	.it-right{
+		float: right !important;
+		border-right: none !important;
+		border-left: $border_size solid $borderColor;
+	}
+
+	.big-size{ width: 9.5em !important; }
+}

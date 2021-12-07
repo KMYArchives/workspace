@@ -1,0 +1,56 @@
+.confirm-mdl{
+	top: 50%;
+	left: 50%;
+	width: 24em;
+	height: auto;
+	display: none;
+	position: fixed;
+	margin-top: -12em;
+	margin-left: -12em;
+	z-index: 9999999999999;
+	background: $firstColor;
+
+	.conf-footer{
+		box-sizing: border-box;
+		height: $padding_base * 3;
+		font-size: $smallFont + .05;
+		line-height: $padding_base * 3;
+
+		.btn{
+			width: 50%;
+			float: left;
+			cursor: pointer;
+			text-align: center;
+			box-sizing: border-box;
+
+			@include hover($secondColor);
+			&:last-child{ border-right: none; }
+		}
+	}
+
+	.conf-content{
+		text-align: center;
+		font-size: $smallFont + .1;
+		padding-left: $padding_base;
+		padding-right: $padding_base;
+		padding-top: $padding_base * 2;
+		padding-bottom: $padding_base * 2;
+		line-height: $padding_base + $padding1;
+
+		input{
+			width: 92.5%;
+			outline: none;
+			color: inherit;
+			padding: $padding_base;
+			background: $firstColor;
+			font-size: $smallFont + .05;
+			margin-top: $padding_base * 2;
+			border: $border_size solid $borderColor;
+
+			@include hover;
+			@include placeholder;
+		}
+
+		.label{ text-align: left; }
+	}
+}

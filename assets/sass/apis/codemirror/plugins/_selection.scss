@@ -1,0 +1,15 @@
+.CodeMirror .cm-url {
+	cursor: pointer;
+	color: #0076AA;
+	&:hover, &:focus{ text-decoration: underline; }
+}
+
+.CodeMirror-focused .cm-matchhighlight {
+	background-image: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAYAAABytg0kAAAAFklEQVQI12NgYGBgkKzc8x9CMDAwAAAmhwSbidEoSQAAAABJRU5ErkJggg==');
+	background-position: bottom;
+	background-repeat: repeat-x;
+}
+
+.cm-matchhighlight { background-color: lightgreen; }
+.CodeMirror-selection-highlight-scrollbar { background-color: green; }
+.styled-background, .styled-background-text { background-color: #ffff77; }

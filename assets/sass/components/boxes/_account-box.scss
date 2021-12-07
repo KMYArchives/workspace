@@ -1,0 +1,69 @@
+.account-box{
+	left: 0;
+	width: 18.5em;
+	display: none;
+	position: fixed;
+	z-index: 999999999;
+	@include box-shadow;
+	background: $firstColor;
+	margin-left: $header_size;
+	border: $border_size solid $borderColor;
+
+	.menu{
+		display: block;
+		color: inherit;
+		cursor: pointer;
+		text-align: left;
+		font-size: $smallFont;
+		text-decoration: none;
+		padding-left: $padding_base;
+		padding-right: $padding_base;
+		line-height: $header_size - $padding2;
+
+		.fab, .far, .fas{
+			float: left;
+			text-align: center;
+			width: $header_size - $padding2;
+			line-height: $header_size - $padding2;
+		}
+
+		@include hover;
+		&:last-child{ border-bottom: 0; }
+	}
+
+	.info-user{
+		display: block;
+		color: inherit;
+		text-decoration: none;
+		padding: $padding_base;
+
+		.name{
+			font-size: 100%;
+			text-align: left;
+			margin-top: $padding3;
+			margin-bottom: $padding3;
+			margin-left: $padding2 - .15;
+		}
+
+		.text{
+			color: inherit;
+			font-size: 80%;
+			cursor: pointer;
+			text-align: left;
+			text-decoration: none;
+			margin-left: $padding2;
+			margin-bottom: $padding2;
+			margin-top: 0 !important;
+			&:hover, &:focus{ text-decoration: underline; }
+		}
+
+		.avatar{
+			float: left;
+			margin-right: $padding4;
+			@include border-radius(50%);
+			margin-top: -$padding2 + .1;
+			width: $header_size - $padding2 + $padding3;
+			height: $header_size - $padding2 + $padding3;
+		}
+	}
+}

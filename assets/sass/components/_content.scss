@@ -1,0 +1,35 @@
+.content{
+	top: 0;
+	position: absolute;
+	margin-top: $padding_base * 3;
+	margin-left: $header_size + $left_box_size;
+	width: calc(100% - $header_size + $left_box_size);
+
+	.filter{
+		float: left;
+		cursor: pointer;
+		margin: $padding_base;
+		font-size: $smallFont;
+		height: $padding_base * 2.5;
+		padding-right: $padding_base;
+		line-height: $padding_base * 2.5;
+		@include border-radius($padding3);
+		border: $border_size solid inherit;
+
+		.far, .fas{
+			float: left;
+			text-align: center;
+			width: $padding_base * 3;
+			line-height: $padding_base * 2.5;
+		}
+
+		@include hover($blueColor, $firstColor, $blueColor);
+	}
+
+	@include table;
+	table{
+		width: 96%;
+		margin: 2%;
+		table-layout: fixed;
+	}
+}

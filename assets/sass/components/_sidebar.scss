@@ -1,0 +1,88 @@
+.sidebar{
+	top: 0;
+	left: 0;
+	height: 100%;
+	position: fixed;
+	z-index: 999999999;
+	width: $header_size;
+	background: $secondColor;
+	border-right: $border_size solid $borderColor;
+
+	hr{
+		border: none !important;
+		border-color: $secondColor !important;
+	}
+
+	.logo{
+		width: 100%;
+		text-align: center;
+		height: $header_size;
+		text-decoration: none;
+		line-height: $header_size;
+		margin-top: $padding_base;
+		margin-left: -$padding3 / 3;
+		margin-bottom: $padding_base;
+		&:hover, &:focus{ @include filter(grayscale, 100%); }
+	}
+
+	.item{
+		float: left;
+		width: 100%;
+		color: inherit;
+		cursor: pointer;
+		height: $header_size;
+		text-decoration: none;
+		line-height: $header_size;
+		font-size: $smallFont + .05;
+
+		.fab, .far, .fas{
+			text-align: center;
+			width: $header_size;
+			line-height: $header_size;
+		}
+
+		@include hover($firstColor, $fontColor);
+		&:hover{
+			.hovercard{
+				opacity: 1;
+				display: inline;
+				transition: 0.5s;
+				transition-delay: 0.1s;
+				margin-right: -$padding3 / 2;
+			}
+		}
+	}
+
+	.actived{
+		color: $fontColor;
+		background: $blueColor;
+	}
+
+	.hovercard{
+		left: 230%;
+		opacity: 0;
+		z-index: 1;
+		display: none;
+		position: absolute;
+		font-weight: normal;
+		line-height: $header_size;
+		transform: translateX(-50%);
+
+		.text{
+			display: flex;
+			transition: 1s;
+			cursor: pointer;
+			text-align: left;
+			color: $fontColor;
+			flex-direction: column;
+			background: $blueColor;
+			width: $padding_base * 12;
+			padding-left: $padding_base;
+			justify-content: flex-start;
+			font-size: $smallFont + .05;
+			padding-right: $padding_base;
+		}
+	}
+
+	.logo-actived{ @include filter(grayscale, 100%); }
+}

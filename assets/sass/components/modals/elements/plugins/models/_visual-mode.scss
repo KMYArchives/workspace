@@ -1,0 +1,33 @@
+.visual-mode{
+	width: 100%;
+	display: none;
+	height: 27.4em;
+	overflow: auto;
+	position: absolute;
+	z-index: 99999999999;
+	background: $firstColor;
+	margin-bottom: $border_size * 2;
+	border-bottom: $border_size solid $borderColor;
+
+	@include table;
+	table{
+		width: 100%;
+		border: none;
+		margin-bottom: 0;
+		font-size: $smallFont - .05;
+
+		th{
+			text-align: center;
+			height: $padding_base * 3;
+			line-height: $padding_base * 3;
+		}
+
+		td{
+			height: $padding_base * 3;
+			line-height: $padding_base * 3;
+		}
+	}
+
+	@include scrollbar;
+	.none{ font-style: italic; }
+}

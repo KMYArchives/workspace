@@ -1,0 +1,42 @@
+.title{
+	background: $firstColor;
+	margin-top: $border_size;
+	height: $padding_base * 3.1;
+	line-height: $padding_base * 3.1;
+	border-bottom: $border_size solid $borderColor;
+	
+	input{
+		width: 13em;
+		float: right;
+		border: none;
+		outline: none;
+		color: inherit;
+		font-size: $smallFont;
+		padding: $padding_base;
+		padding-top: $padding_base + .35;
+		padding-bottom: $padding_base + .35;
+
+		@include hover;
+		@include placeholder;
+	}
+
+	.label{
+		float: left;
+		font-size: $smallFont + .05;
+		padding-left: $padding_base;
+		padding-right: $padding_base;
+		padding-top: $border_size / 2;
+		padding-bottom: $border_size / 2;
+	}
+
+	.fas, .far, .fab{
+		float: right;
+		cursor: pointer;
+		margin-right: $padding_base;
+		line-height: $padding_base * 3.1;
+		@include hover(transparent, $greenColor);
+	}
+
+	.actived{ color: $blueColor; }
+	.fa-times, .fa-trash-alt{ @include hover(transparent, $redColor); }
+}

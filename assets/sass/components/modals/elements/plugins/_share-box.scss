@@ -1,0 +1,104 @@
+.share-box{
+	display: none;
+	width: 18.55em;
+	overflow: auto;
+	z-index: 99999999;
+	position: absolute;
+	text-align: center;
+	background: $firstColor;
+	border-right: $border_size solid $borderColor;
+	border-bottom: $border_size solid $borderColor;
+
+	.links{
+		overflow: auto;
+		font-size: $smallFont;
+		padding: $padding_base;
+		border-top: $border_size solid $borderColor;
+
+		input{
+			width: 90%;
+			outline: none;
+			color: inherit;
+			padding: $padding_base;
+			background: $firstColor;
+			border: $border_size solid $borderColor;
+			@include hover;
+		}
+
+		.label{
+			display: block;
+			margin-left: $padding2;
+			line-height: $padding_base * 3;
+		}
+
+		@include scrollbar;
+	}
+
+	.social{
+		background: $secondColor;
+		border-bottom: $border_size solid $borderColor;
+
+		.fab, .far, .fas{
+			color: inherit;
+			cursor: pointer;
+			text-align: center;
+			text-decoration: none;
+			width: $padding_base * 3;
+			font-size: $smallFont + .3;
+			line-height: $padding_base * 3;
+			@include hover($firstColor);
+		}
+	}
+
+	.options{
+		cursor: pointer;
+		font-size: $smallFont;
+		background: $firstColor;
+		height: $padding_base * 3;
+		line-height: $padding_base * 3;
+
+		.text{
+			float: left;
+			padding-left: $padding_base;
+		}
+
+		.far, .fas{
+			float: right;
+			text-align: center;
+			width: $padding_base * 3;
+			line-height: $padding_base * 3;
+		}
+
+		@include hover;
+	}
+
+	.sub-options{
+		display: none;
+		width: 23.2em;
+		overflow: auto;
+		position: fixed;
+		max-height: 16em;
+		z-index: 99999999;
+		font-size: $smallFont;
+		background: $firstColor;
+		border-top: $border_size solid $borderColor;
+		border-right: $border_size solid $borderColor;
+		border-bottom: $border_size solid $borderColor;
+
+		.option{
+			cursor: pointer;
+			text-align: left;
+			height: $padding_base * 3;
+			padding-left: $padding_base;
+			line-height: $padding_base * 3;
+			border-bottom: $border_size solid $borderColor;
+			
+			@include hover;
+			&:last-child{ border-bottom: 0 }
+		}
+
+		@include scrollbar;
+	}
+
+	.actived{ background: $secondColor; }
+}

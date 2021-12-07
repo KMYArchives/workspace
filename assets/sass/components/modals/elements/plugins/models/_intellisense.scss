@@ -1,0 +1,72 @@
+.intellisense{
+	top: 0;
+	right: 0;
+	width: 16em;
+	display: none;
+	z-index: 999999;
+	position: absolute;
+	box-sizing: border-box;
+	margin-right: $padding2;
+	background: $firstColor;
+	line-height: $padding_base + $padding2;
+	border: $border_size solid $borderColor;
+	margin-top: $header_size + $padding_base * 2.5;
+
+	.msg{
+		width: 100%;
+		display: none;
+		position: absolute;
+		text-align: center;
+		z-index: 9999999999;
+		padding-top: $padding4;
+		background: $secondColor;
+		padding-bottom: $padding4;
+		font-size: $smallFont - .075;
+		border-bottom: $border_size solid $borderColor;
+	}
+
+	.footer{
+		height: $padding_base * 3;
+		font-size: $smallFont - .05;
+		line-height: $padding_base * 3;
+		margin-bottom: $border_size / 3;
+
+		.learn{
+			float: left;
+			outline: none;
+			display: block;
+			cursor: pointer;
+			color: $blueColor;
+			text-decoration: none;
+			margin-left: $padding_base;
+			
+			@include hover(transparent $fontColor);
+			&:hover, &:focus{ text-decoration: underline; }
+		}
+
+		.fas, .far{
+			float: right;
+			cursor: pointer;
+			margin-right: $padding_base;
+			line-height: $padding_base * 3;
+			@include hover(transparent, $blueColor);
+		}
+	}
+
+	.header{
+		text-align: center;
+		font-size: $smallFont;
+		height: $padding_base * 3;
+		line-height: $padding_base * 3;
+	}
+
+	.get-def{
+		width: 17.85em;
+		overflow: auto;
+		max-height: 12.9em;
+		position: relative;
+		font-size: $smallFont;
+		padding: $padding_base;
+		@include scrollbar;
+	}
+}

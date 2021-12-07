@@ -1,0 +1,10 @@
+User-agent: *
+
+# Disallow
+Disallow: /apis/
+Disallow: /yuki/
+Disallow: /pages/
+Disallow: /assets/
+Disallow: /support/
+Disallow: /account/
+Disallow: /policies/

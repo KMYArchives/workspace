@@ -1,0 +1,15 @@
+CREATE TABLE `ws_licenses` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `slug` varchar(36) NOT NULL,
+  `serial_number` varchar(230) NOT NULL,
+  `order_id` varchar(36) NOT NULL,
+  `prod_id` int(11) unsigned NOT NULL,
+  `frequency` varchar(12) NOT NULL DEFAULT 'lifetime',
+  `favorited` enum('true','false') NOT NULL DEFAULT 'false',
+  `added_in` datetime NOT NULL DEFAULT current_timestamp(),
+  `username` int(11) unsigned NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `slug` (`slug`),
+  UNIQUE KEY `serial_number` (`serial_number`),
+  UNIQUE KEY `order_id` (`order_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=52 DEFAULT CHARSET=utf8

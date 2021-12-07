@@ -1,0 +1,76 @@
+.left-box{
+	top: 0;
+	left: 0;
+	height: 100%;
+	position: fixed;
+	text-align: center;
+	width: $left_box_size;
+	background: $firstColor;
+	margin-left: $header_size;
+	padding-top: $padding_base;
+	border-right: $border_size solid $borderColor;
+
+	hr{
+		margin: 5%;
+		opacity: .5;
+		border-top: $border_size solid $secondColor;
+	}
+
+	.tab{
+		width: 90%;
+		color: inherit;
+		display: block;
+		cursor: pointer;
+		text-align: left;
+		text-decoration: none;
+		font-size: $smallFont;
+		margin-bottom: $padding2;
+		margin-left: $padding_base;
+		margin-right: $padding_base;
+		height: $header_size - $padding2;
+		line-height: $header_size - $padding2;
+
+		.far, .fas{
+			float: left;
+			text-align: center;
+			width: $header_size;
+			line-height: $header_size - $padding2;
+		}
+		
+		@include border-radius($padding3);
+		@include hover($blueColor, $fontColor);
+	}
+
+	input{
+		width: 13.3em;
+		outline: none;
+		color: inherit;
+		text-align: left;
+		margin: $padding_base;
+		font-size: $smallFont;
+		padding: $padding_base;
+		background: $secondColor;
+		margin-bottom: $padding_base * 2;
+		@include border-radius($padding3);
+		border: $border_size * 5 solid $secondColor;
+
+		@include placeholder;
+		@include hover($firstColor, $fontColor, $blueColor);
+	}
+
+	.label{
+		color: inherit;
+		display: block;
+		margin-left: 5%;
+		margin-right: 5%;
+		text-align: center;
+		font-size: $smallFont;
+		text-decoration: none;
+		padding: $padding_base;
+	}
+
+	.actived{
+		color: $fontColor;
+		background: $blueColor;
+	}
+}

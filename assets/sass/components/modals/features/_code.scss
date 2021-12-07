@@ -1,0 +1,61 @@
+.code-mdl{
+	top: 50%;
+	left: 50%;
+	width: 50em;
+	height: 35em;
+	display: none;
+	position: fixed;
+	margin-left: -25em;
+	margin-top: -18.5em;
+	z-index: 9999999999999;
+	background: $firstColor;
+
+	.status{
+		bottom: 0;
+		position: absolute;
+		border-bottom: 0 !important;
+
+		.text{
+			float: left;
+			text-align: left;
+			width: auto !important;
+			font-size: $smallFont + .05;
+			padding-right: $padding_base;
+
+			.far, .fas{
+				float: left;
+				text-align: center;
+				width: $header_size;
+				line-height: $padding_base * 3;
+			}
+		}
+
+		.option{
+			float: left;
+			cursor: pointer;
+			text-align: center;
+			width: auto !important;
+			font-size: $smallFont + .05;
+			padding-right: $padding_base;
+
+			.far, .fas{
+				float: left;
+				text-align: center;
+				width: $header_size;
+				line-height: $padding_base * 3;
+			}
+
+			@include hover($firstColor);
+		}
+	}
+
+	.CodeMirror{
+		height: 27.4em;
+		color: #707070;
+		font-weight: 600;
+		font-family: $codeFont;
+		overflow-x: hidden !important;
+	}
+
+	textarea{ opacity: 0; }
+}

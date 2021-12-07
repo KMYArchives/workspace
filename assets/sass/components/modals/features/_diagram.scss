@@ -1,0 +1,27 @@
+.diagram-mdl{
+	top: 50%;
+	left: 50%;
+	width: 22em;
+	display: none;
+	height: 30.5em;
+	position: fixed;
+	margin-left: -11em;
+	margin-top: -15.25em;
+	z-index: 9999999999999;
+	background: $firstColor;
+
+	.viewer{
+		overflow: auto;
+		height: 25.1em;
+		text-align: center;
+
+		img{
+			margin: $padding_base;
+			border: none !important;
+		}
+
+		@include scrollbar;
+	}
+
+	.bar{ border-bottom: $border_size solid $borderColor; }
+}

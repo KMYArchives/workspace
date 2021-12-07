@@ -1,0 +1,61 @@
+.options-box{
+	right: 0;
+	width: 16em;
+	display: none;
+	z-index: 99999999;
+	position: absolute;
+	background: $firstColor;
+	border-left: $border_size solid $borderColor;
+
+	.none{
+		text-align: center;
+		font-size: $smallFont;
+		height: $padding_base * 3;
+		line-height: $padding_base * 3;
+	}
+
+	.item{
+		cursor: pointer;
+		font-size: $smallFont;
+		height: $padding_base * 3;
+		padding-left: $padding_base;
+		line-height: $padding_base * 3;
+		border-bottom: $border_size solid $borderColor;
+
+		.far, .fas{
+			float: right;
+			text-align: center;
+			width: $padding_base * 3;
+			line-height: $padding_base * 3;
+		}
+
+		.icon-left{
+			float: left;
+			margin-left: -$padding_base;
+		}
+
+		@include hover;
+	}
+
+	.collection{
+		display: none;
+		border-bottom: $border_size solid $borderColor;
+
+		.list{
+			overflow: auto;
+			padding: $padding2;
+			max-height: $padding_base * 12;
+			border-bottom: $border_size solid $borderColor;
+
+			@include scrollbar;
+			.item:last-child{ border-bottom: 0; }
+		}
+
+		.item{
+			border-bottom: 0;
+			margin: $padding3 / 2;
+		}
+	}
+
+	.actived{ background: $secondColor; }
+}

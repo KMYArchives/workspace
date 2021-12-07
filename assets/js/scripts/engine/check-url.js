@@ -1,0 +1,35 @@
+const CheckURL = {
+
+	core () {
+		switch (URL.get_last_param()) {
+			case 'tasks':
+				Tasks.page_load()
+				break
+
+			case 'models':
+				Models.page_load()
+				break
+
+			case 'hashes':
+				Hashes.page_load()
+				break
+
+			case 'history':
+				History.page_load()
+				break
+
+			case 'diagrams':
+				Diagrams.page_load()
+				break
+				
+			case 'contacts':
+				Contacts.page_load()
+				break
+
+			default:
+				Models.page_load()
+				break
+		}
+	},
+
+}

@@ -1,0 +1,36 @@
+{
+	"version": "2.0.0",
+	"paths": {
+		"css": "assets/css/",
+		"js": "assets/js/",
+		"bundle": "bundle/"
+	},
+	"options": {
+		"level": 9,
+		"maxage": 31556926,
+		"etag": "91242c4a4111df4cd6be844dfa3b89b5"
+	},
+	"bundle": [
+		"jquery",
+		"humanize",
+		"lodash",
+		"lozad",
+		"xss",
+		"platform",
+		"html2canvas",
+		"json-viewer",
+		"codemirror/codemirror",
+		"codemirror/dialog",
+		"codemirror/runmode",
+		"codemirror/colorize",
+		"codemirror/active-line",
+		"codemirror/autorefresh",
+		"codemirror/jump-to-line",
+		"codemirror/search",
+		"codemirror/searchcursor",
+		"codemirror/languages/javascript",
+		"codemirror/languages/sql",
+		"codemirror/languages/markdown",
+		"codemirror/languages/xml"
+	]
+}

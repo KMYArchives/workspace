@@ -1,0 +1,88 @@
+.send-to-box{
+	display: none;
+	width: 18.6em;
+	z-index: 99999999;
+	position: absolute;
+	text-align: center;
+	box-sizing: border-box;
+	background: $firstColor;
+	border-right: $border_size solid $borderColor;
+	border-bottom: $border_size solid $borderColor;
+
+	.list{
+		overflow: auto;
+		max-height: 15em;
+		
+		.none{
+			opacity: .8;
+			display: block;
+			text-align: center;
+			font-size: $smallFont;
+			margin: $padding_base;
+			background: $secondColor;
+			height: $padding_base * 3;
+			line-height: $padding_base * 3;
+		}
+
+		.contact{
+			display: block;
+			cursor: pointer;
+			font-size: $smallFont;
+			height: $padding_base * 4;
+			line-height: $padding_base * 4;
+			border-bottom: $border_size solid $borderColor;
+
+			img{
+				float: left;
+				margin: $padding2;
+				height: $padding_base * 3;
+				@include border-radius(50%);
+				line-height: $padding_base * 3;
+			}
+
+			.name{
+				float: left;
+				outline: none;
+				color: inherit;
+				text-decoration: none;
+				&:hover, &:focus{ text-decoration: underline; }
+			}
+
+			.far, .fas{
+				float: right;
+				cursor: pointer;
+				text-align: center;
+				width: $padding_base * 3;
+				height: $padding_base * 4;
+				line-height: $padding_base * 4;
+				@include hover($firstColor);
+			}
+
+			@include hover;
+			&:last-child{ border-bottom: 0; }
+		}
+
+		@include scrollbar;
+	}
+
+	.header{
+		display: block;
+		font-size: $smallFont;
+		height: $padding_base * 3;
+		line-height: $padding_base * 3;
+		border-bottom: $border_size solid $borderColor;
+
+		.tab{
+			width: 50%;
+			float: left;
+			cursor: pointer;
+			box-sizing: border-box;
+			border-right: $border_size solid $borderColor;
+
+			@include hover;
+			&:last-child{ border-right: 0; }
+		}
+	}
+
+	.actived{ background: $secondColor; }
+}

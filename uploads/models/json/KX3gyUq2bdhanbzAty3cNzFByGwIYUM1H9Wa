@@ -1,0 +1,74 @@
+[
+    {
+        "Field": "id",
+        "Type": "int(11)",
+        "Null": "NO",
+        "Key": "PRI",
+        "Default": null,
+        "Extra": "auto_increment"
+    },
+    {
+        "Field": "slug",
+        "Type": "varchar(36)",
+        "Null": "NO",
+        "Key": "UNI",
+        "Default": null,
+        "Extra": ""
+    },
+    {
+        "Field": "serial_number",
+        "Type": "varchar(230)",
+        "Null": "NO",
+        "Key": "UNI",
+        "Default": null,
+        "Extra": ""
+    },
+    {
+        "Field": "order_id",
+        "Type": "varchar(36)",
+        "Null": "NO",
+        "Key": "UNI",
+        "Default": null,
+        "Extra": ""
+    },
+    {
+        "Field": "prod_id",
+        "Type": "int(11) unsigned",
+        "Null": "NO",
+        "Key": "",
+        "Default": null,
+        "Extra": ""
+    },
+    {
+        "Field": "frequency",
+        "Type": "varchar(12)",
+        "Null": "NO",
+        "Key": "",
+        "Default": "lifetime",
+        "Extra": ""
+    },
+    {
+        "Field": "favorited",
+        "Type": "enum('true','false')",
+        "Null": "NO",
+        "Key": "",
+        "Default": "false",
+        "Extra": ""
+    },
+    {
+        "Field": "added_in",
+        "Type": "datetime",
+        "Null": "NO",
+        "Key": "",
+        "Default": "current_timestamp()",
+        "Extra": ""
+    },
+    {
+        "Field": "username",
+        "Type": "int(11) unsigned",
+        "Null": "NO",
+        "Key": "",
+        "Default": null,
+        "Extra": ""
+    }
+]

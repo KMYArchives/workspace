@@ -1,0 +1,34 @@
+.model-diagram{
+	width: 16em;
+	position: relative;
+	color: $dgrFontColor;
+	box-sizing: border-box;
+	background: $dgrBgColor;
+	border: $border_size solid $dgrBorderColor;
+
+	li{
+		text-align: left;
+		list-style: none;
+		padding: $padding_base;
+		font-size: $smallFont - .1;
+	}
+
+	.name{
+		text-align: center;
+		font-size: $smallFont;
+		text-transform: lowercase;
+		padding-top: $padding_base;
+		padding-bottom: $padding_base;
+		border-bottom: $border_size solid $dgrBorderColor;
+	}
+
+	.far, .fas{
+		float: left;
+		text-align: center;
+		width: $padding_base;
+		margin-right: $padding_base;
+	}
+	
+	.pri, .PRI{ color: gold; }
+	.uni, .UNI{ color: silver; }
+}

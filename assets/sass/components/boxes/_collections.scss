@@ -1,0 +1,139 @@
+.collections{
+	top: 0;
+	left: 0;
+	width: 21em;
+	display: none;
+	position: fixed;
+	z-index: 9999999;
+	text-align: center;
+	@include box-shadow;
+	background: $firstColor;
+	margin-top: $padding_base * 11;
+	border: $border_size solid $borderColor;
+	margin-left: $header_size + $left_box_size;
+
+	.tabs{
+		font-size: $smallFont;
+		background: $firstColor;
+		height: $padding_base * 3;
+		line-height: $padding_base * 3;
+		border-bottom: $border_size solid $borderColor;
+
+		.tab{
+			width: 50%;
+			float: left;
+			cursor: pointer;
+			text-align: center;
+			box-sizing: border-box;
+			line-height: $padding_base * 3;
+			border-right: $border_size solid $borderColor;
+
+			.far, .fas{
+				float: left;
+				text-align: center;
+				margin-right: $padding2;
+				width: $padding_base * 3;
+				line-height: $padding_base * 3;
+			}
+
+			&:last-child{ border-right: 0; }
+			@include hover($blueColor, $fontColor);
+		}
+
+		.actived{
+			color: $fontColor;
+			background: $blueColor;
+		}
+	}
+
+	.list{
+		overflow: auto;
+		max-height: 18em;
+		padding-top: $padding_base;
+		padding-bottom: $padding_base;
+
+		.item{
+			color: inherit;
+			display: block;
+			cursor: pointer;
+			text-align: left;
+			margin: $padding2;
+			text-decoration: none;
+			font-size: $smallFont;
+			padding-left: $padding2;
+			margin-top: 0 !important;
+			padding-right: $padding3;
+			height: $padding_base * 3;
+			line-height: $padding_base * 3;
+			@include border-radius($padding3);
+			
+			.name{
+				float: left;
+				&:hover, &:focus{ text-decoration: underline; }
+			}
+	
+			.far, .fas{
+				float: left;
+				text-align: center;
+				width: $padding_base * 3;
+				line-height: $padding_base * 3;
+				&:hover, &:focus{ opacity: .5; }
+			}
+
+			.right{ float: right; }
+			&:last-child{ margin-bottom: 0; }
+			@include hover($blueColor, $fontColor);
+		}
+
+		.none{
+			color: inherit;
+			display: block;
+			text-align: left;
+			text-decoration: none;
+			font-size: $smallFont;
+			padding-left: $padding2;
+			padding-right: $padding2;
+			height: $padding_base * 3;
+			margin-left: $padding_base;
+			margin-right: $padding_base;
+			line-height: $padding_base * 3;
+		}
+
+		@include scrollbar;
+	}
+
+	.header{
+		font-size: $smallFont;
+		height: $padding_base * 3;
+		line-height: $padding_base * 3;
+		border-bottom: $border_size solid $borderColor;
+		
+		.total{
+			float: left;
+			cursor: default;
+			padding-left: $padding_base;
+		}
+
+		.button{
+			float: right;
+			display: block;
+			cursor: pointer;
+			text-align: left;
+			box-sizing: border-box;
+			height: $padding_base * 3;
+			line-height: $padding_base * 3;
+			padding-right: $padding_base + $padding2;
+			border-left: $border_size solid $borderColor;
+
+			.far, .fas{
+				float: left;
+				text-align: center;
+				margin-right: $padding2;
+				width: $padding_base * 3;
+				line-height: $padding_base * 3;
+			}
+
+			@include hover($blueColor, $fontColor);
+		}
+	}
+}

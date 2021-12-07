@@ -1,0 +1,42 @@
+.mask{
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	position: fixed;
+	overflow: hidden;
+	z-index: 99999999999999;
+	background: rgba(5, 5, 5, .9);
+}
+
+.left{ float: left; }
+.right{ float: right; }
+
+.red{ color: $redColor; }
+.blue{ color: $blueColor; }
+.green{ color: $greenColor; }
+
+.pointer{ cursor: pointer; }
+.default{ cursor: default; }
+.shadow{ @include box-shadow; }
+.actived{ background: $firstColor; }
+
+.upper{ text-transform: uppercase; }
+.lower{ text-transform: lowercase; }
+.capitalize{ text-transform: capitalize; }
+.hover{ @include hover(inherit, $blueColor); }
+.sub-header-mgr{ margin-top: $header_size - $padding2 - .35; }
+
+.link{
+	outline: none;
+	color: inherit;
+	cursor: pointer;
+	text-decoration: none;
+	&:hover, &:focus{ text-decoration: underline; }
+}
+
+.profile-box-scroll{
+	position: fixed;
+	margin-top: $header_size;
+}

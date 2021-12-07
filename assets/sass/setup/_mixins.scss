@@ -1,0 +1,105 @@
+@mixin table {
+	table{
+		width: 100%;
+		border-spacing: 0;
+		font-size: $smallFont;
+		border-bottom: 0 !important;
+		border: $border_size solid $borderColor;
+		
+		th{
+			font-weight: 500;
+			font-size: $fontSize;
+			height: $header_size;
+			background: $secondColor;
+			line-height: $header_size;
+			border-bottom: $border_size solid $borderColor;
+		}
+
+		td{
+			cursor: pointer;
+			text-align: center;
+			height: $header_size;
+			background: $firstColor;
+			line-height: $header_size;
+			border-bottom: $border_size solid $borderColor;
+		}
+
+		tr{
+			&:hover, &:focus{
+				td{ background: $secondColor; }
+			}
+		}
+	}
+}
+
+@mixin select {
+	appearance: none;
+	-o-appearance: none;
+	-ms-appearance: none;
+	-moz-appearance: none;
+	-webkit-appearance: none;
+}
+
+@mixin placeholder {
+	@include input-placeholder {
+		opacity: .7;
+		font-weight: 500;
+		color: $fontColor;
+	}
+}
+
+@mixin input-placeholder {
+	&.placeholder{ @content; }
+	&:-o-placeholder{ @content; }
+	&::-moz-placeholder{ @content; }
+	&:-ms-input-placeholder{ @content; }
+	&::-webkit-input-placeholder{ @content; }
+}
+
+@mixin border-radius($radius) {
+	border-radius: $radius;
+	-o-border-radius: $radius;
+	-ms-border-radius: $radius;
+	-moz-border-radius: $radius;
+	-webkit-border-radius: $radius;
+}
+
+@mixin no-text-select($important: false) {
+	@if $important {
+		user-select: none !important;
+		-ms-user-select: none !important;
+		-moz-user-select: none !important;
+		-webkit-user-select: none !important;
+	} @else {
+		user-select: none;
+		-ms-user-select: none;
+		-moz-user-select: none;
+		-webkit-user-select: none;
+	}
+}
+
+@mixin scrollbar($bdr-top: false, $bdr-bot: false, $bdr-rig: false, $bdr-lef: true) {
+	&::-webkit-scrollbar {
+		position: fixed;
+		width: $padding5;
+		z-index: 9999999;
+		background: $firstColor;
+
+		@if $bdr-top { border-top: $border_size solid $borderColor; }
+		@if $bdr-lef { border-left: $border_size solid $borderColor; }
+		@if $bdr-rig { border-right: $border_size solid $borderColor; }
+		@if $bdr-bot { border-bottom: $border_size solid $borderColor; }
+	}
+
+	&::-webkit-scrollbar-thumb { background: $borderColor; }
+}
+
+@mixin hover($background: $secondColor, $color: inherit, $border-color: $borderColor, $transition: 1.2s) {
+	&:hover, &:focus {
+		outline: none;
+		color: $color;
+		border-color: $border-color;
+		background-color: $background;
+		@include transition(background-color $transition);
+	}
+}

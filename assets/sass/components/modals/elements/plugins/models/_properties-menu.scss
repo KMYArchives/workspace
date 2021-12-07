@@ -1,0 +1,64 @@
+.properties-menu{
+	bottom: 0;
+	display: none;
+	width: 18.55em;
+	overflow: auto;
+	z-index: 99999999;
+	position: absolute;
+	max-height: 25.05em;
+	background: $firstColor;
+	margin-bottom: $padding_base * 2.2;
+	border-top: $border_size solid $borderColor;
+	border-right: $border_size solid $borderColor;
+
+	.item{
+		cursor: pointer;
+		font-size: $smallFont;
+		height: $padding_base * 3;
+		padding-left: $padding_base;
+		padding-right: $padding_base;
+		line-height: $padding_base * 3;
+		border-bottom: $border_size solid $borderColor;
+
+		@include hover;
+		&:last-child{ border-bottom: 0 }
+	}
+
+	.comment-area{
+		display: block;
+		font-size: $smallFont;
+		box-sizing: border-box;
+
+		.header{
+			cursor: pointer;
+			height: $padding_base * 3;
+			padding-left: $padding_base;
+			line-height: $padding_base * 3;
+			border-bottom: $border_size solid $borderColor;
+
+			.fab, .far, .fas{
+				float: right;
+				text-align: center;
+				width: $padding_base * 3;
+				height: $padding_base * 3;
+				line-height: $padding_base * 3;
+			}
+
+			@include hover;
+		}
+
+		.comment{
+			display: none;
+			overflow: auto;
+			max-height: 10.25em;
+			padding: $padding_base;
+			line-height: $padding_base + $padding4;
+			border-bottom: $border_size solid $borderColor;
+			@include scrollbar;
+		}
+
+		.actived{ background: $secondColor; }
+	}
+
+	@include scrollbar;
+}

@@ -1,0 +1,148 @@
+.hashes-mdl{
+	top: 50%;
+	left: 50%;
+	width: 40em;
+	height: 30em;
+	display: none;
+	position: fixed;
+	margin-top: -15em;
+	margin-left: -20em;
+	z-index: 99999999999999;
+	background: $firstColor;
+
+	.body{
+		width: 100%;
+		overflow: auto;
+		height: 28.05em;
+		position: relative;
+		text-align: center;
+		padding-bottom: $padding2;
+		font-size: $smallFont + .05;
+
+		.label{
+			float: left;
+			color: inherit;
+			margin-top: 2%;
+			margin-left: 5%;
+			margin-bottom: 2%;
+		}
+
+		input{
+			width: 86.5%;
+			outline: none;
+			color: inherit;
+			font-weight: 600;
+			padding: $padding_base;
+			background: $firstColor;
+			font-size: $smallFont + .1;
+			border: $border_size solid $borderColor;
+
+			@include placeholder;
+			@include hover($secondColor, $fontColor);
+		}
+
+		select{
+			width: 90%;
+			outline: none;
+			color: inherit;
+			cursor: pointer;
+			font-weight: 600;
+			padding: $padding_base;
+			background: $firstColor;
+			font-size: $smallFont + .1;
+			border: $border_size solid $borderColor;
+
+			@include select;
+			@include hover($secondColor, $fontColor);
+		}
+
+		button{
+			width: 10em;
+			float: right;
+			outline: none;
+			color: inherit;
+			margin-top: 2%;
+			cursor: pointer;
+			font-weight: 600;
+			margin-bottom: 2%;
+			margin-right: 4.8%;
+			padding: $padding_base;
+			background: $firstColor;
+			font-size: $smallFont + .1;
+			border: $border_size solid $borderColor;
+			@include hover($secondColor, $fontColor);
+		}
+
+		.msg{
+			float: left;
+			display: none;
+			margin-top: 2%;
+			margin-left: 5%;
+			font-weight: 600;
+			text-align: left;
+			margin-bottom: 2%;
+			padding: $padding_base;
+			font-size: $smallFont + .1;
+			border: $border_size solid transparent;
+		}
+
+		.error{
+			color: $fontColor;
+			background: $redColor;
+			border-color: $redColor;
+		}
+
+		.success{
+			color: $fontColor;
+			background: $greenColor;
+			border-color: $greenColor;
+		}
+
+		ul{
+			text-align: left;
+			margin-left: -$padding_base - $padding2;
+
+			li{
+				display: block;
+				list-style: none;
+				text-align: left;
+				height: $header_size;
+				line-height: $header_size;
+				font-size: $smallFont + .05;
+				margin-right: $padding_base + $padding4;
+				border-bottom: $border_size solid $borderColor;
+	
+				.name{ float: left; }
+				.value{ float: right; }
+				
+				&:last-child{ border-bottom: 0 !important; }
+				.fas, .far, .fab{ @include hover(inherit, $blueColor); }
+			}
+		}
+
+		fieldset{
+			width: 86%;
+			float: left;
+			outline: none;
+			display: none;
+			color: inherit;
+			margin-left: 5%;
+			font-weight: 600;
+			text-align: left;
+			background: $secondColor;
+			font-size: $smallFont + .2;
+			padding-left: $padding_base;
+			padding-right: $padding_base;
+			border: $border_size solid $borderColor;
+
+			ul{
+				li{
+					margin-left: 0 !important;
+					&:last-child{ margin-bottom: -$padding2; }
+				}
+			}
+		}
+
+		@include scrollbar;
+	}
+}

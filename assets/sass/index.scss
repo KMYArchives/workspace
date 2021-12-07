@@ -1,0 +1,26 @@
+@import 'autoload';
+html{ scroll-behavior: smooth; }
+
+body{
+	margin: 0;
+	padding: 0;
+	color: $fontColor;
+	font-family: $font;
+	background: $bgColor;
+	font-size: $fontSize;
+	@include no-text-select;
+
+	@import 'components/top-bar';
+	@import 'components/content';
+	@import 'components/sidebar';
+	@import 'components/left-bar';
+
+	@import 'components/modals/autoload';
+	@import 'components/classes/classes';
+	@import 'components/classes/important';
+
+	@import 'components/boxes/notif-box';
+	@import 'components/boxes/account-box';
+	@import 'components/boxes/collections';
+	@import 'components/boxes/contacts-box';
+}

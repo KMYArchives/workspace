@@ -1,0 +1,56 @@
+.code-diagram{
+	right: 0;
+	bottom: 0;
+	display: none;
+	height: 27.4em;
+	overflow: auto;
+	z-index: 99999999;
+	position: absolute;
+	background: $firstColor;
+	border-right: 0 !important;
+	margin-bottom: $padding_base * 2.15;
+	border: $border_size solid $borderColor;
+	
+	.viewer{
+		float: left;
+		overflow: auto;
+		max-height: 25.4em;
+		padding: $padding_base;
+		margin-right: $padding_base * 2.6;
+
+		.message{
+			display: none;
+			width: 102.5%;
+			z-index: 9999999;
+			text-align: center;
+			position: relative;
+			padding: $padding_base;
+			background: $secondColor;
+			font-size: $smallFont + .05;
+			margin: -$padding_base - $padding3;
+			border-bottom: $border_size solid $borderColor;
+		}
+
+		@include scrollbar;
+	}
+
+	.right-bar{
+		right: 0;
+		height: 100%;
+		text-align: center;
+		position: absolute;
+		background: $secondColor;
+		width: $padding_base * 3;
+		font-size: $smallFont + .05;
+		border-left: $border_size solid $borderColor;
+
+		.far, .fas{
+			display: block;
+			cursor: pointer;
+			text-align: center;
+			line-height: $padding_base * 3;
+			border-bottom: $border_size solid $borderColor;
+			@include hover($firstColor);
+		}
+	}
+}
