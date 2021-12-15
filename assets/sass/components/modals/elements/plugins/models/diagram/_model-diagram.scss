@@ -4,7 +4,6 @@
 	color: $dgrFontColor;
 	box-sizing: border-box;
 	background: $dgrBgColor;
-	border: $border_size solid $dgrBorderColor;
 
 	li{
 		text-align: left;
@@ -19,7 +18,6 @@
 		text-transform: lowercase;
 		padding-top: $padding_base;
 		padding-bottom: $padding_base;
-		border-bottom: $border_size solid $dgrBorderColor;
 	}
 
 	.far, .fas{

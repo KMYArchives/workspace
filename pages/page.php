@@ -1,10 +1,30 @@
 <!DOCTYPE html>
-<html lang='en'>
+<?php MetaTags::html_lang(); ?>
 <head>
-	<?php Page::tags(); ?>
-	<title><?php Page::title(); ?></title>
+	<?php
+	
+		Page::css();
+
+		MetaTags::title();
+		MetaTags::favicon();
+
+		MetaTags::robots();
+		MetaTags::viewport();
+		MetaTags::keywords();
+		MetaTags::canonical();
+		MetaTags::description();
+
+		MetaTags::compatible();
+		MetaTags::content_type();
+		MetaTags::content_language();
+	
+	?>
 </head>
 <body>
-	<script async defer src='<?php echo Values::$assets['link'] . Values::$assets['render'] ?>js'></script>
+	<?php
+
+		Page::js();
+		
+	?>
 </body>
 </html>

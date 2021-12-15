@@ -4,7 +4,7 @@
 
 		private $db, $clients;
 
-		private function term() {
+		private function term(): string {
 			if (Clean::default($_GET['term'])) {
 				return "AND name LIKE '%" . Clean::default($_GET['term']) . "%'";
 			} else {
@@ -12,37 +12,27 @@
 			}
 		}
 
-		private function filter() {
-			switch (Clean::string($_GET['filter'], 'az')) {
-				case 'public':
-					return "AND privacy = 'public'"; 
-					break;
-
-				case 'private':
-					return "AND privacy = 'private'"; 
-					break;
-				
-				case 'favorites':
-					return "AND favorited = 'true'"; 
-					break;
-				
-				case 'collections':
-					return "AND collection = '" . Clean::numbers($_GET['col']) . "'"; 
-					break;
-
-				default:
-					return "AND privacy = 'public'"; 
-					break;
-			}
+		private function filter(): string {
+			return match (
+				Clean::string(
+					$_GET['filter'], 'az'
+				)
+			) {
+				default			=>	"AND privacy = 'public'",
+				'public'		=>	"AND privacy = 'public'",
+				'favorites'		=>	"AND favorites = 'true'",
+				'private'		=>	"AND privacy = 'private'",
+				'collections'	=>	"AND collection = '" . Clean::numbers($_GET['col']) . "'",
+			};
 		}
 
-		public function get() {
+		public function get(): mixed {
 			foreach ($this->db->query("SELECT * FROM ws_hashes WHERE slug = ? AND username = ?", [
 				Clean::slug($_GET['slug']), 
 				$this->clients->get_id($_GET['username'])
 			]) as $data);
 
-			header('Content-Type: application/json');
+			Headers::setContentType('application/json');
 			echo json_encode([
 				'name'				=>	$data['name'],
 				'size'				=>	$data['size'],
@@ -55,7 +45,7 @@
 			]);
 		}
 
-		public function list() {
+		public function list(): mixed {
 			$sql_max	=	Values::$assets['sql_max'];
 			$offset		=	($_GET['offset']) ? Clean::numbers($_GET['offset']) : 0;
 
@@ -72,7 +62,7 @@
 				];
 			}
 
-			header('Content-Type: application/json');
+			Headers::setContentType('application/json');
 			echo json_encode([
 				'list'	=>	$list,
 				'total'	=>	$this->db->query("SELECT count(*) FROM ws_hashes WHERE username = ? $where", [
@@ -81,8 +71,13 @@
 			]);
 		}
 
-		public function create() {
-			$slug	=	Random::string(36, true, true, true);
+		public function __construct() {
+			$this->db		=	new DB;
+			$this->clients	=	new Clients;
+		}
+
+		public function create(): mixed {
+			$slug	=	Random::slug([ 36, 48 ]);
 			$file	=	Random::string(36, true, true, true);
 
 			if (File::create(Values::$assets['hashes'] . $file, $_POST['content'])) {
@@ -101,11 +96,6 @@
 			} else {
 				echo json_encode([ 'return' => 'error-file-create-hash' ]);
 			}
-		}
-
-		public function __construct() {
-			$this->db		=	new DB;
-			$this->clients	=	new Clients;
 		}
 
 	}

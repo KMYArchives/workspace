@@ -17,6 +17,10 @@ const GetModel = {
 					<div class='item bdr-rig' id='linked-model' onclick='ModelsLinked.toggle(this)'>Linked</div>
 
 					<div class='right'>
+						<div class='item icon' id='code-notes-model' onclick='CodeNotes.toggle()' title='Code Notes'>
+							<div class='fas fa-sticky-note'></div>
+						</div>
+
 						<div class='item icon' id='download-model' onclick='GetModel.download()' title='Download'>
 							<div class='fas fa-download'></div>
 						</div>
@@ -74,7 +78,11 @@ const GetModel = {
 				)
 			})
 		} else {
-			Misc.download(`${ Apis.core() }cloud/models/meta/download?slug=${ URL.get_query('i') }`)
+			Misc.download(`${ 
+				Apis.core() 
+			}cloud/models/meta/download?slug=${ 
+				URL.get_query('i') 
+			}`)
 		}
 	},
 

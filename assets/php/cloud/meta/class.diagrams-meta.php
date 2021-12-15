@@ -22,7 +22,7 @@
 				$favorited	=	'true';
 			}
 
-			header('Content-Type: application/json');
+			Headers::setContentType('application/json');
 			if ($this->db->query("UPDATE ws_diagrams SET favorited = ? WHERE slug = ? AND username = ?", [
 				$favorited,
 				$data['slug'],
@@ -43,7 +43,7 @@
 				$this->clients->get_id(),
 			]) as $data);
 
-			header('Content-Type: application/json');
+			Headers::setContentType('application/json');
 			echo json_encode([
 				'privacy'			=>	$data['privacy'],
 				'collection'		=>	[
@@ -65,7 +65,7 @@
 				$privacy	=	'public';
 			}
 
-			header('Content-Type: application/json');
+			Headers::setContentType('application/json');
 			if ($this->db->query("UPDATE ws_diagrams SET privacy = ? WHERE slug = ? AND username = ?", [
 				$privacy,
 				$data['slug'],
@@ -88,7 +88,7 @@
 		public function change_collection(int|string $col = null): mixed {
 			if (!$col) { $col = Clean::numbers($_POST['col']); }
 
-			header('Content-Type: application/json');
+			Headers::setContentType('application/json');
 			if ($this->db->query("UPDATE ws_diagrams SET collection = ? WHERE slug = ? AND username = ?", [
 				$col,
 				Clean::slug($_POST['slug']), 

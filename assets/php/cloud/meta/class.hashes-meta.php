@@ -11,7 +11,7 @@
 		}
 
 		public function delete() {
-			header('Content-type: application/json');
+			Headers::setContentType('application/json');
 
 			foreach ($this->db->query("SELECT json_file FROM ws_hashes WHERE slug = ? AND username = ?", [
 				Clean::slug($_POST['slug']), 
@@ -41,7 +41,7 @@
 				$favorited	=	'true';
 			}
 
-			header('Content-Type: application/json');
+			Headers::setContentType('application/json');
 			if ($this->db->query("UPDATE ws_hashes SET favorited = ? WHERE slug = ? AND username = ?", [
 				$favorited,
 				$data['slug'],
@@ -73,7 +73,7 @@
 				$privacy	=	'public';
 			}
 
-			header('Content-Type: application/json');
+			Headers::setContentType('application/json');
 			if ($this->db->query("UPDATE ws_models SET privacy = ? WHERE slug = ? AND username = ?", [
 				$privacy,
 				$data['slug'],
@@ -88,7 +88,7 @@
 		public function change_collection($col = null) {
 			if (!$col) { $col = Clean::numbers($_POST['col']); }
 
-			header('Content-Type: application/json');
+			Headers::setContentType('application/json');
 			if ($this->db->query("UPDATE ws_hashes SET collection = ? WHERE slug = ? AND username = ?", [
 				$col,
 				Clean::slug($_POST['slug']), 

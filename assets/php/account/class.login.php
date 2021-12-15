@@ -7,12 +7,12 @@
 		public function sign_out() {
 			Cookies::delete('user');
 
-			header('Content-type: application/json');
+			Headers::setContentType('application/json');
 			echo json_encode([ 'logoff' => true ]);
 		}
 
 		public function check_logged() {
-			header('Content-type: application/json');
+			Headers::setContentType('application/json');
 			
 			if ($this->clients->get_id()) {
 				echo json_encode([ 'logged' => true ]);

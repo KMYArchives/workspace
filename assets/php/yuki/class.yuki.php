@@ -13,16 +13,16 @@
 				file_get_contents(__DIR__ . '/yuki.json'), true
 			);	
 		}
-		
-		private function force_gzip($file) {
-			return gzencode(
-				file_get_contents($file), $this->configs()['options']['level'], FORCE_GZIP
-			);
-		}
 
 		private function css_file($file) {
 			return file_get_contents(
 				$this->configs()['paths']['css'] . $file . '.css'
+			);
+		}
+		
+		private function force_gzip($file) {
+			return gzencode(
+				file_get_contents($file), $this->configs()['options']['level'], FORCE_GZIP
 			);
 		}
 
@@ -33,7 +33,7 @@
 			ob_start('ob_gzhandler');
 
 			header('Last-Modified: ' . gmdate('D, d M Y H:i:s') . ' GMT');
-			header('Cache-Control: Cache-Control: max-age=' .$this->configs()['options']['maxage'] . ', must-revalidate');
+			header('Cache-Control: max-age=' .$this->configs()['options']['maxage'] . ', must-revalidate');
 			header('Expires: ' . gmdate('D, d M Y H:i:s', time() + $this->configs()['options']['maxage']));
 
 			if ($type_file == 'css') {

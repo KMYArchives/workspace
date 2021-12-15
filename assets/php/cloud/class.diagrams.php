@@ -2,7 +2,7 @@
 
 	class Diagrams {
 
-		private $db, $imgur, $models, $clients;
+		private $db, $imgur, $client, $models_meta, $diagrams_meta;
 
 		private function term(): string {
 			if (Clean::default($_GET['term'])) {
@@ -32,7 +32,7 @@
 				$this->clients->get_id($_GET['username'])
 			]) as $data);
 
-			header('Content-Type: application/json');
+			Headers::setContentType('application/json');
 			echo json_encode([
 				'name'			=>	$data['name'],
 				'size'			=>	$data['size'],
@@ -44,10 +44,11 @@
 		}
 
 		public function __construct() {
-			$this->db		=	new DB;
-			$this->imgur	=	new Imgur;
-			$this->models	=	new Models;
-			$this->clients	=	new Clients;
+			$this->db				=	new DB;
+			$this->imgur			=	new Imgur;
+			$this->clients			=	new Clients;
+			$this->models_meta		=	new ModelsMeta;
+			$this->diagrams_meta	=	new DiagramsMeta;
 		}
 
 		public function list(): mixed {
@@ -66,7 +67,7 @@
 				];
 			}
 
-			header('Content-Type: application/json');
+			Headers::setContentType('application/json');
 			echo json_encode([
 				'list'	=>	$list,
 				'total'	=>	$this->db->query("SELECT count(*) FROM ws_diagrams WHERE username = ? $where", [
@@ -76,7 +77,7 @@
 		}
 
 		public function create(): mixed {
-			$slug	=	Random::string([ 36, 48 ]);
+			$slug	=	Random::slug([ 36, 48 ]);
 			$imgur	=	$this->imgur->upload($_POST['image']);
 
 			if ($this->db->query("INSERT INTO ws_diagrams(slug, name, image_id, image, size, mime, delete_hash, username) VALUES(?, ?, ?, ?, ?, ?, ?, ?)", [
@@ -92,8 +93,8 @@
 				$this->clients->get_id($_GET['username'])
 			])) {
 				if (Clean::slug($_POST['model'])) {
-					$this->models->change_diagram(
-						$this->get_data($slug, 'id')
+					$this->models_meta->change_diagram(
+						$this->diagrams_meta->get_data($slug, 'id')
 					);
 				}
 
@@ -101,7 +102,7 @@
 					'slug'		=>	$slug,
 					'return'	=> 'success',
 					'image'		=>	$imgur['data']['link'],
-					'id'		=>	$this->get_data($slug, 'id'),
+					'id'		=>	$this->diagrams_meta->get_data($slug, 'id'),
 				]);
 			} else {
 				echo json_encode([ 'return' => 'error-db-create-diagram' ]);
@@ -115,7 +116,7 @@
 			]) as $data);
 
 			if ($this->imgur->delete($data['delete_hash'])) {
-				header('Content-Type: application/json');
+				Headers::setContentType('application/json');
 
 				if ($this->db->query("DELETE FROM ws_diagrams WHERE slug = ? AND username = ?" , [
 					$data['slug'], 

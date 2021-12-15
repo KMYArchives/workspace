@@ -4,11 +4,27 @@
 	require_once 'assets/php/yuki/autoload.php';
 
 	foreach ([ 
-		'core/', 'utils/', 'page/', 'system/', 'security/', 'cloud/', 'account/', 'cloud/meta/'
+		'core/',
+		'page/',
+		'utils/',
+		'cloud/',
+		'system/',
+		'account/', 
+		'security/',
+		'cloud/meta/',
+		'system/minify/',
 	] as $p) {
 		foreach (scandir(__DIR__ . '/' . $p) as $file) {
-			if (!in_array(substr($file, 0, 1), [ '_' ]) && is_file(__DIR__ . '/' . $p . $file)) {
-				if ($file != '.env') { require_once $p . $file; }
+			if (!in_array(
+				substr($file, 0, 1), [ '_' ]
+			) && is_file(
+				__DIR__ . '/' . $p . $file
+			)) {
+				if (pathinfo(
+					$file, PATHINFO_EXTENSION
+				) == 'php') {
+					require_once $p . $file;
+				}
 			}
 		}
 	}

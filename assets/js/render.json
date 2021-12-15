@@ -1,0 +1,29 @@
+{
+    "entry": "assets/js/index.js",
+    "build": "assets/js/index.min.js",
+
+    "configs": {
+        "cache": true,
+        "build": true,
+        "compress": true,
+        "etag": "qSFDCRCHGVJCVFJFVNFVJN"
+    },
+
+    "js": [
+        {
+            "files": [],
+            "name": "lib",
+            "minify": true,
+            "version": "0.0.0"
+        }
+    ],
+
+    "css": [
+        {
+            "files": [],
+            "name": "lib",
+            "minify": true,
+            "version": "0.0.0"
+        }
+    ]
+}

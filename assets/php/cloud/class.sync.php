@@ -11,8 +11,9 @@
 		public function delete() {}
 
 		public function __construct() {
-			$this->db		=	new DB;
-			$this->clients	=	new Clients;	
+			$this->db				=	new DB;
+			$this->clients			=	new Clients;
+			$this->notifications	=	new Notifications;
 		}
 
 	}

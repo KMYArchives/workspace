@@ -35,23 +35,23 @@ const CodeDiagramIO = {
 	},
 
 	download () {
-		var image
-
 		if ($(code_diagram + ' > .viewer > img').attr('src')) {
-			Encoder.toDataURL($(code_diagram + ' > .viewer > img').attr('src'), base64 => {
-				image	=	base64
+			Encoder.toDataURL(
+				$(code_diagram + ' > .viewer > img').attr('src'),
+			base64 => {
+				Misc.download(
+					base64, $(header_code + ' > .label').text() + '.png'
+				)
 			})
 		} else {
 			html2canvas(
 				document.querySelector(code_diagram + ' > .viewer > .model-diagram')
 			).then( canvas => {
-				image	=	canvas.toDataURL()
+				Misc.download(
+					canvas.toDataURL(), $(header_code + ' > .label').text() + '.png'
+				)
 			})
 		}
-
-		setTimeout( e => {
-			Misc.download(image, $(header_code + ' > .label').text() + '.png')
-		}, anim_time)
 	},
 
 }

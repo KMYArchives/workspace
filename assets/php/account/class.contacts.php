@@ -66,7 +66,7 @@
 				];
 			}
 
-			header('Content-Type: application/json');
+			Headers::setContentType('application/json');
 			echo json_encode($contact);
 		}
 
@@ -90,7 +90,7 @@
 				];
 			}
 
-			header('Content-Type: application/json');
+			Headers::setContentType('application/json');
 			echo json_encode([
 				'list'	=>	$list,
 				'total'	=>	$this->db->query("SELECT count(*) FROM ws_contacts WHERE invite_accept = 'true' AND username = ? AND contact_id != ? $where LIMIT $offset, $sql_max", [
@@ -159,7 +159,7 @@
 				$favorited	=	'true';
 			}
 
-			header('Content-Type: application/json');
+			Headers::setContentType('application/json');
 			if ($this->db->query("UPDATE ws_contacts SET favorited = ? WHERE slug = ? AND username = ?", [
 				$favorited,
 				$data['slug'],

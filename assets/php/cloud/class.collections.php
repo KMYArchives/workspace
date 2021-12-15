@@ -26,7 +26,7 @@
 				$this->clients->get_id($_GET['username'])
 			]) as $data);
 
-			header('Content-Type: application/json');
+			Headers::setContentType('application/json');
 			echo json_encode($data);
 		}
 
@@ -36,7 +36,7 @@
 			$client		=	$this->clients->get_id($_GET['username']);
 			$offset		=	($_GET['offset']) ? Clean::numbers($_GET['offset']) : 0;
 
-			header('Content-Type: application/json');
+			Headers::setContentType('application/json');
 			echo json_encode([
 				'list'	=>	$this->db->query("SELECT id, slug, name, privacy, added_in FROM ws_collections WHERE username = ? $filter LIMIT $offset, $sql_max", [
 					$client
@@ -66,7 +66,7 @@
 		}
 
 		public function create() {
-			header('Content-type: application/json');
+			Headers::setContentType('application/json');
 
 			if ($this->db->query("INSERT INTO ws_collections(slug, name, collation, privacy, username) VALUES(?, ?, ?, ?, ?)", [
 				Random::string(36, true, true, true),
@@ -83,7 +83,7 @@
 		}
 
 		public function delete() {
-			header('Content-type: application/json');
+			Headers::setContentType('application/json');
 
 			foreach ($this->db->query("SELECT id, username, slug FROM ws_collections WHERE slug = ? AND username = ?", [
 				Clean::slug($_POST['slug']), 

@@ -26,7 +26,7 @@
 				$this->clients->get_id()
 			]) as $data);
 
-			header('Content-Type: application/json');
+			Headers::setContentType('application/json');
 			echo json_encode([
 				'name'		=>	$data['name'],
 				'token'		=>	$data['token'],
@@ -50,7 +50,7 @@
 				];
 			}
 
-			header('Content-Type: application/json');
+			Headers::setContentType('application/json');
 			echo json_encode([
 				'list'	=>	$list,
 				'total'	=>	$this->db->query("SELECT count(*) FROM ws_tokens WHERE username = ? $where", [
@@ -67,7 +67,7 @@
 			$token	=	$this->generate_token();
 			$slug	=	Random::string(36, true, true, true);
 
-			header('Content-Type: application/json');
+			Headers::setContentType('application/json');
 			if ($this->db->query("INSERT INTO ws_tokens(slug, token, name) VALUES(?, ?, ?)", [
 				$slug,
 				$token,
@@ -84,7 +84,7 @@
 		}
 
 		public function delete() {
-			header('Content-Type: application/json');
+			Headers::setContentType('application/json');
 			
 			if ($this->db->query("DELETE FROM ws_tokens WHERE slug = ? AND username = ?", [
 				Clean::slug($_POST['slug']),

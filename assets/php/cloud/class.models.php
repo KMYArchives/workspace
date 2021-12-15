@@ -2,7 +2,7 @@
 
 	class Models {
 
-		private $db, $clients, $diagrams_meta;
+		private $db, $cache, $clients, $diagrams_meta;
 
 		private function term(): string {
 			if (Clean::default($_GET['term'])) {
@@ -55,7 +55,7 @@
 				$this->clients->get_id($_GET['username'])
 			]) as $data);
 
-			header('Content-Type: application/json');
+			Headers::setContentType('application/json');
 			echo json_encode([
 				'name'				=>	$data['name'],
 				'added_in'			=>	$data['added_in'],
@@ -76,6 +76,7 @@
 
 		public function __construct() {
 			$this->db				=	new DB;
+			$this->cache			=	new Cache;
 			$this->clients			=	new Clients;
 			$this->diagrams_meta	=	new DiagramsMeta;
 		}
@@ -97,13 +98,15 @@
 				];
 			}
 
-			header('Content-Type: application/json');
-			echo json_encode([
+			$items		=	[
 				'list'	=>	$list,
-				'total'	=>	$this->db->query("SELECT count(*) FROM ws_models WHERE username = ? $where", [
+				'total'	=>	$this->db->query("SELECT COUNT(*) FROM ws_models WHERE username = ? $where", [
 					$username
-				])[0]['count(*)']
-			]);
+				])[0]['COUNT(*)'],
+			];
+
+			Headers::setContentType('application/json');
+			echo json_encode($items);
 		}
 
 		public function create(): mixed {
@@ -138,7 +141,7 @@
 		}
 
 		public function delete(): mixed {
-			header('Content-type: application/json');
+			Headers::setContentType('application/json');
 
 			foreach ($this->db->query("SELECT sql_file, json_file, username FROM ws_models WHERE slug = ? AND username = ?", [
 				Clean::slug($_POST['slug']), 

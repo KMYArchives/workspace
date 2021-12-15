@@ -4,7 +4,9 @@
 
 		public static function avatar(string $email): string {
 			return md5(
-				OpenSSL::decrypt($email)
+				OpenSSL::decrypt(
+					$email
+				)
 			);
 		}
 

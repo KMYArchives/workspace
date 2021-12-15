@@ -13,7 +13,7 @@
 				$data['username']	=	OpenSSL::decrypt($data['username']);
 			}
 
-			header('Content-type: application/json');
+			Headers::setContentType('application/json');
 			echo json_encode($data);
 		}
 
