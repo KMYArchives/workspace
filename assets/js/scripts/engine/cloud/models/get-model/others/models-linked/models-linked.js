@@ -1,8 +1,8 @@
 const ModelsLinked = {
 
 	layout () {
-		$(models_linked_box).empty()
-		$(models_linked_box).append(`
+		El.empty(models_linked_box)
+		El.append(models_linked_box, `
 			<div class='header'>
 				<div class='label'>Linked</div>
 				<div class='total'>0 item's</div>
@@ -12,15 +12,21 @@ const ModelsLinked = {
 		`)
 	},
 
-	toggle (el) {
-		$(send_to_box).hide()
-		$(share_code_box).hide()
-		$(toolbar_code + ' > #send-model').removeClass(act_class)
-		$(toolbar_code + ' > #share-model').removeClass(act_class)
+	toggle () {
+		El.hide([ send_to_box, share_code_box ])
+		
+		Classes.remove([
+			toolbar_code + ' > #send-model',
+			toolbar_code + ' > #share-model',
+		], act_class)
 
-		Classes.toggle(el)
-		$(models_linked_box).fadeToggle(anim_time)
-		if (Classes.is_visible(models_linked_box)) { ListModelsLinked.list() }
+		Classes.toggle('#linked-model', act_class)
+		if (Classes.has('#linked-model', act_class)) {
+			El.show(models_linked_box)
+			ListModelsLinked.list()
+		} else {
+			El.hide(models_linked_box)
+		}
 	},
 
 }

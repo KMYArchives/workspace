@@ -87,8 +87,8 @@ const GetModel = {
 	},
 
 	get (model = null) {
-		$(code_diagram).hide()
-		if (model != null) { URL.add_query('i', $(model).attr('id')) }
+		El.hide(code_diagram)
+		if (model != null) { URL.add_query('i', model.id) }
 
 		fetch(`${ Apis.core() }cloud/models/get?slug=${ URL.get_query('i') }`).then( 
 			json => json.json() 
@@ -104,7 +104,7 @@ const GetModel = {
 			Editor.content(callback.content)
 			PropsTable.get(callback.metadata)
 			VisualMode.fields(callback.colunms)
-			$(header_code + ' > .label').text(callback.name)
+			El.setText(header_code + ' > .label', callback.name)
 
 			FavModels.check(callback)
 			Modals.show(code_view_modal)

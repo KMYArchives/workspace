@@ -6,7 +6,7 @@
 			$models_meta->delete();
 			break;
 
-		case 'download':
+		case 'export':
 			Request::get([ 'slug' ]);
 			$models_meta->download();
 			break;

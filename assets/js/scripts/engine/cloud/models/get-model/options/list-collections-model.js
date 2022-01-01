@@ -1,7 +1,7 @@
 const ListCollectionsModel = {
 
 	toggle (el) {
-		Classes.toggle(el)
+		Classes.toggle('#list-cols-options-model', act_class)
 		$('.collection').slideToggle(anim_time)
 	},
 

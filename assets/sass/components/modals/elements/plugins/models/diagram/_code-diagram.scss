@@ -1,15 +1,15 @@
 .code-diagram{
 	right: 0;
-	bottom: 0;
 	display: none;
-	height: 27.4em;
 	overflow: auto;
+	height: 27.23em;
 	z-index: 99999999;
 	position: absolute;
 	background: $firstColor;
 	border-right: 0 !important;
-	margin-bottom: $padding_base * 2.15;
-	border: $border_size solid $borderColor;
+	margin-bottom: $border_size * 2;
+	border-left: $border_size solid $borderColor;
+	border-bottom: $border_size solid $borderColor;
 	
 	.viewer{
 		float: left;
@@ -41,6 +41,7 @@
 		position: absolute;
 		background: $secondColor;
 		width: $padding_base * 3;
+		margin-top: -$border_size;
 		font-size: $smallFont + .05;
 		border-left: $border_size solid $borderColor;
 

@@ -1,8 +1,8 @@
 const SendToModel = {
 
 	layout () {
-		$(send_to_box).empty()
-		$(send_to_box).append(`
+		El.empty(send_to_box)
+		El.append(send_to_box, `
 			<div class='header'>
 				<div class='tab actived'>All</div>
 				<div class='tab'>Favorites</div>
@@ -12,15 +12,21 @@ const SendToModel = {
 		`)
 	},
 
-	toggle (el) {
-		$(share_code_box).hide()
-		$(models_linked_box).hide()
-		$(toolbar_code + ' > #share-model').removeClass(act_class)
-		$(toolbar_code + ' > #linked-model').removeClass(act_class)
+	toggle () {
+		El.hide([ share_code_box, models_linked_box ])
+		
+		Classes.remove([
+			toolbar_code + ' > #share-model',
+			toolbar_code + ' > #linked-model'
+		], act_class)
 
-		Classes.toggle(el)
-		$(send_to_box).fadeToggle(anim_time)
-		if (Classes.is_visible(send_to_box)) { ListContactsModel.list() }
+		Classes.toggle('#send-model', act_class)
+		if (Classes.has('#send-model', act_class)) {
+			El.show(send_to_box)
+			ListContactsModel.list()
+		} else {
+			El.hide(send_to_box)
+		}
 	},
 
 }

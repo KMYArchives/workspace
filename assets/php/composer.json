@@ -3,6 +3,7 @@
         "vlucas/phpdotenv": "^5.4",
         "phpmailer/phpmailer": "^6.5",
         "league/csv": "^9.7",
-        "phpfastcache/phpfastcache": "^8.0"
+        "phpfastcache/phpfastcache": "^8.0",
+        "miladrahimi/phprouter": "^5.1"
     }
 }

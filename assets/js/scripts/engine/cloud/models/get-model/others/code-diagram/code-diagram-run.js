@@ -16,27 +16,27 @@ const CodeDiagramRun = {
 	},
 
 	get (callback) {
-		$(code_diagram + ' > .viewer > .model-diagram').hide()
-		$(code_diagram + ' > .viewer > .model-diagram').empty()
+		El.hide(code_diagram + ' > .viewer > .model-diagram')
+		El.empty(code_diagram + ' > .viewer > .model-diagram')
 
 		if (callback.diagram.link) {
-			$(code_diagram + ' > .viewer > img').attr('src', callback.diagram.link)
+			Attr.set(code_diagram + ' > .viewer > img', 'src', callback.diagram.link)
 		} else {
-			$(code_diagram + ' > .viewer > .model-diagram').append(`
+			El.append(code_diagram + ' > .viewer > .model-diagram', `
 				<div class='name'>
 					${ Str.cut(callback.name, 50) }
 				</div>
 			`)
 			
 			callback.colunms.forEach( field => { this.item_layout(field) })
-			$(code_diagram + ' > .viewer > .model-diagram').show()
+			El.show(code_diagram + ' > .viewer > .model-diagram')
 		}
 		
 		CodeDiagram.toggle_option(callback.diagram.slug)
 	},
 
 	item_layout (field) {
-		$(code_diagram + ' > .viewer > .model-diagram').append(`
+		El.append(code_diagram + ' > .viewer > .model-diagram', `
 			<li>
 				<div class='${ this.icon(field.Key) }'></div>
 				${ Str.cut(field.Field, 32) } ${ Str.slice(field.Type, '(', 0).toUpperCase() }

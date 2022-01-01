@@ -9,13 +9,12 @@
 			$this->clients	=	new Clients;
 		}
 
-		public function download(): mixed {
+		public function download(): void {
 			foreach ($this->db->query("SELECT name, sql_file FROM ws_models WHERE slug = ? AND username = ?", [
 				Clean::slug($_GET['slug']), 
 				$this->clients->get_id()
 			]) as $data);
 			
-			Headers::setContentType('application/json');
 			File::download([
 				'file'	=>	$data['sql_file'],
 				'name'	=>	$data['name'] . '.sql',
@@ -23,7 +22,7 @@
 			]);
 		}
 
-		public function favorite(): mixed {
+		public function favorite(): string {
 			foreach ($this->db->query("SELECT slug, favorited, username FROM ws_models WHERE slug = ? AND username = ? LIMIT 1" , [ 
 				Clean::slug($_POST['slug']), 
 				$this->clients->get_id() 
@@ -50,7 +49,7 @@
 			}
 		}
 
-		public function get_options(): mixed {
+		public function get_options(): string {
 			$collections	=	new Collections;
 			
 			foreach ($this->db->query("SELECT privacy, collection FROM ws_models WHERE slug = ? AND username = ?", [
@@ -68,14 +67,14 @@
 			]);
 		}
 
-		public function change_privacy(): mixed {
+		public function change_privacy(): string {
 			foreach ($this->db->query("SELECT slug, privacy, username FROM ws_models WHERE slug = ? AND username = ? LIMIT 1" , [ 
 				Clean::slug($_POST['slug']), 
 				$this->clients->get_id() 
 			]) as $data);
 
 			if ($data['privacy'] == 'public') {
-				$privacy	=	'private';
+				$privacy	=	'private'; 
 			} else if ($data['privacy'] == 'private') {
 				$privacy	=	'public';
 			}
@@ -92,7 +91,7 @@
 			}
 		}
 
-		public function change_diagram(string $diagram): mixed {
+		public function change_diagram(string $diagram): string {
 			if ($this->db->query("UPDATE ws_models SET diagram = ? WHERE slug = ? AND username = ?", [
 				$diagram,
 
@@ -105,7 +104,7 @@
 			}
 		}
 
-		public function change_collection(int|string $col = null): mixed {
+		public function change_collection(int|string $col = null): string {
 			if (!$col) { $col = Clean::numbers($_POST['col']); }
 
 			Headers::setContentType('application/json');

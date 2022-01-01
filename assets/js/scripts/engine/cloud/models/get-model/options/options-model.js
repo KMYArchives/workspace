@@ -23,14 +23,13 @@ const OptionsModel = {
 		$(options_model).append(`
 			<div class='item' id='model-privacy' onclick='EditModel.privacy()'>Public</div>
 
-			<div class='item' onclick="ListCollectionsModel.toggle(this)">
+			<div class='item' id='list-cols-options-model' onclick="ListCollectionsModel.toggle(this)">
 				Collection
 				<div class='fas fa-folder icon-left'></div>
 			</div>
 
 			<div class='collection'>
 				<div class='list'></div>
-
 				<div class='item' id='remove-col' onclick="EditModel.collection('0')">Remove in this collection</div>
 			</div>
 		`)

@@ -2,12 +2,12 @@ const CodeDiagram = {
 
 	toggle () {
 		$(code_diagram).fadeToggle(anim_time)
-		Classes.toggle('#btn-code-diagram')
+		Classes.toggle('#btn-code-diagram', act_class)
 	},
 
 	layout () {
-		$(code_diagram).empty()
-		$(code_diagram).append(`
+		El.empty(code_diagram)
+		El.append(code_diagram, `
 			<div class='viewer'>
 				<div class='message' id='msg-dgr-model'></div>
 				<div class='model-diagram'></div>
@@ -24,19 +24,18 @@ const CodeDiagram = {
 	toggle_option (slug = null) {
 		var option = '#option-1'
 
-		if ($(code_diagram + ' > .viewer > img').attr('src')) {
-			$(option).removeClass('fa-save')
-			$(option).addClass('fa-external-link-alt')
+		if (Attr.has(code_diagram + ' > .viewer > img', 'src')) {
+			Classes.remove(option, 'fa-save')
+			Classes.add(option, 'fa-external-link-alt')
 
-			$(option).attr('title', 'View diagram page')
-			$(option).attr('onclick', `Diagrams.go('${ slug }')`)
+			Attr.set(option, 'title', 'View diagram page')
+			Attr.set(option, 'onclick', `Diagrams.go('${ slug }')`)
 		} else {
-			$(option).removeClass('fa-external-link-alt')
-			$(option).addClass('fa-save')
+			Classes.remove(option, 'fa-external-link-alt')
+			Classes.add(option, 'fa-save')
 			
-			$(option).attr('title', 'Save to my account')
-			$(option).attr('onclick', 'CodeDiagramIO.save()')
-
+			Attr.set(option, 'title', 'Save to my account')
+			Attr.set(option, 'onclick', 'CodeDiagramIO.save()')
 		}
 	},
 

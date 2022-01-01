@@ -1,10 +1,5 @@
 const ShareMisc = {
 
-	actived (el) {
-		$(share_code_box + ' > .sub-options > .option').removeClass(act_class)
-		$(el).addClass(act_class)
-	},
-
 	links (item, el) {
 		var value
 
@@ -21,12 +16,10 @@ const ShareMisc = {
 				value = this.link_direct()
 				break
 		}
-
-		$(share_code_box + ' > .links > input').val(value)
-		$(share_code_box + ' > .options > .text').text($(el).text())
 		
-		this.actived(el)
 		ShareModel.toggle_sub_options()
+		Attr.set(share_code_box + ' > .links > input', 'value', value)
+		El.setText(share_code_box + ' > .options > .text', El.getText('#' + el.id))
 	},
 
 	social_media (social) {

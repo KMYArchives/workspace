@@ -4,20 +4,24 @@ const ListContactsModel = {
 		fetch(`${ Apis.core() }contacts/list`).then( 
 			json => json.json() 
 		).then( callback => {
-			$(send_to_box + ' > .list').empty()
+			El.empty(send_to_box + ' > .list')
 			
 			if (callback.total > 0) {
 				_.forEach(_.orderBy(callback.list, 'name', 'asc'), contact => {
 					this.item_layout(contact)
 				})
 			} else {
-				$(send_to_box + ' > .list').append(`<div class='none'>You no have contacts</div>`)
+				El.append(send_to_box + ' > .list', `
+					<div class='none'>
+						You no have contacts
+					</div>
+				`)
 			}
 		})
 	},
 
 	item_layout (contact) {
-		$(send_to_box + ' > .list').append(`
+		El.append(send_to_box + ' > .list', `
 			<div class='contact'>
 				<img src='${ Misc.gravatar(contact.gravatar) }'>
 				<div class='name'>${ contact.name }</div>

@@ -2,26 +2,46 @@
 
 	class Cookies {
 
-		public static function has($name) {
-			if ($_COOKIE[Values::$cookie[$name]]) {
-				return true;
+		private static function _name(string $name): mixed {
+			if (Values::$cookie[$name]) {
+				return Values::$cookie[$name];
 			} else {
-				return false;
+				return $name;
 			}
 		}
 
-		public static function delete($name) { 
-			setcookie(
-				Values::$cookie[$name], null, null, '/', null, true, true
-			); 
+		public static function has(string $name): bool {
+			return isset(
+				$_COOKIE[
+					self::_name($name)
+				]
+			);
 		}
 
-		public static function create($options) { 
+		public static function create(array $data): void {
 			setcookie(
-				Values::$cookie[$options[0]], $options[1], $options[2], '/', null, true, true
-			); 
+				self::_name($data['name']),
+				$data['value'],
+				$data['expire'] ?? 0,
+				$data['path'] ?? '/',
+				$data['domain'] ?? null,
+				$data['secure'] ?? false,
+				$data['httpOnly'] ?? false
+			);
 		}
 
-		public static function get($name) { return $_COOKIE[Values::$cookie[$name]]; }
+		public static function get(string $name): string {
+			return $_COOKIE[
+				self::_name($name)
+			];
+		}
+
+		public static function delete(string $name): void {
+			self::create([
+				'value'		=>	'',
+				'expire'	=>	time() - 3600,
+				'name'		=>	self::_name($name),
+			]);
+		}
 
 	}

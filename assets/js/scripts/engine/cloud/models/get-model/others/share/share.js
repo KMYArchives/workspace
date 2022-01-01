@@ -1,8 +1,8 @@
 const ShareModel = {
 
 	layout () {
-		$(share_code_box).empty()
-		$(share_code_box).append(`
+		El.empty(share_code_box)
+		El.append(share_code_box, `
 			<div class='social'>
 				<a href="${ ShareMisc.social_media('facebook') }" target='_blank' class='fab fa-facebook'></a>
 				<a href="${ ShareMisc.social_media('twitter') }" target='_blank' class='fab fa-twitter'></a>
@@ -16,9 +16,9 @@ const ShareModel = {
 			</div>
 
 			<div class='sub-options'>
-				<div class='option ${ Find.replace(act_class, '.', '') }' onclick="ShareMisc.links('direct', this)">Direct</div>
-				<div class='option' onclick="ShareMisc.links('cli', this)">CLI</div>
-				<div class='option' onclick="ShareMisc.links('raw', this)">Raw</div>
+				<div class='option' id='share-direct-code' onclick="ShareMisc.links('direct', this)">Direct</div>
+				<div class='option' id='share-cli-code' onclick="ShareMisc.links('cli', this)">CLI</div>
+				<div class='option' id='share-raw-code' onclick="ShareMisc.links('raw', this)">Raw</div>
 			</div>
 
 			<div class='links'>
@@ -27,27 +27,45 @@ const ShareModel = {
 		`)
 	},
 
-	toggle (el) {
-		$(send_to_box).hide()
-		$(models_linked_box).hide()
-		$(toolbar_code + ' > #send-model').removeClass(act_class)
-		$(toolbar_code + ' > #linked-model').removeClass(act_class)
+	toggle () {
+		El.hide([ send_to_box, models_linked_box ])
+		
+		Classes.remove([
+			toolbar_code + ' > #send-model',
+			toolbar_code + ' > #linked-model'
+		], act_class)
 
-		Classes.toggle(el)
-		$(share_code_box).fadeToggle(anim_time)
+		Classes.toggle('#share-model', act_class)
+		if (Classes.has('#share-model', act_class)) {
+			El.show(share_code_box)
+		} else {
+			El.hide(share_code_box)
+		}
 	},
 
 	toggle_sub_options () {
-		$('.options > .fas').remove()
+		El.remove('.options > .fas')
 
 		if (Classes.is_visible('.sub-options')) {
-			$('.options').append(`<div class='fas fa-chevron-down'></div>`)
+			El.append('.options', `
+				<div class='fas fa-chevron-down'></div>
+			`)
 		} else {
-			$('.options').append(`<div class='fas fa-chevron-up'></div>`)
+			El.append('.options', `
+				<div class='fas fa-chevron-up'></div>
+			`)
 		}
 
-		Classes.toggle('.options')
-		$('.sub-options').slideToggle(anim_time)
+		Classes.add([
+			'.sub-options'
+		], 'animate__animated animate__zoomIn animate__faster')
+
+		Classes.toggle('.options', act_class)
+		if (Classes.has('.options', act_class)) {
+			El.show('.sub-options')
+		} else {
+			El.hide('.sub-options')
+		}
 	}
 
 }

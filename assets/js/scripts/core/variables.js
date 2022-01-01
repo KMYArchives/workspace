@@ -12,8 +12,10 @@ var mask = '.mask',
 
 var hide = 'hide',
 	anim_time = 200,
+	sidebar = '.sidebar',
 	act_class = 'actived',
 	side_box = '#side-box',
+	left_box = '#left-box',
 	cm_editor = 'cm-editor',
 	props_btn = '#props-btn',
 	notif_btn = '#notif-btn',
@@ -31,6 +33,8 @@ var hide = 'hide',
 	user_page_top = '#user-page-top',
 	account_avatar = '#account-avatar',
 	collections_box = '#collections-box',
+	sidebar_items = sidebar + ' > .item',
+	left_box_items = side_box + ' > .tab',
 	sub_header_items = sub_header + ' > .menu > .item'
 
 // Diagram modal
@@ -42,7 +46,8 @@ var message_dgr = toolbar_dgr + ' > #cvm-message',
 	properties_dgr = diagram_modal + ' > #properties-dgr'
 
 // Code view modal
-var visual_mode = code_view_modal + ' > #visual-mode',
+var send_model = code_view_modal + ' > #send-model',
+	visual_mode = code_view_modal + ' > #visual-mode',
 	send_to_box = code_view_modal + ' > #send-to-box',
 	toolbar_code = code_view_modal + ' > #toolbar-snp',
 	properties = code_view_modal + ' > #properties-snp',

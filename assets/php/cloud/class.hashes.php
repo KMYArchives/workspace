@@ -20,7 +20,7 @@
 			) {
 				default			=>	"AND privacy = 'public'",
 				'public'		=>	"AND privacy = 'public'",
-				'favorites'		=>	"AND favorites = 'true'",
+				'favorites'		=>	"AND favorited = 'true'",
 				'private'		=>	"AND privacy = 'private'",
 				'collections'	=>	"AND collection = '" . Clean::numbers($_GET['col']) . "'",
 			};

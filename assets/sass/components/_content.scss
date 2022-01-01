@@ -23,7 +23,7 @@
 			line-height: $padding_base * 2.5;
 		}
 
-		@include hover($blueColor, $firstColor, $blueColor);
+		@include hover($blueColor);
 	}
 
 	@include table;

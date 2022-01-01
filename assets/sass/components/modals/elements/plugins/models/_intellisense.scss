@@ -10,7 +10,7 @@
 	background: $firstColor;
 	line-height: $padding_base + $padding2;
 	border: $border_size solid $borderColor;
-	margin-top: $header_size + $padding_base * 2.5;
+	margin-top: $header_size + $padding_base + $padding4;
 
 	.msg{
 		width: 100%;

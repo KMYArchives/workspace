@@ -28,27 +28,27 @@ const CodeDiagramIO = {
 
 	element () {
 		if ($(code_diagram + ' > .viewer > img').attr('src')) {
-			return document.querySelector(code_diagram + ' > .viewer > img')
+			return El.get(code_diagram + ' > .viewer > img')
 		} else {
-			return document.querySelector(code_diagram + ' > .viewer > .model-diagram')
+			return El.get(code_diagram + ' > .viewer > .model-diagram')
 		}
 	},
 
 	download () {
-		if ($(code_diagram + ' > .viewer > img').attr('src')) {
+		if (Attr.get(code_diagram + ' > .viewer > img', 'src')) {
 			Encoder.toDataURL(
-				$(code_diagram + ' > .viewer > img').attr('src'),
+				Attr.get(code_diagram + ' > .viewer > img', 'src'),
 			base64 => {
 				Misc.download(
-					base64, $(header_code + ' > .label').text() + '.png'
+					base64, El.getText(header_code + ' > .label') + '.png'
 				)
 			})
 		} else {
 			html2canvas(
-				document.querySelector(code_diagram + ' > .viewer > .model-diagram')
+				El.get(code_diagram + ' > .viewer > .model-diagram')
 			).then( canvas => {
 				Misc.download(
-					canvas.toDataURL(), $(header_code + ' > .label').text() + '.png'
+					canvas.toDataURL(), El.getText(header_code + ' > .label') + '.png'
 				)
 			})
 		}
