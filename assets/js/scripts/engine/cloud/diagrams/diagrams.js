@@ -9,9 +9,9 @@ const Diagrams = {
 	},
 
 	side_box () {
-		$(side_box).show()
-		$(side_box).empty()
-		$(side_box).append(`
+		El.show(side_box)
+		El.empty(side_box)
+		El.append(side_box, `
 			<div class='tab actived' id='list-public' onclick="ListDiagrams.list_table('public')">
 				Public
 				<div class='fas fa-globe'></div>
@@ -42,7 +42,7 @@ const Diagrams = {
 	},
 
 	page_load () {
-		if (URL.get_last_param() != 'diagrams') { 
+		if (Params.get_last() != 'diagrams') { 
 			URL.change_url(`${ URL.get_url_base() }diagrams`) 
 		}
 

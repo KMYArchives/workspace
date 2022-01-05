@@ -1,8 +1,13 @@
 const CodeDiagram = {
 
 	toggle () {
-		$(code_diagram).fadeToggle(anim_time)
 		Classes.toggle('#btn-code-diagram', act_class)
+
+		if (El.is_visible(code_diagram)) {
+			El.hide(code_diagram)
+		} else {
+			El.show(code_diagram)
+		}
 	},
 
 	layout () {

@@ -1,38 +1,44 @@
 const ListModels = {
 
-	list () {
-		if (Find.in_array(URL.get_last_param(), [ 'models' ])) {
-			setTimeout( e => {
-				GetModel.modal()
-				this.list_table()
-	
-				Editor.loader()
-				Classes.replace([
-					'.sidebar > .item'
-				], '#tab-models')
-
-				setTimeout( e => {
-					if (URL.get_query('i') != null) { GetModel.get() }
-				}, anim_time * 2)
-			}, anim_time * 2)
+	_set_filter (filter, col_id = null, append = false) {
+		if (!Queries.has('filter')) {
+			if (col_id) {
+				Queries.add({
+					filter: filter,
+					col_id: col_id,
+				}, append)
+			} else {
+				Queries.add({
+					filter: filter,
+				}, append)
+			}
+		} else {
+			if (col_id) {
+				Queries.update('col', col_id, append)
+				Queries.update('filter', filter, append)
+			} else {
+				Queries.update('filter', filter, append)
+			}
 		}
 	},
 
-	params (filter) {
-		var params
+	list () {
+		if (Find.in_array(Params.get_last(), [ 'models' ])) {
+			GetModel.modal()
+			
+			if (Queries.get('filter') != 'favorites') {
+				this.list_table(
+					Queries.get('filter')
+				)
+			} else {
+				FavModels.list_table()
+			}
 
-		if (filter == 'private') {
-			params = '?filter=private'
-			Classes.replace([ side_box + ' > .tab' ], '#list-privated')
-		} else if (filter == 'public') {
-			params = '?filter=public'
-			Classes.replace([ side_box + ' > .tab' ], '#list-public')
-		} else {
-			params = `?filter=collections&col=${ $(col_id).attr('id') }`
-			Collections.get(col_id)
+			Editor.loader()
+			Navbar.actived('tab-models')
+
+			if (Queries.has('i')) { GetModel.get() }
 		}
-
-		return params
 	},
 
 	table_layout () {
@@ -55,19 +61,47 @@ const ListModels = {
 		], true)
 	},
 
+	params (filter, col_id = null) {
+		var params, append = false
+		if (Queries.has('i')) { append = true }
+
+		if (filter == 'private') {
+			params = '?filter=private'
+			Classes.add('#list-privated', act_class)
+			Classes.remove([ '#list-favs', '#list-public' ], act_class)
+			
+			Queries.remove([ 'col' ])
+			this._set_filter(filter, col_id, append)
+		} else if (filter == 'public') {
+			params = '?filter=public'
+			Classes.add('#list-public', act_class)
+			Classes.remove([ '#list-favs', '#list-privated' ], act_class)
+			
+			Queries.remove([ 'col' ])
+			this._set_filter(filter, col_id, append)
+		} else {
+			params = `?filter=collections&col=${ col_id.id }`
+
+			Collections.get(col_id)
+			this._set_filter(filter, col_id)
+		}
+
+		return params
+	},
+
 	list_table (filter = 'public', col_id = null) {
 		this.table_layout()
-		$(collections_box).hide()
-		$('#list-cols').removeClass(act_class)
-		$(user_container + ' > .filter-area > .filter').remove()
+		El.hide(collections_box)
+		Classes.remove('#list-cols', act_class)
+		El.remove(user_container + ' > .filter-area > .filter')
 
 		var loaded = false
 		var Interval = setInterval( e => {
 			if (loaded != true) {
-				fetch(`${ Apis.core() }cloud/models/list${ this.params(filter) }`).then( 
+				fetch(`${ Apis.core() }cloud/models/list${ this.params(filter, col_id) }`).then( 
 					json => json.json() 
 				).then( callback => {
-					$(total_items).text(`Total: ${ callback.total } item's`)
+					El.text(total_items, `Total: ${ callback.total } item's`)
 					_.forEach(_.orderBy(callback.list, 'name', 'asc'), model => { this.row_layout(model) })
 				})
 

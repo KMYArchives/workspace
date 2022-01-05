@@ -1,8 +1,8 @@
 const ManagerCollection = {
 
 	modal () {
-		$(collection_modal).empty()
-		$(collection_modal).append(`
+		El.append(collection_modal)
+		El.append(collection_modal, `
 			<div class='title'>
 				<div class='label'></div>
 				<div class='fas fa-times' onclick='Modals.close_all()'></div>
@@ -29,13 +29,13 @@ const ManagerCollection = {
 	},
 
 	create_modal () {
-		$(collection_modal + ' > .title > .label').text('Create collection')
-		$(collection_modal + ' > .body > .btn').attr('onclick', 'ManagerCollectionPost.create()')
+		El.text('#col-submit', 'Create')
+		El.text(collection_modal + ' > .title > .label', 'Create collection')
+		Attr.set(collection_modal + ' > .body > .btn', 'onclick', 'ManagerCollectionPost.create()')
 
-		$('#col-name').val('')
-		$('#col-privacy').val('public')
-		$('#col-submit').text('Create')
-		$('#col-collation').val('utf8_general_ci')
+		El.value('#col-name','')
+		El.value('#col-privacy', 'public')
+		El.value('#col-collation', 'utf8_general_ci')
 
 		Modals.show(collection_modal)
 	},
@@ -46,13 +46,13 @@ const ManagerCollection = {
 		fetch(`${ Apis.core() }cloud/collections/get?slug=${ Storage.get('col-slug') }`).then( 
 			json => json.json() 
 		).then( callback => {
-			$('#col-submit').text('Save')
-			$('#col-name').val(callback.name)
-			$('#col-privacy').val(callback.privacy)
-			$('#col-collation').val(callback.collation)
+			El.text('#col-submit', 'Save')
+			El.value('#col-name', callback.name)
+			El.value('#col-privacy', callback.privacy)
+			El.value('#col-collation', callback.collation)
 
-			$(collection_modal + ' > .title > .label').text('Edit collection')
-			$(collection_modal + ' > .body > .btn').attr('onclick', 'ManagerCollectionPost.edit()')
+			El.text(collection_modal + ' > .title > .label', 'Edit collection')
+			Attr.set(collection_modal + ' > .body > .btn', 'onclick', 'ManagerCollectionPost.edit()')
 			Modals.show(collection_modal)
 		})
 	},
@@ -63,10 +63,10 @@ const ManagerCollection = {
 		).then(
 			json => json.json()
 		).then(callback => {
-			$('#col-collation').empty()
+			El.empty('#col-collation')
 
 			_.forEach(callback, item => {
-				$('#col-collation').append(`
+				El.append('#col-collation', `
 					<option value='${ item }'>
 						${ item }
 					</option>

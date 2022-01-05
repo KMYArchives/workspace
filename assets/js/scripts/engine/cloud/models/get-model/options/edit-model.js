@@ -2,7 +2,7 @@ const EditModel = {
 
 	privacy () {
 		var privacy_data = new FormData()
-		privacy_data.append('slug', URL.get_query('i'))
+		privacy_data.append('slug', Queries.get_query('i'))
 
 		fetch(`${ Apis.core() }cloud/models/meta/change-privacy`, {
 			method: 'POST', 
@@ -23,8 +23,8 @@ const EditModel = {
 
 	collection (el) {
 		var col_data = new FormData()
-		col_data.append('col', $(el).attr('id'))
-		col_data.append('slug', URL.get_query('i'))
+		col_data.append('col', el.id)
+		col_data.append('slug', Queries.get('i'))
 
 		fetch(`${ Apis.core() }cloud/models/meta/change-collection`, {
 			method: 'POST', 
@@ -38,7 +38,7 @@ const EditModel = {
 				if (callback.collection != 0) {
 					ListCollectionsModel.list(callback.collection.id)
 				} else {
-					$(options_model + ' > .collection > .list > .item > .fas').remove()
+					El.remove(options_model + ' > .collection > .list > .item > .fas')
 				}
 			} else {
 				console.log(callback)

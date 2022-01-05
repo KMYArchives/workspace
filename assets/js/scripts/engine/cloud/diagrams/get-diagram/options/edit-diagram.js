@@ -2,7 +2,7 @@ const EditDiagram = {
 
 	privacy () {
 		var privacy_data = new FormData()
-		privacy_data.append('slug', URL.get_query('i'))
+		privacy_data.append('slug', Queries.get('i'))
 
 		fetch(`${ Apis.core() }cloud/diagrams/meta/change-privacy`, {
 			method: 'POST', 
@@ -22,8 +22,8 @@ const EditDiagram = {
 
 	collection (el) {
 		var col_data = new FormData()
-		col_data.append('col', $(el).attr('id'))
-		col_data.append('slug', URL.get_query('i'))
+		col_data.append('col', el.id)
+		col_data.append('slug', Queries.get('i'))
 
 		fetch(`${ Apis.core() }cloud/diagrams/meta/change-collection`, {
 			method: 'POST', 
@@ -35,7 +35,7 @@ const EditDiagram = {
 				if (callback.collection != 0) {
 					ListCollectionsDiagram.list(callback.collection.id)
 				} else {
-					$(options_dgr + ' > .collection > .list > .item > .fas').remove()
+					El.remove(options_dgr + ' > .collection > .list > .item > .fas')
 				}
 			} else {
 				console.log(callback)

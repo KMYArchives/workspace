@@ -2,16 +2,18 @@ const OptionsModel = {
 
 	get () {
 		this.layout()
-		$(options_model + ' > #model-privacy > .fas').remove()
+		El.remove(options_model + ' > #model-privacy > .fas')
 
-		fetch(`${ Apis.core() }cloud/models/meta/get-options?slug=${ URL.get_query('i') }`).then( 
+		fetch(`${ Apis.core() }cloud/models/meta/get-options?slug=${ Queries.get('i') }`).then( 
 			json => json.json() 
 		).then( callback => {
 			StatusModel.privacy(callback.privacy)
 			StatusModel.collection(callback.collection)
 
 			if (callback.privacy == 'public') {
-				$(options_model + ' > #model-privacy').append(`<div class='fas fa-check'></div>`)
+				El.append(options_model + ' > #model-privacy', `
+					<div class='fas fa-check'></div>
+				`)
 			}
 
 			ListCollectionsModel.list(callback.collection.id)
@@ -19,8 +21,8 @@ const OptionsModel = {
 	},
 
 	layout () {
-		$(options_model).empty()
-		$(options_model).append(`
+		El.empty(options_model)
+		El.append(options_model, `
 			<div class='item' id='model-privacy' onclick='EditModel.privacy()'>Public</div>
 
 			<div class='item' id='list-cols-options-model' onclick="ListCollectionsModel.toggle(this)">
@@ -36,8 +38,13 @@ const OptionsModel = {
 	},
 
 	toggle () {
-		Classes.toggle('#get-options-model')
-		$(options_model).fadeToggle(anim_time)
+		Classes.toggle('#get-options-model', act_class)
+
+		if (El.is_visible(options_model)) {
+			El.hide(options_model)
+		} else [
+			El.show(options_model)
+		]
 	},
 	
 }

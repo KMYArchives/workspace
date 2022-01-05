@@ -3,7 +3,7 @@ const Notifications = {
 	list () {},
 
 	layout () {
-		$('body').append(`
+		El.append('body', `
 			<div class='notif-box' id='${ Find.replace_all(notif_box, '#', '') }'>
 				<div class='header'>
 					<div class='label'>Notification's</div>

@@ -1,8 +1,8 @@
 const GetDiagram = {
 
 	modal () {
-		if ($(diagram_modal).html() == '') {
-			$(diagram_modal).append(`
+		if (El.is_empty(diagram_modal)) {
+			El.append(diagram_modal, `
 				<div class='title' id='${ Find.replace(header_dgr, diagram_modal + ' > #', '') }'>
 					<div class='label'></div>
 					<div class='fas fa-times' onclick='Modals.close_all()'></div>
@@ -38,7 +38,7 @@ const GetDiagram = {
 
 	delete () {
 		var delete_data = new FormData()
-		delete_data.append('slug', URL.get_query('i'))
+		delete_data.append('slug', Queries.get('i'))
 
 		fetch(`${ Apis.core() }cloud/diagrams/delete`, {
 			method: 'POST', 
@@ -58,23 +58,23 @@ const GetDiagram = {
 	},
 
 	download () {
-		Encoder.toDataURL($(diagram_modal + ' > .viewer > img').attr('src'), base64 => {
-			Misc.download(base64, $(header_dgr + ' > .label').text() + '.png')
+		Encoder.toDataURL(Attr.get(diagram_modal + ' > .viewer > img', 'src'), base64 => {
+			Misc.download(base64, El.text(header_dgr + ' > .label') + '.png')
 		})
 	},
 
 	get (diagram = null) {
-		if (diagram != null) { URL.add_query('i', $(diagram).attr('id')) }
+		if (diagram != null) { URL.add_query('i', diagram.id) }
 
-		fetch(`${ Apis.core() }cloud/diagrams/get?slug=${ URL.get_query('i') }`).then( 
+		fetch(`${ Apis.core() }cloud/diagrams/get?slug=${ Queries.get('i') }`).then( 
 			json => json.json() 
 		).then( callback => {
 			ShareDiagram.layout()
 			OptionsDiagram.layout()
 			
 			OptionsDiagram.get()
-			$(header_dgr + ' > .label').text(callback.name)
-			$(diagram_modal + ' > .viewer > img').attr('src', callback.image)
+			El.text(header_dgr + ' > .label', callback.name)
+			Attr.set(diagram_modal + ' > .viewer > img', 'src', callback.image)
 
 			Modals.show(diagram_modal)
 		})

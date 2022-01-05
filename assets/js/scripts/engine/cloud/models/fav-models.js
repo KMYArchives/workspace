@@ -1,8 +1,15 @@
 const FavModels = {
 
 	execute () {
+		var item = Queries.get('i')
+
 		var fav_data = new FormData()
-		fav_data.append('slug', URL.get_query('i'))
+		fav_data.append('slug', item)
+
+		Queries.add({
+			filter: 'favorites',
+			i: item,
+		})
 
 		fetch(`${ Apis.core() }cloud/models/meta/favorite`, {
 			method: 'POST', 
@@ -18,15 +25,18 @@ const FavModels = {
 	},
 	
 	list_table () {
-		Classes.replace([
-			side_box + ' > .tab'
-		], '#list-favs')
+		Classes.add('#list-favs', act_class)
+		Classes.remove([ '#list-privated', '#list-public' ], act_class)
+
+		if (Queries.get('filter') != 'favorites') {
+			Queries.update('filter', 'favorites')
+		}
 	
 		ListModels.table_layout()
 		fetch(`${ Apis.core() }cloud/models/list?filter=favorites`).then( 
 			json => json.json() 
 		).then( callback => {
-			$(total_items).text(`Total: ${ callback.total } item's`)
+			El.text(total_items, `Total: ${ callback.total } item's`)
 			
 			_.forEach(_.orderBy(callback.list, 'product', 'asc'), model => {
 				ListModels.row_layout(model)
@@ -37,11 +47,9 @@ const FavModels = {
 
 	check (callback) {
 		if (callback.favorited == 'true') {
-			$(header_code + ' > .fa-heart').addClass('fas')
-			$(header_code + ' > .fa-heart').removeClass('far')
+			Classes.change(header_code + ' > .fa-heart', 'far', 'fas')
 		} else {
-			$(header_code + ' > .fa-heart').addClass('far')
-			$(header_code + ' > .fa-heart').removeClass('fas')
+			Classes.change(header_code + ' > .fa-heart', 'fas', 'far')
 		}
 	},
 

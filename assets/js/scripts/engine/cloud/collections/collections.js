@@ -1,8 +1,18 @@
 const Collections = {
 
+	toggle () {
+		Classes.toggle('#list-cols', act_class)
+
+		if (El.is_visible(collections_box)) {
+			El.hide(collections_box)
+		} else {
+			El.show(collections_box)
+		}
+	},
+
 	layout () {
-		$(collections_box).empty()
-		$(collections_box).append(`
+		El.empty(collections_box)
+		El.append(collections_box, `
 			<div class='header'>
 				<div class='button' onclick='ManagerCollection.create_modal()'>
 					New
@@ -21,17 +31,12 @@ const Collections = {
 		`)
 	},
 
-	toggle () {
-		Classes.toggle('#list-cols')
-		$(collections_box).fadeToggle(anim_time)
-	},
-
 	get (item) {
 		setTimeout( e => {
-			fetch(`${ Apis.core() }cloud/collections/get?slug=${ $(item).attr('slug') }`).then( 
+			fetch(`${ Apis.core() }cloud/collections/get?slug=${ Attr.get(item, 'slug') }`).then( 
 				json => json.json() 
 			).then( callback => {
-				$(user_container + ' > .filter-area').append(`
+				El.append(user_container + ' > .filter-area', `
 					<div class='filter' title='Remove filter' onclick='Collections.check_page()'>
 						${ callback.name }
 						<div class='fas fa-filter'></div>
@@ -39,18 +44,6 @@ const Collections = {
 				`)
 			})
 		}, anim_time)
-	},
-
-	check_page () {
-		switch (URL.get_last_param()) {
-			case 'models':
-				Models.list_table()
-				break
-
-			case 'hashes':
-				Hashes.list_table()
-				break
-		}
 	},
 
 }

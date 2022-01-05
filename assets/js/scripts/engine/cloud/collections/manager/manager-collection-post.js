@@ -2,10 +2,10 @@ const ManagerCollectionPost = {
 
 	edit () {
 		var col_data = new FormData()
-		col_data.append('name', $('#col-name').val())
+		col_data.append('name', El.value('#col-name'))
 		col_data.append('slug', Storage.get('col-slug'))
-		col_data.append('privacy', $('#col-privacy').val())
-		col_data.append('collation', $('#col-collation').val())
+		col_data.append('privacy', El.value('#col-privacy'))
+		col_data.append('collation', El.value('#col-collation'))
 
 		fetch(`${ Apis.core() }cloud/collections/edit`, {
 			method: 'POST', 
@@ -27,9 +27,9 @@ const ManagerCollectionPost = {
 
 	create () {
 		var col_data = new FormData()
-		col_data.append('name', $('#col-name').val())
-		col_data.append('privacy', $('#col-privacy').val())
-		col_data.append('collation', $('#col-collation').val())
+		col_data.append('name', El.value('#col-name'))
+		col_data.append('privacy', El.value('#col-privacy'))
+		col_data.append('collation', El.value('#col-collation'))
 
 		fetch(`${ Apis.core() }cloud/collections/create`, {
 			method: 'POST', 

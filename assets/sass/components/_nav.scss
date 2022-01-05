@@ -1,4 +1,4 @@
-.sidebar{
+.nav{
 	top: 0;
 	left: 0;
 	height: 100%;
@@ -25,7 +25,7 @@
 		&:hover, &:focus{ @include filter(grayscale, 100%); }
 	}
 
-	.item{
+	.btn-item{
 		float: left;
 		width: 100%;
 		color: inherit;

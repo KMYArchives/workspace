@@ -10,9 +10,9 @@ body{
 	font-size: $fontSize;
 	@include no-text-select;
 
+	@import 'components/nav';
 	@import 'components/top-bar';
 	@import 'components/content';
-	@import 'components/sidebar';
 	@import 'components/left-bar';
 
 	@import 'components/modals/autoload';

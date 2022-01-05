@@ -32,22 +32,6 @@ gulp.task('sass-compiler', e => {
 		)
 		.pipe(gulp.dest('assets/css'))
 })
- 
-// Minify e concate scripts
-gulp.task('js-admin-compiler', e => {
-	return gulp.src([
-		'assets/js/admin/**/*.js'
-	])
-	.pipe(plumber())
-	.pipe(babel({
-		compact: false,
-		comments: false,
-		presets: [ '@babel/env' ]
-	}))
-	.pipe(concat('admin.js'))
-	.pipe(uglify())
-	.pipe(gulp.dest('assets/js'))
-})
 
 // Watch the js files
 gulp.task('js', e => {
@@ -74,7 +58,6 @@ gulp.task('package', e => {
 		'!**/assets/sass/**',
 		'!**/node_modules/**',
 		'!**/assets/php/**/*.md',
-		'!**/assets/js/bundle/**',
 		'!**/assets/js/scripts/**',
 		'!**/assets/php/**/composer.json',
 		'!**/*.lock',

@@ -2,11 +2,16 @@ const ListCollectionsModel = {
 
 	toggle (el) {
 		Classes.toggle('#list-cols-options-model', act_class)
-		$('.collection').slideToggle(anim_time)
+		
+		if (El.is_visible('.collection')) {
+			El.hide('.collection')
+		} else {
+			El.show('.collection')
+		}
 	},
 
 	list (col_id) {
-		$(options_model + ' > .collection > .list').empty()
+		El.empty(options_model + ' > .collection > .list')
 
 		var loaded = false
 		var Interval = setInterval( e => {
@@ -15,11 +20,15 @@ const ListCollectionsModel = {
 					json => json.json() 
 				).then( callback => {
 					if (callback.total > 0) {
-						$('#remove-col').show()
-						_.forEach(_.orderBy(callback.list, 'name', 'asc'), item => { this.item_layout(item, col_id) })
+						El.show('#remove-col')
+
+						_.forEach(_.orderBy(callback.list, 'name', 'asc'), item => {
+							this.item_layout(item, col_id)
+						})
 					} else {
-						$('#remove-col').hide()
-						$(options_model + ' > .collection > .list').append(`
+						El.hide('#remove-col')
+
+						El.append(options_model + ' > .collection > .list', `
 							<div class='none'>
 								You no have collections
 							</div>
@@ -36,14 +45,14 @@ const ListCollectionsModel = {
 
 	item_layout (item, col_id) {
 		if (item.id == col_id) {
-			$(options_model + ' > .collection > .list').append(`
+			El.append(options_model + ' > .collection > .list', `
 				<div class='item' id='${ item.id }' onclick="EditModel.collection(this)">
 					${ item.name }
 					<div class='fas fa-check'></div>
 				</div>
 			`)
 		} else {
-			$(options_model + ' > .collection > .list').append(`
+			El.append(options_model + ' > .collection > .list', `
 				<div class='item' id='${ item.id }' onclick="EditModel.collection(this)">
 					${ item.name }
 				</div>

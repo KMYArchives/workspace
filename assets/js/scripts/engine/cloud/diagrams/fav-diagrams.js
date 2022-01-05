@@ -2,7 +2,7 @@ const FavDiagrams = {
 
 	execute () {
 		var fav_data = new FormData()
-		fav_data.append('slug', URL.get_query('i'))
+		fav_data.append('slug', Queries.get('i'))
 
 		fetch(`${ Apis.core() }cloud/diagrams/meta/favorite`, {
 			method: 'POST', 
@@ -18,15 +18,14 @@ const FavDiagrams = {
 	},
 	
 	list_table () {
-		Classes.replace([
-			side_box + ' > .tab'
-		], '#list-favs')
+		Classes.add('#list-favs', act_class)
+		Classes.remove([ '#list-privated', '#list-public' ], act_class)
 	
 		ListDiagrams.table_layout()
 		fetch(`${ Apis.core() }cloud/diagrams/list?filter=favorites`).then( 
 			json => json.json() 
 		).then( callback => {
-			$(total_items).text(`Total: ${ callback.total } item's`)
+			El.text(total_items, `Total: ${ callback.total } item's`)
 			_.forEach(_.orderBy(callback.list, 'product', 'asc'), diagram => { Diagrams.row_layout(diagram) })
 		})
 		
@@ -34,11 +33,9 @@ const FavDiagrams = {
 
 	check (callback) {
 		if (callback.favorited == 'true') {
-			$(header_dgr + ' > .fa-heart').addClass('fas')
-			$(header_dgr + ' > .fa-heart').removeClass('far')
+			Classes.change(header_dgr + ' > .fa-heart', 'far', 'fas')
 		} else {
-			$(header_dgr + ' > .fa-heart').addClass('far')
-			$(header_dgr + ' > .fa-heart').removeClass('fas')
+			Classes.change(header_dgr + ' > .fa-heart', 'fas', 'far')
 		}
 	},
 

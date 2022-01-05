@@ -51,12 +51,12 @@ const Confirm = {
 	},
 
 	run (task, slug = null) {
-		$(modal).fadeOut()
-		$(account_box).hide()
-		$(account_avatar).removeClass('logo-actived')
+		El.hide(mask)
+		El.hide(Modals.all_modals())
+		Classes.remove(account_avatar, 'logo-actived')
 
-		$(confirm_modal).empty()
-		$(confirm_modal).append(`
+		El.empty(confirm_modal)
+		El.append(confirm_modal, `
 			<div class='conf-content'>
 				<div class='label'>${ this.text(task) }</div>
 			</div>
@@ -67,8 +67,7 @@ const Confirm = {
 			</div>
 		`)
 		
-		$(mask).fadeIn()
-		$(confirm_modal).fadeIn()
+		El.show([ mask, confirm_modal ])
 	},
 
 	close_modal (run = null) {
@@ -78,11 +77,11 @@ const Confirm = {
 			if (Find.in_array(run, [ 
 				'delete_task', 'delete_model', 'delete_diagram', 
 			]) != true) { 
-				$(mask).fadeOut() 
+				El.hide(mask) 
 			}
 		}
 
-		$(confirm_modal).fadeOut()
+		El.hide(confirm_modal)
 	},
 
 }

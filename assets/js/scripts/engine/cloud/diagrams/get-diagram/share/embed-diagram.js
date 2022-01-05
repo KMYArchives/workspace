@@ -2,13 +2,13 @@ const EmbedDiagram = {
 
 	page () {
 		return Find.replace(
-			URL.get_url(), 'diagrams/', URL.get_query('i')
+			URL.get_url(), 'diagrams/', Queries.get('i')
 		)
 	},
 
 	actived (el) {
-		$(share_dgr_box + ' > .sub-options > .option').removeClass(act_class)
-		$(el).addClass(act_class)
+		Classes.remove(share_dgr_box + ' > .sub-options > .option')
+		Classes.add(el, act_class)
 	},
 
 	options (item, el) {
@@ -36,8 +36,11 @@ const EmbedDiagram = {
 				break
 		}
 
-		$(share_dgr_box + ' > .links > input').val(value)
-		$(share_dgr_box + ' > .options > .text').text($(el).text())
+		El.value(share_dgr_box + ' > .links > input', value)
+
+		El.text(
+			share_dgr_box + ' > .options > .text', El.text(el)
+		)
 		
 		this.actived(el)
 		ShareDiagram.toggle_sub_options()
@@ -57,7 +60,7 @@ const EmbedDiagram = {
 
 	bbcode () { return `[img](${ this.direct() })[/img]` },
 
-	direct () { return $(diagram_modal + ' > .viewer > img').attr('src') },
+	direct () { return Attr.get(diagram_modal + ' > .viewer > img', 'src') },
 
 	markdown () { return `<![Diagram by ${ Str.slice(document.title, ' - ', 0) }](${ this.direct() })` },
 

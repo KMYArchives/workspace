@@ -1,7 +1,7 @@
 const CodeDiagramIO = {
 
 	save () {
-		if (!$(code_diagram + ' > .viewer > img').attr('src')) {
+		if (!Attr.has(code_diagram + ' > .viewer > img', 'src')) {
 			html2canvas(
 				this.element()
 			).then( canvas => {
@@ -11,23 +11,25 @@ const CodeDiagramIO = {
 					)
 
 				diagram_data.append('image', base64_img)
-				diagram_data.append('model', URL.get_query('i'))
-				diagram_data.append('name', $(code_view_modal + ' > .title > .label').text())
+				diagram_data.append('model', Queries.get('i'))
+				diagram_data.append('name', El.text(code_view_modal + ' > .title > .label'))
 
 				fetch(`${ Apis.core() }cloud/diagrams/create`, {
 					method: 'POST', 
 					body: diagram_data
 				}).then(
 					json => json.json()
-				)
-
-				GUI.message('msg-dgr-model', 'Diagram saved with successfully.')
+				).then( callback => {
+					if (callback.return == 'success') {
+						GUI.message('msg-dgr-model', 'Diagram saved with successfully.')
+					}
+				})
 			})
 		}
 	},
 
 	element () {
-		if ($(code_diagram + ' > .viewer > img').attr('src')) {
+		if (Attr.get(code_diagram + ' > .viewer > img', 'src')) {
 			return El.get(code_diagram + ' > .viewer > img')
 		} else {
 			return El.get(code_diagram + ' > .viewer > .model-diagram')
@@ -40,7 +42,7 @@ const CodeDiagramIO = {
 				Attr.get(code_diagram + ' > .viewer > img', 'src'),
 			base64 => {
 				Misc.download(
-					base64, El.getText(header_code + ' > .label') + '.png'
+					base64, El.text(header_code + ' > .label') + '.png'
 				)
 			})
 		} else {
@@ -48,7 +50,7 @@ const CodeDiagramIO = {
 				El.get(code_diagram + ' > .viewer > .model-diagram')
 			).then( canvas => {
 				Misc.download(
-					canvas.toDataURL(), El.getText(header_code + ' > .label') + '.png'
+					canvas.toDataURL(), El.text(header_code + ' > .label') + '.png'
 				)
 			})
 		}

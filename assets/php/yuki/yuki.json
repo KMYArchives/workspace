@@ -11,14 +11,12 @@
 		"etag": "91242c4a4111df4cd6be844dfa3b89b5"
 	},
 	"bundle": [
-		"jquery",
 		"humanize",
 		"lodash",
 		"lozad",
 		"xss",
 		"platform",
 		"html2canvas",
-		"json-viewer",
 		"codemirror/codemirror",
 		"codemirror/dialog",
 		"codemirror/runmode",

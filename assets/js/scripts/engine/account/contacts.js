@@ -1,7 +1,7 @@
 const Contacts = {
 
 	layout () {
-		$('body').append(`
+		El.append('body', `
 			<div class='contacts-box' id='${ Find.replace_all(contacts_box, '#', '') }'>
 				<div class='title'>
 					<div class='label'>Contact's</div>

@@ -2,8 +2,8 @@ const ShareDiagram = {
 
 	layout () {
 		setTimeout( e => {
-			$(share_dgr_box).empty()
-			$(share_dgr_box).append(`
+			El.empty(share_dgr_box)
+			El.append(share_dgr_box, `
 				<div class='social'>
 					<a href="${ EmbedDiagram.social_media('facebook') }" target='_blank' class='fab fa-facebook'></a>
 					<a href="${ EmbedDiagram.social_media('twitter') }" target='_blank' class='fab fa-twitter'></a>
@@ -32,21 +32,30 @@ const ShareDiagram = {
 	},
 
 	toggle (el) {
-		Classes.toggle(el)
-		$(share_dgr_box).fadeToggle(anim_time)
+		Classes.toggle(el, act_class)
+
+		if (El.is_visible(share_dgr_box)) {
+			El.hide(share_dgr_box)
+		} else {
+			El.show(share_dgr_box)
+		}
 	},
 
 	toggle_sub_options () {
-		$('.options > .fas').remove()
+		El.remove('.options > .fas')
 
 		if (Classes.is_visible('.sub-options')) {
-			$('.options').append(`<div class='fas fa-chevron-down'></div>`)
+			El.append('.options', `<div class='fas fa-chevron-down'></div>`)
 		} else {
-			$('.options').append(`<div class='fas fa-chevron-up'></div>`)
+			El.append('.options', `<div class='fas fa-chevron-up'></div>`)
 		}
 
-		Classes.toggle('.options')
-		$('.sub-options').slideToggle(anim_time)
+		Classes.toggle('.options', act_class)
+		if (El.is_visible('.sub-options')) {
+			El.hide('.sub-options')
+		} else {
+			El.show('.sub-options')
+		}
 	}
 
 }

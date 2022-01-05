@@ -1,8 +1,8 @@
 const StatusModel = {
 
 	layout () {
-		$(status_code).empty()
-		$(status_code).append(`
+		El.empty(status_code)
+		El.append(status_code, `
 			<div class='option bdr-rig' id='${ Find.replace(props_btn, '#', '') }' onclick='PropsTable.toggle()'>
 				Properties
 				<div class='fas fa-info-circle'></div>
@@ -28,38 +28,42 @@ const StatusModel = {
 	},
 
 	code_mode () {
-		$(visual_mode).hide()
-		$(code_diagram).hide()
-		$('.CodeMirror').show()
-		$(options_model).hide()
+		El.hide([
+			visual_mode,
+			code_diagram,
+			options_model,
+		])
 
-		$(status_code + ' > .right > .item').removeClass(act_class)
-		$(status_code + ' > .right > #code-mode').addClass(act_class)
+		El.show('.CodeMirror')
+		Classes.add(status_code + ' > .right > #code-mode', act_class)
+		Classes.remove(status_code + ' > .right > #visual-mode', act_class)
 	},
 
 	visual_mode () {
-		$(visual_mode).show()
-		$(code_diagram).hide()
-		$('.CodeMirror').hide()
-		$(options_model).hide()
+		El.hide([
+			code_diagram,
+			options_model,
+			'.CodeMirror',
+		])
 
-		$(status_code + ' > .right > .item').removeClass(act_class)
-		$(status_code + ' > .right > #visual-mode').addClass(act_class)
+		El.show(visual_mode)
+		Classes.add(status_code + ' > .right > #visual-mode', act_class)
+		Classes.remove(status_code + ' > .right > #code-mode', act_class)
 	},
 
 	privacy (privacy) {
-		$(status_code + ' > #privacy-model').empty()
+		El.empty(status_code + ' > #privacy-model')
 
 		switch (privacy) {
 			case 'public':
-				$(status_code + ' > #privacy-model').append(`
+				El.append(status_code + ' > #privacy-model', `
 					Public
 					<div class='fas fa-globe'></div>
 				`)
 				break
 
 			case 'private':
-				$(status_code + ' > #privacy-model').append(`
+				El.append(status_code + ' > #privacy-model', `
 					Private
 					<div class='fas fa-lock'></div>
 				`)
@@ -68,10 +72,10 @@ const StatusModel = {
 	},
 
 	collection (collection) {
-		$(status_code + ' > #collection-model').empty()
+		El.empty(status_code + ' > #collection-model')
 
 		if (collection.id != 0) {
-			$(status_code + ' > #collection-model').append(`
+			El.append(status_code + ' > #collection-model', `
 				${ collection.name }
 				<div class='fas fa-folder'></div>
 			`)

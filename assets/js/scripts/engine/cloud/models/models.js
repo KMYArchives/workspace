@@ -1,9 +1,9 @@
 const Models = {
 
 	side_box () {
-		$(side_box).show()
-		$(side_box).empty()
-		$(side_box).append(`
+		El.show(side_box)
+		El.empty(side_box)
+		El.append(side_box, `
 			<div class='tab actived' id='list-public' onclick="ListModels.list_table('public')">
 				Public
 				<div class='fas fa-globe'></div>
@@ -34,7 +34,7 @@ const Models = {
 	},
 
 	page_load () {
-		if (URL.get_last_param() != 'models') { 
+		if (Params.get_last() != 'models') { 
 			URL.change_url(`${ URL.get_url_base() }models`) 
 		}
 

@@ -35,7 +35,5 @@
 			'logo'		=>	'https://i.imgur.com/h9yIPc8.png',	
 			'favicon'	=>	'https://i.imgur.com/tV8qJH8.png',
 		];
-		
-		static $pages	=	[ null, 'tasks', 'models', 'hashes', 'history', 'diagrams', 'contacts' ];
 
 	}

@@ -33,30 +33,6 @@ const Misc = {
 		}
 	},
 
-	copy_input (input) {
-		$(input).select()
-		if (document.execCommand('copy') == true) {
-			return true
-		} else {
-			return false
-		}
-	},
-
-	copy_element (content) {
-		var dummy = document.createElement('input')
-		document.body.appendChild(dummy)
-		dummy.setAttribute('value', content)
-		dummy.select()
-
-		if (document.execCommand('copy') == true) {
-			document.body.removeChild(dummy)
-			return true
-		} else {
-			document.body.removeChild(dummy)
-			return false
-		}
-	},
-
 	download (link, name = null) {
 		var a = document.createElement('a')
 	
@@ -66,19 +42,15 @@ const Misc = {
 
 		document.body.appendChild(a)
 		a.click()
-
-		window.URL.revokeObjectURL(link)
 	},
 
 	change_type_input (input, element = 'toggle-type-input') {
-		if ($(input).attr('type') == 'password') {
-			$(input).attr('type', 'text')
-			$('#' + Find.replace_all(element, '#', '')).addClass('fa-eye')
-			$('#' + Find.replace_all(element, '#', '')).removeClass('fa-eye-slash')
+		if (Attr.get(input, 'type') == 'password') {
+			Attr.set(input, 'type', 'text')
+			Classes.change(element, 'fa-eye-slash', 'fa-eye')
 		} else {
-			$(input).attr('type', 'password')
-			$('#' + Find.replace_all(element, '#', '')).removeClass('fa-eye')
-			$('#' + Find.replace_all(element, '#', '')).addClass('fa-eye-slash')
+			Attr.set(input, 'type', 'password')
+			Classes.change(element, 'fa-eye', 'fa-eye-slash')
 		}
 	},
 

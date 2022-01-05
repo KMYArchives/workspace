@@ -10,16 +10,13 @@ const ISE = {
 	},
 
 	element () {
-		$(intellisense).remove()
-		$(code_view_modal).append(`
-			<div class='intellisense' id='${ Find.replace_all(intellisense, code_view_modal + ' > #', '') }'>
-				<div class='header'></div>
-				<div class='msg' id='isp-msg'></div>
-				<div class='get-def'></div>
+		El.append(intellisense, `
+			<div class='header'></div>
+			<div class='msg' id='isp-msg'></div>
+			<div class='get-def'></div>
 
-				<div class='footer'>
-					<div class='fas fa-copy' title='Copy definition' onclick="ISE.copy_definition()"></div>
-				</div>
+			<div class='footer'>
+				<div class='fas fa-copy' title='Copy definition' onclick="ISE.copy_definition()"></div>
 			</div>
 		`)
 	},
@@ -45,8 +42,9 @@ const ISE = {
 	},
 
 	get_definition () {
-		$(intellisense + ' > .header').text(editor.getSelection())
-		$(intellisense + ' > .get-def').append(`
+		El.text(intellisense + ' > .header', editor.getSelection())
+
+		El.append(intellisense + ' > .get-def', `
 			<div class='define'>${
 				sql_code_ref.keywords[
 					editor.getSelection().toLowerCase()
@@ -55,36 +53,42 @@ const ISE = {
 		`)
 			
 		if (sql_code_ref.docs[editor.getSelection().toLowerCase()] != undefined) {
-			$(intellisense + ' > .footer > .learn').remove()
-			if ($(intellisense + ' > .footer > .learn').length == 0) {
-				$(intellisense + ' > .footer').append(`
+			El.remove(intellisense + ' > .footer > .learn')
+
+			if (!El.has(intellisense + ' > .footer > .learn')) {
+				El.append(intellisense + ' > .footer', `
 					<div class='learn' onclick="ISE.open_docs('${ sql_code_ref.docs[editor.getSelection().toLowerCase()] }')">
 						Learn more
 					</div>
 				`)
 			}
 		} else {
-			$(intellisense + ' > .footer > .learn').remove()
+			El.remove(intellisense + ' > .footer > .learn')
 		}
 	},
 
 	toggle_element () {
-		$(intellisense + ' > .header').empty()
-		$(intellisense + ' > .get-def').empty()
+		El.empty(
+			intellisense + ' > .header',
+			intellisense + ' > .get-def',
+		)
 	
 		if (sql_code_ref.keywords != undefined) {
 			if (sql_code_ref.keywords[editor.getSelection().toLowerCase()] != undefined) {
 				this.get_definition()
-				$(intellisense).fadeIn(anim_time)
+				El.show(intellisense)
 			} else { 
-				$(intellisense).hide()
+				El.hide(intellisense)
 			}
 		}
 	},
 
 	copy_definition () {
 		GUI.message('isp-msg', 'Copied with successfully.', 3000)
-		Misc.copy_element($(intellisense + ' > .get-def')[0].innerText)
+
+		Misc.copy_element(
+			El.text(intellisense + ' > .get-def')
+		)
 	},
 
 }

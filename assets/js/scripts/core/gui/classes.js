@@ -1,5 +1,11 @@
 const Classes = {
 
+	_remove (elem, class_name) {
+		if (Classes.has(elem, class_name)) {
+			El.get(elem).classList.remove(class_name)
+		}
+	},
+
 	_add_class (elem, class_name) {
 		if (/\s/.test(class_name)) {
 			class_name.split(' ').forEach( e => {
@@ -12,11 +18,11 @@ const Classes = {
 
 	_remove_class (elem, class_name) {
 		if (/\s/.test(class_name)) {
-			class_name.split(' ').forEach( e => {
-				El.get(elem).classList.remove(e)
+			class_name.split(' ').forEach( class_css => {
+				Classes._remove(elem, class_css)
 			})
 		} else {
-			El.get(elem).classList.remove(class_name)
+			Classes._remove(elem, class_name)
 		}
 	},
 
@@ -39,7 +45,7 @@ const Classes = {
 			var elements = El.get(elem, 'selectorAll')
 
 			for (var i = 0; i < elements.length; i++) {
-				Classes._remove_class(elements[i], class_name)
+				El.hide(elements[0].className)
 			}
 		} else {
 			if (Array.isArray(elem)) {
@@ -70,17 +76,14 @@ const Classes = {
 	},
 
 	replace (elem, old_class_name, new_class_name) {
-		El.get(elem).classList.replace(old_class_name, new_class_name)
+		El.get(elem).classList.replace(
+			old_class_name, new_class_name
+		)
 	},
 
 	is_visible (elem) {
 		var element = El.get(elem)
 		return element.offsetWidth > 0 && element.offsetHeight > 0
-	},
-
-	replace (rem, add, selected = act_class) {
-		rem.forEach( rem_class => { $(rem_class).removeClass(selected) })
-		$(add).addClass(selected)
 	},
 
 }

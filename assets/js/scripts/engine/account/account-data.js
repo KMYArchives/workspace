@@ -25,11 +25,16 @@ const AccountData = {
 
 	get_data (callback) {
 		Misc.gravatar(callback.gravatar)
-		$('#name-user').text(Humanize.capitalize(callback.name))
+
+		El.text(
+			'#name-user', Humanize.capitalize(
+				callback.name
+			)
+		)
 
 		setTimeout( e => {
-			$('#avatar-user').attr(
-				'src', Storage.get('gravatar')
+			Attr.set(
+				'#avatar-user', 'src', Storage.get('gravatar')
 			)
 		}, anim_time * 3)
 	},

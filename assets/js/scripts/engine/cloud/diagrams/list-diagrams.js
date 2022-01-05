@@ -1,71 +1,68 @@
 const ListDiagrams = {
 
 	list () {
-		if (Find.in_array(URL.get_last_param(), [ 'diagrams' ])) {
-			setTimeout( e => {
-				this.list_table()
-				GetDiagram.modal()
-	
-				Classes.replace([
-					'.sidebar > .item'
-				], '#tab-diagrams')
+		if (Find.in_array(Params.get_last(), [ 'diagrams' ])) {
+			this.list_table()
+			GetDiagram.modal()
 
-				setTimeout( e => {
-					if (URL.get_query('i') != null) { GetDiagram.get() }
-				}, anim_time * 3)
-			}, anim_time * 2)
+			Navbar.actived('tab-diagrams')
+			if (Queries.has('i')) { GetDiagram.get() }
 		}
 	},
 
 	table_layout () {
-		$(user_container + ' > table > thead').empty()
-		$(user_container + ' > table > tbody').empty()
-		
-		$(user_container + ' > table > thead').append(`
-			<tr>
-				<th>Name</th>
-				<th>Size</th>
-				<th>Added in</th>
-			</tr>
-		`)
+		Table.clean_table()
+		Table.header([ 'Name', 'Size', 'Added in' ])
 	},
 
 	row_layout (diagram) {
-		$(user_container + ' > table > tbody').append(`
-			<tr id='${ diagram.slug }' onclick='GetDiagram.get(this)'>
-				<td>${ Str.cut(diagram.name, 32) }</td>
-				<td>${ Numbers.bytes(diagram.size) }</td>
-				<td>${ diagram.added_in }</td>
-			</tr>
-		`)
+		Table.add_rows([
+			{
+				slug: diagram.slug,
+				click: 'GetDiagram.get(this)',
+				rows: [
+					Str.cut(diagram.name, 32),
+					Numbers.bytes(diagram.size),
+					diagram.added_in
+				]
+			}
+		], true)
+	},
+
+	params (filter, col_id = null) {
+		var params
+
+		if (filter == 'private') {
+			params = '?filter=private'
+
+			Classes.add('#list-privated', act_class)
+			Classes.remove([ '#list-favs', '#list-public' ], act_class)
+		} else if (filter == 'public') {
+			params = '?filter=public'
+
+			Classes.add('#list-public', act_class)
+			Classes.remove([ '#list-favs', '#list-privated' ], act_class)
+		} else {
+			params = `?filter=collections&col=${ col_id.id }`
+			Collections.get(col_id)
+		}
+
+		return params
 	},
 
 	list_table (filter = 'public', col_id = null) {
 		this.table_layout()
-		$(collections_box).hide()
-		$('#list-cols').removeClass(act_class)
-		$(user_container + ' > .filter-area > .filter').remove()
+		El.hide(collections_box)
+		Classes.remove('#list-cols', act_class)
+		El.remove(user_container + ' > .filter-area > .filter')
 
-		var params = '', 
-			loaded = false
-
-		if (filter == 'private') {
-			params = '?filter=private'
-			Classes.replace([ side_box + ' > .tab' ], '#list-privated')
-		} else if (filter == 'public') {
-			params = '?filter=public'
-			Classes.replace([ side_box + ' > .tab' ], '#list-public')
-		} else {
-			params = `?filter=collections&col=${ $(col_id).attr('id') }`
-			Collections.get(col_id)
-		}
-
+		var loaded = false
 		var Interval = setInterval( e => {
 			if (loaded != true) {
-				fetch(`${ Apis.core() }cloud/diagrams/list${ params }`).then( 
+				fetch(`${ Apis.core() }cloud/diagrams/list${ this.params(filter, col_id) }`).then( 
 					json => json.json() 
 				).then( callback => {
-					$(total_items).text(`Total: ${ callback.total } item's`)
+					El.text(total_items, `Total: ${ callback.total } item's`)
 					_.forEach(_.orderBy(callback.list, 'name', 'asc'), diagram => { this.row_layout(diagram) })
 				})
 

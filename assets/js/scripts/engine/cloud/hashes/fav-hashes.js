@@ -2,7 +2,7 @@ const FavHashes = {
 
 	execute () {
 		var fav_data = new FormData()
-		fav_data.append('slug', URL.get_query('i'))
+		fav_data.append('slug', Queries.get('i'))
 
 		fetch(`${ Apis.core() }cloud/hashes/favorite`, {
 			method: 'POST', 
@@ -18,27 +18,27 @@ const FavHashes = {
 	},
 	
 	list_table () {
-		Classes.replace([ 
-			side_box + ' > .tab'
-		], '#list-favs')
+		Classes.add('#list-favs', act_class)
+		Classes.remove([ '#list-privated', '#list-public' ], act_class)
 	
 		ListHashes.table_layout()
 		fetch(`${ Apis.core() }cloud/hashes/list?filter=favorites`).then( 
 			json => json.json() 
 		).then( callback => {
-			$(total_items).text(`Total: ${ callback.total } item's`)
-			_.forEach(_.orderBy(callback.list, 'product', 'asc'), hash => { Models.row_layout(hash) })
+			El.text(total_items, `Total: ${ callback.total } item's`)
+
+			_.forEach(_.orderBy(callback.list, 'product', 'asc'), hash => {
+				Models.row_layout(hash)
+			})
 		})
 		
 	},
 
 	check (callback) {
 		if (callback.favorited == 'true') {
-			$(header_code + ' > .fa-heart').addClass('fas')
-			$(header_code + ' > .fa-heart').removeClass('far')
+			Classes.change(header_hash + ' > .fa-heart', 'far', 'fas')
 		} else {
-			$(header_code + ' > .fa-heart').addClass('far')
-			$(header_code + ' > .fa-heart').removeClass('fas')
+			Classes.change(header_hash + ' > .fa-heart', 'fas', 'far')
 		}
 	},
 

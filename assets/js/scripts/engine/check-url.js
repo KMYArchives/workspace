@@ -1,7 +1,7 @@
 const CheckURL = {
 
 	core () {
-		switch (URL.get_last_param()) {
+		switch (Params.get_last()) {
 			case 'tasks':
 				Tasks.page_load()
 				break

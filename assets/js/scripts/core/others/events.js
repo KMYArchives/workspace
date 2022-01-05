@@ -4,14 +4,6 @@ const Events = {
 		document.execCommand(command)
 	},
 
-	page_load (callback) {
-		document.addEventListener('readystatechange', function(event) {
-			if (document.readyState === "complete") {
-				callback
-			}
-		});
-	},
-
 	click (element, callback) {
 		El.get(element).addEventListener(
 			'click', callback

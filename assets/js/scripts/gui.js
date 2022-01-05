@@ -1,17 +1,18 @@
-$( e => {
+window.onload = e => {
 
 	Layout.page()
 	CheckURL.core()
 	LoginVerify.check_logged()
 
 	Classes.add([
-		modal,
 		notif_box,
 		account_box,
 		contacts_box,
+		collections_box,
+		
+		modal,
 		diagram_modal,
 		confirm_modal,
-		collections_box,
 		code_view_modal,
 		collection_modal
 	], 'animate__animated animate__zoomIn animate__faster')
@@ -30,11 +31,14 @@ $( e => {
 	})
 
 	Events.click(contacts_btn, e => {
-		Classes.remove(notif_btn, act_class)
-		Classes.toggle(contacts_btn, act_class)
-		Classes.remove(account_avatar, 'logo-actived')
+		Classes.remove([ 
+			notif_btn, 
+			account_avatar
+		], act_class)
 
+		Classes.toggle(contacts_btn, act_class)
 		El.hide([ notif_box, account_box ])
+		
 		if (Classes.has(contacts_btn, act_class)) {
 			El.show(contacts_box)
 		} else {
@@ -43,11 +47,14 @@ $( e => {
 	})
 
 	Events.click(account_avatar, e => {
-		Classes.remove(notif_btn, act_class)
-		Classes.remove(contacts_btn, act_class)
-		Classes.toggle(account_avatar, 'logo-actived')
+		Classes.remove([ 
+			notif_btn, 
+			contacts_btn
+		], act_class)
 
+		Classes.toggle(account_avatar, 'logo-actived')
 		El.hide([ notif_box, contacts_box ])
+
 		if (Classes.has(account_avatar, 'logo-actived')) {
 			El.show(account_box)
 		} else {
@@ -57,4 +64,4 @@ $( e => {
 
 	Events.click(mask, e => { Modals.close_all() })
 
-})
+}

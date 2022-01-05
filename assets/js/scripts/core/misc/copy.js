@@ -1,8 +1,8 @@
 const Copy = {
 
 	input (input) {
-		$(input).select()
-		document.execCommand('copy')
+		El.select(input)
+		Events.command('copy')
 	},
 
 	content (content) {
@@ -11,7 +11,7 @@ const Copy = {
 		dummy.setAttribute('value', content)
 		dummy.select()
 
-		if (document.execCommand('copy') == true) {
+		if (Events.command('copy') == true) {
 			document.body.removeChild(dummy)
 			return true
 		} else {

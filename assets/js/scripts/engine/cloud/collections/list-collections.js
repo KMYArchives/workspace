@@ -1,31 +1,37 @@
 const ListCollections = {
 
 	privacy (filter) {
-		$(collections_box + ' > .tabs > .tab').removeClass(act_class)
+		Classes.remove([
+			'#col-priv', '#col-pub'
+		], act_class)
 
 		if (filter != 'public') {
-			$('#col-priv').addClass(act_class)
+			Classes.add('#col-priv', act_class)
 			return '?filter=private'
 		} else {
-			$('#col-pub').addClass(act_class)
+			Classes.add('#col-pub', act_class)
 			return '?filter=public'
 		}
 	},
 
 	check_page (item) {
-		switch (URL.get_last_param()) {
+		switch (Params.get_last()) {
 			case 'models':
-				Models.list_table('collections', item)
+				ListModels.list_table('collections', item)
 				break
 
 			case 'hashes':
-				Hashes.list_table('collections', item)
+				ListHashes.list_table('collections', item)
+				break
+
+			case 'diagrams':
+				ListDiagrams.list_table('collections', item)
 				break
 		}
 	},
 
 	item_layout (item) {
-		$(collections_box + ' > .list').append(`
+		El.append(collections_box + ' > .list', `
 			<div class='item'>
 				<div class='name' id='${ item.id }' slug='${ item.slug }' onclick="ListCollections.check_page(this)">
 					${ item.name }
@@ -42,7 +48,7 @@ const ListCollections = {
 	list (privacy = 'public') {
 		Collections.layout()
 		ManagerCollection.modal()
-		$(collections_box + ' > .list').empty()
+		El.empty(collections_box + ' > .list')
 
 		var loaded = false
 		var Interval = setInterval( e => {
@@ -50,13 +56,12 @@ const ListCollections = {
 				fetch(`${ Apis.core() }cloud/collections/list${ this.privacy(privacy) }`).then( 
 					json => json.json() 
 				).then( callback => {
-					$(collections_box + ' > .list').empty()
-					$(collections_box + ' > .header > .total').text(`Total: ${ callback.total } item's`)
+					El.text(collections_box + ' > .header > .total', `Total: ${ callback.total } item's`)
 
 					if (callback.total > 0) {
 						_.forEach(_.orderBy(callback.list, 'name', 'asc'), item => { this.item_layout(item) })
 					} else {
-						$(collections_box + ' > .list').append(`
+						El.append(collections_box + ' > .list', `
 							<div class='none'>
 								You no have collections
 							</div>

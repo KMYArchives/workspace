@@ -1,42 +1,18 @@
 const ListHashes = {
 
 	list () {
-		if (Find.in_array(URL.get_last_param(), [ 'hashes' ])) {
-			setTimeout( e => {
-				//GetHash.modal()
-				this.list_table()
+		if (Find.in_array(Params.get_last(), [ 'hashes' ])) {
+			//GetHash.modal()
+			this.list_table()
 
-				Classes.replace([
-					'.sidebar > .item'
-				], '#tab-hashes')
-	
-				setTimeout( e => {
-					if (URL.get_query('i') != null) { GetHash.get() }
-				}, anim_time * 3)
-			}, anim_time * 2)
+			Navbar.actived('tab-hashes')
+			if (Queries.has('i')) { GetHash.get() }
 		}
 	},
 
 	table_layout () {
 		Table.clean_table()
 		Table.header([ 'Name', 'Size', 'Type', 'Added in' ])
-	},
-
-	params (filter) {
-		var params
-
-		if (filter == 'private') {
-			params = '?filter=private'
-			Classes.replace([ side_box + ' > .tab' ], '#list-privated')
-		} else if (filter == 'public') {
-			params = '?filter=public'
-			Classes.replace([ side_box + ' > .tab' ], '#list-public')
-		} else {
-			params = `?filter=collections&col=${ $(col_id).attr('id') }`
-			Collections.get(col_id)
-		}
-
-		return params
 	},
 
 	row_layout (hash) {
@@ -54,19 +30,40 @@ const ListHashes = {
 		], true)
 	},
 
+	params (filter, col_id = null) {
+		var params
+
+		if (filter == 'private') {
+			params = '?filter=private'
+
+			Classes.add('#list-privated', act_class)
+			Classes.remove([ '#list-favs', '#list-public' ], act_class)
+		} else if (filter == 'public') {
+			params = '?filter=public'
+			
+			Classes.add('#list-public', act_class)
+			Classes.remove([ '#list-favs', '#list-privated' ], act_class)
+		} else {
+			params = `?filter=collections&col=${ col_id.id }`
+			Collections.get(col_id)
+		}
+
+		return params
+	},
+
 	list_table (filter = 'public', col_id = null) {
 		this.table_layout()
-		$(collections_box).hide()
-		$('#list-cols').removeClass(act_class)
-		$(user_container + ' > .filter-area > .filter').remove()
+		El.hide(collections_box)
+		Classes.remove('#list-cols', act_class)
+		El.remove(user_container + ' > .filter-area > .filter')
 
 		var loaded = false
 		var Interval = setInterval( e => {
 			if (loaded != true) {
-				fetch(`${ Apis.core() }cloud/hashes/list${ params }`).then( 
+				fetch(`${ Apis.core() }cloud/hashes/list${ this.params(filter, col_id) }`).then( 
 					json => json.json() 
 				).then( callback => {
-					$(total_items).text(`Total: ${ callback.total } item's`)
+					El.text(total_items, `Total: ${ callback.total } item's`)
 					_.forEach(_.orderBy(callback.list, 'name', 'asc'), hash => { this.row_layout(hash) })
 				})
 

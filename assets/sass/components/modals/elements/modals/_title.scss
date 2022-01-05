@@ -1,4 +1,6 @@
 .title{
+	z-index: 9999999;
+	position: relative;
 	background: $firstColor;
 	margin-top: $border_size;
 	height: $padding_base * 3.1;

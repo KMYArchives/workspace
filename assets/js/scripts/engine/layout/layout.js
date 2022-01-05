@@ -1,11 +1,12 @@
 const Layout = {
 
 	page () {
-		$('body').empty()
+		El.empty('body')
+		Navbar.init()
 	
 		this.modals()
+		this.navbar()
 		this.top_bar()
-		this.sidebar()
 
 		this.content()
 		this.left_box()
@@ -17,7 +18,7 @@ const Layout = {
 	},
 
 	modals () {
-		$('body').append(`
+		El.append('body', `
 			<div class='mask'></div>
 			<div class='code-mdl modal' id='${ Find.replace(code_view_modal, '#', '') }'></div>
 			<div class='diagram-mdl modal' id='${ Find.replace(diagram_modal, '#', '') }'></div>
@@ -27,7 +28,7 @@ const Layout = {
 	},
 
 	top_bar () {
-		$('body').append(`
+		El.append('body', `
 			<div class='top-bar'>
 				<div class='right'>
 					<div class='fas fa-users' id='${ Find.replace_all(contacts_btn, '#', '') }'></div>
@@ -37,72 +38,54 @@ const Layout = {
 		`)
 	},
 
-	sidebar () {
-		$('body').append(`
-			<div class='sidebar'>
-				<a class='logo' id='${ Find.replace_all(account_avatar, '#', '') }'></a>
-
-				<a class='item' id='search-box' onclick=''>
-					<div class='fas fa-search'></div>
-
-					<span class='hovercard'>
-						<div class='text'>Search</div>
-					</span>
-				</a>
-
-				<a class='item actived' id='tab-models' onclick='Models.page_load()'>
-					<div class='fas fa-table'></div>
-
-					<span class='hovercard'>
-						<div class='text'>Models</div>
-					</span>
-				</a>
-
-				<a class='item' id='tab-hashes' onclick='Hashes.page_load()'>
-					<div class='fas fa-fingerprint'></div>
-					
-					<span class='hovercard'>
-						<div class='text'>Hashes</div>
-					</span>
-				</a>
-
-				<a class='item' id='tab-diagrams' onclick='Diagrams.page_load()'>
-					<div class='fas fa-project-diagram'></div>
-					
-					<span class='hovercard'>
-						<div class='text'>Diagrams</div>
-					</span>
-				</a>
-
-				<a class='item'>
-					<div class='fas fa-stream'></div>
-					
-					<span class='hovercard'>
-						<div class='text'>Tasks</div>
-					</span>
-				</a>
-
-				<a class='item'>
-					<div class='fas fa-history'></div>
-					
-					<span class='hovercard'>
-						<div class='text'>History</div>
-					</span>
-				</a>
-
-				<a class='item'>
-					<div class='fas fa-sync-alt'></div>
-					
-					<span class='hovercard'>
-						<div class='text'>Sync</div>
-					</span>
-				</a>
-			</div>
-		`)
+	navbar () {
+		Navbar.set([
+			{
+				id: 'search-box',
+				icon: 'fas fa-search',
+				title: 'Search'
+			},
+			{
+				title: 'Models',
+				id: 'tab-models',
+				icon: 'fas fa-table',
+				click: "Models.page_load()"
+			},
+			{
+				title: 'Hashes',
+				id: 'tab-hashes',
+				icon: 'fas fa-fingerprint',
+				click: "Hashes.page_load()",
+			},
+			{
+				title: 'Diagrams',
+				id: 'tab-diagrams',
+				click: "Diagrams.page_load()",
+				icon: 'fas fa-project-diagram',
+			},
+			{
+				title: 'Sync',
+				id: 'tab-tasks',
+				icon: 'fas fa-stream',
+				//click: "Tasks.page_load()",
+			},
+			{
+				title: 'History',
+				id: 'tab-history',
+				icon: 'fas fa-history',
+				//click: "Diagrams.page_load()",
+			},
+			{
+				title: 'Sync',
+				id: 'tab-sync',
+				icon: 'fas fa-sync-alt',
+				//click: "Sync.page_load()",
+			},
+		])
 	},
 
 	content () {
-		$('body').append(`
+		El.append('body', `
 			<div class='content' id='${ Find.replace_all(user_container, '#', '') }'>
 				<div class='filter-area'></div>
 
@@ -115,7 +98,7 @@ const Layout = {
 	},
 
 	left_box () {
-		$('body').append(`
+		El.append('body', `
 			<div class='left-box' id='${ Find.replace_all(side_box, '#', '') }'></div>
 			<div class='collections' id='${ Find.replace_all(collections_box, '#', '') }'></div>
 		`)
@@ -124,7 +107,7 @@ const Layout = {
 	},
 	
 	account_box () {
-		$('body').append(`
+		El.append('body', `
 			<div class='account-box' id='${ Find.replace_all(account_box, '#', '') }'>
 				<div class='info-user'>
 					<img class='avatar' id='avatar-user'>

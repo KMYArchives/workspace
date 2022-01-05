@@ -1,7 +1,7 @@
 const ListModelsLinked = {
 
 	list () {
-		fetch(`${ Apis.core() }cloud/models/list?filter=linked&slug=${ URL.get_query('i') }`).then( 
+		fetch(`${ Apis.core() }cloud/models/list?filter=linked&slug=${ Queries.get('i') }`).then( 
 			json => json.json() 
 		).then( callback => {
             El.empty(models_linked_box + ' > .list')

@@ -1,8 +1,8 @@
 const GetModel = {
 
 	modal () {
-		if ($(code_view_modal).html() == '') {
-			$(code_view_modal).append(`
+		if (El.is_empty(code_view_modal)) {
+			El.append(code_view_modal, `
 				<div class='title' id='${ Find.replace(header_code, code_view_modal + ' > #', '') }'>
 					<div class='label'></div>
 					<div class='fas fa-times' onclick='Modals.close_all()'></div>
@@ -34,12 +34,19 @@ const GetModel = {
 				</div>
 
 				<div class='send-to-box' id='${ Find.replace(send_to_box, code_view_modal + ' > #', '') }'></div>
-				<div class='visual-mode' id='${ Find.replace(visual_mode, code_view_modal + ' > #', '') }'></div>
 				<div class='share-box' id='${ Find.replace(share_code_box, code_view_modal + ' > #', '') }'></div>
 				<div class='code-diagram' id='${ Find.replace(code_diagram, code_view_modal + ' > #', '') }'></div>
 				<div class='options-box' id='${ Find.replace(options_model, code_view_modal + ' > #', '') }'></div>
 				<div class='properties-menu' id='${ Find.replace(properties, code_view_modal + ' > #', '') }'></div>
+				<div class='intellisense' id='${ Find.replace_all(intellisense, code_view_modal + ' > #', '') }'></div>
 				<div class='models-linked-box' id='${ Find.replace(models_linked_box, code_view_modal + ' > #', '') }'></div>
+				
+				<div class='visual-mode' id='${ Find.replace(visual_mode, code_view_modal + ' > #', '') }'>
+					<table id='${ Find.replace(table_render_visual, visual_mode + ' > #', '') }'>
+						<thead></thead>
+						<tbody></tbody>
+					</table>
+				</div>
 				
 				<textarea id='${ cm_editor }'></textarea>
 				<div class='bar status' id='${ Find.replace(status_code, code_view_modal + ' > #', '') }'></div>
@@ -49,7 +56,7 @@ const GetModel = {
 
 	delete () {
 		var delete_data = new FormData()
-		delete_data.append('slug', URL.get_query('i'))
+		delete_data.append('slug', Queries.get('i'))
 
 		fetch(`${ Apis.core() }cloud/models/delete`, {
 			method: 'POST', 
@@ -68,31 +75,51 @@ const GetModel = {
 		})
 	},
 
+	effects () {
+		Classes.add([
+			properties,
+			send_to_box,
+			visual_mode,
+			intellisense,
+			code_diagram,
+			options_model,
+			share_code_box,
+			models_linked_box,
+			code_view_message,
+		], 'animate__animated animate__zoomIn animate__faster')
+	},
+
 	download () {
 		if (Classes.is_visible(visual_mode)) {
 			html2canvas(
 				document.querySelector(table_render_visual)
 			).then( canvas => {
 				Misc.download(
-					canvas.toDataURL(), $(header_code + ' > .label').text() + '.png'
+					canvas.toDataURL(), El.text(header_code + ' > .label') + '.png'
 				)
 			})
 		} else {
 			Misc.download(`${ 
 				Apis.core() 
 			}cloud/models/meta/download?slug=${ 
-				URL.get_query('i') 
+				Queries.get('i')
 			}`)
 		}
 	},
 
 	get (model = null) {
 		El.hide(code_diagram)
-		if (model != null) { URL.add_query('i', model.id) }
+		if (model != null) {
+			Queries.add({
+				i: model.id
+			}, true)
+		}
 
-		fetch(`${ Apis.core() }cloud/models/get?slug=${ URL.get_query('i') }`).then( 
+		fetch(`${ Apis.core() }cloud/models/get?slug=${ Queries.get('i') }`).then( 
 			json => json.json() 
 		).then( callback => {
+			this.effects()
+
 			OptionsModel.get()
 			ShareModel.layout()
 			StatusModel.layout()
@@ -104,7 +131,7 @@ const GetModel = {
 			Editor.content(callback.content)
 			PropsTable.get(callback.metadata)
 			VisualMode.fields(callback.colunms)
-			El.setText(header_code + ' > .label', callback.name)
+			El.text(header_code + ' > .label', callback.name)
 
 			FavModels.check(callback)
 			Modals.show(code_view_modal)

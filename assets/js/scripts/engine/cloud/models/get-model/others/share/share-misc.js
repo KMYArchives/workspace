@@ -18,8 +18,8 @@ const ShareMisc = {
 		}
 		
 		ShareModel.toggle_sub_options()
-		Attr.set(share_code_box + ' > .links > input', 'value', value)
-		El.setText(share_code_box + ' > .options > .text', El.getText('#' + el.id))
+		El.value(share_code_box + ' > .links > input', value)
+		El.text(share_code_box + ' > .options > .text', El.text('#' + el.id))
 	},
 
 	social_media (social) {
@@ -31,10 +31,10 @@ const ShareMisc = {
 		}
 	},
 
-	import_cli () { return `wks import ${ URL.get_query('i') }` },
+	import_cli () { return `wks import ${ Queries.get('i') }` },
 
-	link_direct () { return URL.get_url_base() + URL.get_query('i') },
+	link_direct () { return URL.get_url_base() + Queries.get('i') },
 
-	link_raw () { return URL.get_url_base() + 'raw/' + URL.get_query('i') },
+	link_raw () { return URL.get_url_base() + 'raw/' + Queries.get('i') },
 
 }

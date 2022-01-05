@@ -36,10 +36,10 @@ const ShareModel = {
 		], act_class)
 
 		Classes.toggle('#share-model', act_class)
-		if (Classes.has('#share-model', act_class)) {
-			El.show(share_code_box)
-		} else {
+		if (El.is_visible('#share-model')) {
 			El.hide(share_code_box)
+		} else {
+			El.show(share_code_box)
 		}
 	},
 

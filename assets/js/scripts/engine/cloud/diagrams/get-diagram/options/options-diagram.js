@@ -2,13 +2,15 @@ const OptionsDiagram = {
 
 	get () {
 		this.layout()
-		$(options_dgr + ' > #diagram-privacy > .fas').remove()
+		El.remove(options_dgr + ' > #diagram-privacy > .fas')
 
-		fetch(`${ Apis.core() }cloud/diagrams/meta/get-options?slug=${ URL.get_query('i') }`).then( 
+		fetch(`${ Apis.core() }cloud/diagrams/meta/get-options?slug=${ Queries.get('i') }`).then( 
 			json => json.json() 
 		).then( callback => {
 			if (callback.privacy == 'public') {
-				$(options_dgr + ' > #diagram-privacy').append(`<div class='fas fa-check'></div>`)
+				El.append(options_dgr + ' > #diagram-privacy', `
+					<div class='fas fa-check'></div>
+				`)
 			}
 
 			ListCollectionsDiagram.list(callback.collection.id)
@@ -16,8 +18,8 @@ const OptionsDiagram = {
 	},
 
 	layout () {
-		$(options_dgr).empty()
-		$(options_dgr).append(`
+		El.empty(options_dgr)
+		El.append(options_dgr, `
 			<div class='item' id='diagram-privacy' onclick='EditDiagram.privacy()'>Public</div>
 
 			<div class='item' onclick="ListCollectionsDiagram.toggle(this)">
@@ -34,8 +36,13 @@ const OptionsDiagram = {
 	},
 
 	toggle () {
-		Classes.toggle('#get-options-diagram')
-		$(options_dgr).fadeToggle(anim_time)
+		Classes.toggle('#get-options-diagram', act_class)
+
+		if (El.is_visible(options_dgr)) {
+			El.hide(options_dgr)
+		} else {
+			El.show(options_dgr)
+		}
 	},
 	
 }

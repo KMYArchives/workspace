@@ -73,7 +73,33 @@ const El = {
 	},
 
 	remove (el) {
-		El.get(el).remove()
+		if (El.has(el)) {
+			El.get(el).remove()
+		}
+	},
+	
+	removeChild (el) {
+		if (El.has(el)) {
+			El.get(el).removeChild(
+				El.get(el).childNodes[0]
+			)
+		}
+	},
+
+	removeChilds (el) {
+		if (El.has(el)) {
+			while (El.get(el).childNodes.length > 0) {
+				El.get(el).removeChild(El.get(el).childNodes[0])
+			}
+		}
+	},
+
+	text (el, text = null) {
+		if (text == null) {
+			return El.get(el).innerText
+		} else {
+			El.get(el).innerText = text
+		}
 	},
 
 	getText (el) {
@@ -84,6 +110,10 @@ const El = {
 		El.get(el).innerText = text
 	},
 
+	select (el) {
+		El.get(el).select()
+	},
+
 	empty (el) {
 		if (Array.isArray(el)) {
 			for (let i = 0; i < el.length; i++) {
@@ -91,6 +121,30 @@ const El = {
 			}
 		} else {
 			El.get(el).innerHTML = ''
+		}
+	},
+
+	has (el) {
+		return El.get(el) != null
+	},
+
+	is_visible (el) {
+		return El.get(el).style.display == 'block'
+	},
+
+	is_hidden (el) {
+		return El.get(el).style.display == 'none'
+	},
+
+	is_empty (el) {
+		return El.get(el).innerHTML == ''
+	},
+
+	value (el, value = null) {
+		if (value != null) {
+			El.get(el).value = value
+		} else {
+			return El.get(el).value
 		}
 	},
 
