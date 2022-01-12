@@ -29,6 +29,8 @@ const Modals = {
 	},
 	
 	close_all (clean_params = true, hide_mask = true) {
+		var slice_url
+
 		if (clean_params == true) {
 			slice_url = Str.slice(
 				Find.replace(
@@ -37,7 +39,7 @@ const Modals = {
 			)
 		
 			Queries.remove([ 'i' ])
-			Storage.delete([ 'cc-item', 'cc-list', 'cc-list2' ])
+			Storage.delete([ 'cc-item', 'cc-list', 'cc-list2', 'ise-keyword', 'ise-editor-selection' ])
 		}
 
 		if (Find.search(URL.get_url(), 'account')) {

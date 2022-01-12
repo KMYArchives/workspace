@@ -13,6 +13,7 @@ const PropsTable = {
 	get (callback) {
 		El.empty(properties)
 		El.append(properties, `
+			<div class='item'>Charset: ${ callback.charset }</div>
 			<div class='item'>Engine: ${ callback.engine }</div>
 			<div class='item'>Auto increment: ${ callback.auto_increment }</div>
 			<div class='item'>Row format: ${ callback.row_format }</div>

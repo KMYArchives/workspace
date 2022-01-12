@@ -59,12 +59,18 @@ const GetDiagram = {
 
 	download () {
 		Encoder.toDataURL(Attr.get(diagram_modal + ' > .viewer > img', 'src'), base64 => {
-			Misc.download(base64, El.text(header_dgr + ' > .label') + '.png')
+			Misc.download(
+				base64, El.text(header_dgr + ' > .label') + '.png'
+			)
 		})
 	},
 
 	get (diagram = null) {
-		if (diagram != null) { URL.add_query('i', diagram.id) }
+		if (diagram != null) {
+			Queries.add({
+				i: diagram.id
+			}, true)
+		}
 
 		fetch(`${ Apis.core() }cloud/diagrams/get?slug=${ Queries.get('i') }`).then( 
 			json => json.json() 

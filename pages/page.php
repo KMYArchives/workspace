@@ -17,6 +17,19 @@
 		MetaTags::compatible();
 		MetaTags::content_type();
 		MetaTags::content_language();
+
+		MetaTagsSocial::og_url();
+		MetaTagsSocial::og_type();
+		MetaTagsSocial::og_title();
+		MetaTagsSocial::og_image();
+		MetaTagsSocial::og_description();
+
+		MetaTagsSocial::twitter_card();
+		MetaTagsSocial::twitter_site();
+		MetaTagsSocial::twitter_title();
+		MetaTagsSocial::twitter_image();
+		MetaTagsSocial::twitter_creator();
+		MetaTagsSocial::twitter_description();
 	
 	?>
 </head>

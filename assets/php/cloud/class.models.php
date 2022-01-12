@@ -55,9 +55,11 @@
 				$this->clients->get_id($_GET['username'])
 			]) as $data);
 
+			Headers::setHttpCode(200);
 			Headers::setContentType('application/json');
 			echo json_encode([
 				'name'				=>	$data['name'],
+				'driver'			=>	$data['driver'],
 				'added_in'			=>	$data['added_in'],
 				'favorited'			=>	$data['favorited'],
 				'metadata'			=>	$this->get_meta($data['metadata']),

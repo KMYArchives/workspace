@@ -29,7 +29,9 @@ const FavModels = {
 		Classes.remove([ '#list-privated', '#list-public' ], act_class)
 
 		if (Queries.get('filter') != 'favorites') {
-			Queries.update('filter', 'favorites')
+			Queries.update(
+				'filter', 'favorites'
+			)
 		}
 	
 		ListModels.table_layout()

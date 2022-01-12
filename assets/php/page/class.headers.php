@@ -12,6 +12,20 @@
 			self::set('Access-Control-Allow-Origin', Values::$assets['link']);
 		}
 
+		public static function get($name) {
+			return isset(
+				$_SERVER[
+					'HTTP_' . strtoupper(
+						str_replace('-', '_', $name)
+					)
+				]
+			) ? $_SERVER[
+				'HTTP_' . strtoupper(
+					str_replace('-', '_', $name)
+				)
+			] : null;
+		}
+
 		public static function setLocation($url) { self::set('Location', $url); }
 		
 		public static function setHttpCode($code) { self::set('HTTP/1.1', $code); }

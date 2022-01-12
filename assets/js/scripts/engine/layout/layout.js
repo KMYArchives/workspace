@@ -27,24 +27,8 @@ const Layout = {
 		`)
 	},
 
-	top_bar () {
-		El.append('body', `
-			<div class='top-bar'>
-				<div class='right'>
-					<div class='fas fa-users' id='${ Find.replace_all(contacts_btn, '#', '') }'></div>
-					<div class='fas fa-bell' id='${ Find.replace_all(notif_btn, '#', '') }'></div>
-				</div>
-			</div>
-		`)
-	},
-
 	navbar () {
 		Navbar.set([
-			{
-				id: 'search-box',
-				icon: 'fas fa-search',
-				title: 'Search'
-			},
 			{
 				title: 'Models',
 				id: 'tab-models',
@@ -64,7 +48,7 @@ const Layout = {
 				icon: 'fas fa-project-diagram',
 			},
 			{
-				title: 'Sync',
+				title: 'Tasks',
 				id: 'tab-tasks',
 				icon: 'fas fa-stream',
 				//click: "Tasks.page_load()",
@@ -82,6 +66,18 @@ const Layout = {
 				//click: "Sync.page_load()",
 			},
 		])
+	},
+
+	top_bar () {
+		El.append('body', `
+			<div class='top-bar'>
+				<div class='right'>
+					<div class='fas fa-search'></div>
+					<div class='fas fa-users' id='${ Find.replace_all(contacts_btn, '#', '') }'></div>
+					<div class='fas fa-bell' id='${ Find.replace_all(notif_btn, '#', '') }'></div>
+				</div>
+			</div>
+		`)
 	},
 
 	content () {

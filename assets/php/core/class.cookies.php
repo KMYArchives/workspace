@@ -2,7 +2,7 @@
 
 	class Cookies {
 
-		private static function _name(string $name): mixed {
+		public static function _name(string $name): mixed {
 			if (Values::$cookie[$name]) {
 				return Values::$cookie[$name];
 			} else {

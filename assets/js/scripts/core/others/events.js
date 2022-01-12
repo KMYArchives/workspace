@@ -4,6 +4,10 @@ const Events = {
 		document.execCommand(command)
 	},
 
+	setPageTitle (title) {
+		document.title = title
+	},
+
 	click (element, callback) {
 		El.get(element).addEventListener(
 			'click', callback

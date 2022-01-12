@@ -51,8 +51,8 @@ const Confirm = {
 	},
 
 	run (task, slug = null) {
-		El.hide(mask)
 		El.hide(Modals.all_modals())
+		El.hide([ mask, account_box ])
 		Classes.remove(account_avatar, 'logo-actived')
 
 		El.empty(confirm_modal)

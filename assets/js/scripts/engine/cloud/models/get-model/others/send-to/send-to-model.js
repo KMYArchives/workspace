@@ -13,7 +13,10 @@ const SendToModel = {
 	},
 
 	toggle () {
-		El.hide([ share_code_box, models_linked_box ])
+		El.hide([
+			share_code_box, 
+			models_linked_box
+		])
 		
 		Classes.remove([
 			toolbar_code + ' > #share-model',
@@ -21,7 +24,7 @@ const SendToModel = {
 		], act_class)
 
 		Classes.toggle('#send-model', act_class)
-		if (Classes.has('#send-model', act_class)) {
+		if (!Classes.is_visible(send_to_box)) {
 			El.show(send_to_box)
 			ListContactsModel.list()
 		} else {

@@ -26,7 +26,10 @@ const FavDiagrams = {
 			json => json.json() 
 		).then( callback => {
 			El.text(total_items, `Total: ${ callback.total } item's`)
-			_.forEach(_.orderBy(callback.list, 'product', 'asc'), diagram => { Diagrams.row_layout(diagram) })
+
+			_.forEach(_.orderBy(callback.list, 'product', 'asc'), diagram => {
+				Diagrams.row_layout(diagram)
+			})
 		})
 		
 	},

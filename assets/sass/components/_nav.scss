@@ -3,7 +3,7 @@
 	left: 0;
 	height: 100%;
 	position: fixed;
-	z-index: 999999999;
+	z-index: 9999999999;
 	width: $header_size;
 	background: $secondColor;
 	border-right: $border_size solid $borderColor;
@@ -25,11 +25,17 @@
 		&:hover, &:focus{ @include filter(grayscale, 100%); }
 	}
 
+	.actived{
+		color: $fontColor;
+		background: $blueColor;
+	}
+
 	.btn-item{
 		float: left;
 		width: 100%;
 		color: inherit;
 		cursor: pointer;
+		z-index: 9999999;
 		height: $header_size;
 		text-decoration: none;
 		line-height: $header_size;
@@ -46,27 +52,24 @@
 			.hovercard{
 				opacity: 1;
 				display: inline;
-				transition: 0.5s;
-				transition-delay: 0.1s;
+				transition: .5s;
+				transition-delay: .1s;
 				margin-right: -$padding3 / 2;
 			}
 		}
 	}
 
-	.actived{
-		color: $fontColor;
-		background: $blueColor;
-	}
-
 	.hovercard{
-		left: 230%;
 		opacity: 0;
-		z-index: 1;
+		z-index: -1;
 		display: none;
+		cursor: default;
 		position: absolute;
 		font-weight: normal;
+		width: $padding_base * 12;
 		line-height: $header_size;
 		transform: translateX(-50%);
+		left: $header_size + $padding4;
 
 		.text{
 			display: flex;
@@ -76,11 +79,12 @@
 			color: $fontColor;
 			flex-direction: column;
 			background: $blueColor;
-			width: $padding_base * 12;
 			padding-left: $padding_base;
 			justify-content: flex-start;
 			font-size: $smallFont + .05;
 			padding-right: $padding_base;
+			border-top-right-radius: $padding2;
+			border-bottom-right-radius: $padding2;
 		}
 	}
 

@@ -63,7 +63,10 @@ const ListDiagrams = {
 					json => json.json() 
 				).then( callback => {
 					El.text(total_items, `Total: ${ callback.total } item's`)
-					_.forEach(_.orderBy(callback.list, 'name', 'asc'), diagram => { this.row_layout(diagram) })
+
+					_.forEach(_.orderBy(callback.list, 'name', 'asc'), diagram => {
+						this.row_layout(diagram)
+					})
 				})
 
 				loaded = true

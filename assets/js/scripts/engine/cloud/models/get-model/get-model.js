@@ -17,6 +17,10 @@ const GetModel = {
 					<div class='item bdr-rig' id='linked-model' onclick='ModelsLinked.toggle(this)'>Linked</div>
 
 					<div class='right'>
+						<div class='item icon' id='sql-minidoc' onclick='SDMList.toggle()' title='${ SDM.name }'>
+							<div class='fas fa-book-open'></div>
+						</div>
+
 						<div class='item icon' id='code-notes-model' onclick='CodeNotes.toggle()' title='Code Notes'>
 							<div class='fas fa-sticky-note'></div>
 						</div>
@@ -33,12 +37,24 @@ const GetModel = {
 					<div class='message' id='${ Find.replace(code_view_message, toolbar_code + ' > #', '') }'></div>
 				</div>
 
+				<div class='link-scraper'>
+					<div class='lk-header'>
+						<img class='lk-preview' src=''>
+
+						<div class='lk-title'>
+							<img class='lk-favicon' src=''>
+							<div class='lk-site'></div>
+						</div>
+					</div>
+				</div>
+
+				<div class='sdm-get' id='${ Find.replace_all(sdm_get, code_view_modal + ' > #', '') }'></div>
+				<div class='sdm-list' id='${ Find.replace_all(sdm_list, code_view_modal + ' > #', '') }'></div>
 				<div class='send-to-box' id='${ Find.replace(send_to_box, code_view_modal + ' > #', '') }'></div>
 				<div class='share-box' id='${ Find.replace(share_code_box, code_view_modal + ' > #', '') }'></div>
 				<div class='code-diagram' id='${ Find.replace(code_diagram, code_view_modal + ' > #', '') }'></div>
 				<div class='options-box' id='${ Find.replace(options_model, code_view_modal + ' > #', '') }'></div>
 				<div class='properties-menu' id='${ Find.replace(properties, code_view_modal + ' > #', '') }'></div>
-				<div class='intellisense' id='${ Find.replace_all(intellisense, code_view_modal + ' > #', '') }'></div>
 				<div class='models-linked-box' id='${ Find.replace(models_linked_box, code_view_modal + ' > #', '') }'></div>
 				
 				<div class='visual-mode' id='${ Find.replace(visual_mode, code_view_modal + ' > #', '') }'>
@@ -77,10 +93,11 @@ const GetModel = {
 
 	effects () {
 		Classes.add([
+			sdm_get,
+			sdm_list,
 			properties,
 			send_to_box,
 			visual_mode,
-			intellisense,
 			code_diagram,
 			options_model,
 			share_code_box,
@@ -109,6 +126,7 @@ const GetModel = {
 
 	get (model = null) {
 		El.hide(code_diagram)
+		
 		if (model != null) {
 			Queries.add({
 				i: model.id

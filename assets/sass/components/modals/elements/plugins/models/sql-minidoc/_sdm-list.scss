@@ -1,0 +1,100 @@
+.sdm-list{
+	top: 0;
+	right: 0;
+	width: 22em;
+	display: none;
+	z-index: 99999999;
+	position: absolute;
+	@include box-shadow;
+	box-sizing: border-box;
+	margin-right: $padding2;
+	background: $firstColor;
+	line-height: $padding_base + $padding2;
+	border: $border_size solid $borderColor;
+	margin-top: $header_size + $padding_base * 2;
+
+	.list{
+		height: 17em;
+		overflow: auto;
+		position: relative;
+		font-size: $smallFont;
+		margin-right: $padding_base * 3.8;
+		border-top: $border_size solid $borderColor;
+
+		.item{
+			cursor: pointer;
+			padding-left: $padding_base;
+			padding-right: $padding_base;
+			line-height: $padding_base * 3;
+			border-bottom: $border_size solid $borderColor;
+
+			@include hover($secondColor);
+			&:last-child{ border-bottom: 0; }
+		}
+
+		@include scrollbar;
+	}
+
+	.header{
+		text-align: center;
+		font-size: $smallFont;
+		line-height: $padding_base * 3;
+		border-bottom: $border_size solid $borderColor;
+
+		.label{
+			float: left;
+			text-align: left;
+			padding-left: $padding_base;
+		}
+		
+		.far, .fas{
+			float: right;
+			cursor: pointer;
+			margin-right: $padding_base;
+			line-height: $padding_base * 3;
+			@include hover(transparent, $redColor);
+		}
+	}
+
+	.nav-right{
+		right: 0;
+		height: 15.6em;
+		position: absolute;
+		background: $firstColor;
+		width: $padding_base * 3;
+		margin-top: $padding_base * 2.4;
+		border-top: $border_size solid $borderColor;
+		border-left: $border_size solid $borderColor;
+
+		.far, .fas{
+			width: 100%;
+			display: block;
+			cursor: pointer;
+			text-align: center;
+			font-size: $smallFont;
+			margin-right: $padding_base;
+			line-height: $padding_base * 3.5;
+			border-bottom: $border_size solid $borderColor;
+			@include hover($secondColor);
+		}
+
+		.actived{ background: $secondColor; }
+	}
+
+	.search-area{
+		width: 76%;
+		border: none;
+		outline: none;
+		color: inherit;
+		padding-left: 5%;
+		padding-right: 5%;
+		font-size: $smallFont;
+		background: $firstColor;
+		line-height: $padding_base * 2.5;
+		margin-right: $padding_base * 3.2;
+		border-top: $border_size solid $borderColor;
+
+		@include placeholder;
+		@include hover($secondColor);
+	}
+}

@@ -27,7 +27,7 @@ const Models = {
 			</div>
 
 			<hr>
-			<div class='label' id='${ Find.replace_all(total_items, '#', '') }'>Total: 0 item's</div>
+			<div class='label' id='${ Find.replace_all(total_items, '#', '') }'></div>
 		`)
 
 		ListCollections.list()

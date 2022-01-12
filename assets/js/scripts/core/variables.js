@@ -1,7 +1,5 @@
 var editor, 
-	menu_items, 
-	mark_lines, 
-	sql_code_ref
+	menu_items
 
 var mask = '.mask',
 	modal = '.modal',
@@ -46,12 +44,13 @@ var message_dgr = toolbar_dgr + ' > #cvm-message',
 	properties_dgr = diagram_modal + ' > #properties-dgr'
 
 // Code view modal
-var send_model = code_view_modal + ' > #send-model',
+var	sdm_get = code_view_modal + ' > #ise-get',
+	sdm_list = code_view_modal + ' > #ise-list',
+	send_model = code_view_modal + ' > #send-model',
 	visual_mode = code_view_modal + ' > #visual-mode',
 	send_to_box = code_view_modal + ' > #send-to-box',
 	toolbar_code = code_view_modal + ' > #toolbar-snp',
 	properties = code_view_modal + ' > #properties-snp',
-	intellisense = code_view_modal + ' > #intellisense',
 	code_diagram = code_view_modal + ' > #code-diagram',
 	table_render_visual = visual_mode + ' > #tbl-render',
 	code_view_message = toolbar_code + ' > #cvm-message',

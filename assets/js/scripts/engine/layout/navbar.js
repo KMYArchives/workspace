@@ -76,27 +76,17 @@ const Navbar = {
 			}
 			
 			if (item.actived != undefined && item.actived == true) {
-				actived_class = 'actived'
+				actived_class = act_class
 			} else {
 				actived_class = ''
 			}
 			
 			El.append(this.menu_element(), `
-				<a class='btn-item ${
-					item_id + ' ' + actived_class
-				}' id='${
-					item_id
-				}' ${
-					click
-				}'>
-					<div class='${
-						item.icon
-					}'></div>
+				<a class='btn-item ${ item_id + ' ' + actived_class }' id='${ item_id }' ${ click }'>
+					<div class='${ item.icon }'></div>
 
-					<span class='hovercard'>
-						<div class='text'>${
-							item.title
-						}</div>
+					<span class='hovercard animate__animated animate__slideInLeft animate__faster'>
+						<div class='text'>${ item.title }</div>
 					</span>
 				</a>
 			`)

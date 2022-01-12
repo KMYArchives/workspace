@@ -7,7 +7,7 @@
 			$dotenv->load();
 		}
 
-		public static function hide_errors(string $level) {
+		public static function show_errors(string $level) {
 			return match ($level) {
 				default		=>	error_reporting(0),
 				'none'		=>	error_reporting(0),

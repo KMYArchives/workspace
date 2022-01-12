@@ -5,7 +5,7 @@ const ListModelsLinked = {
 			json => json.json() 
 		).then( callback => {
             El.empty(models_linked_box + ' > .list')
-            El.setText(models_linked_box + ' > .header > .total', `${ callback.total } item's`)
+            El.text(models_linked_box + ' > .header > .total', `${ callback.total } item's`)
 			
 			if (callback.total > 0) {
 				_.forEach(_.orderBy(callback.list, 'name', 'asc'), linked => {

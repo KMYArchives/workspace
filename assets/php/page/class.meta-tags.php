@@ -83,5 +83,5 @@
 		public static function viewport(string $viewport = "width=device-width, initial-scale=1") {
 			echo "<meta name='viewport' content='$viewport'>";
 		}
-
+		
 	}

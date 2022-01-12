@@ -102,7 +102,10 @@ const ListModels = {
 					json => json.json() 
 				).then( callback => {
 					El.text(total_items, `Total: ${ callback.total } item's`)
-					_.forEach(_.orderBy(callback.list, 'name', 'asc'), model => { this.row_layout(model) })
+					
+					_.forEach(_.orderBy(callback.list, 'name', 'asc'), model => {
+						this.row_layout(model)
+					})
 				})
 
 				loaded = true

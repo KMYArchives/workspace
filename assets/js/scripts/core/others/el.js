@@ -102,14 +102,6 @@ const El = {
 		}
 	},
 
-	getText (el) {
-		return El.get(el).innerText
-	},
-
-	setText (el, text) {
-		El.get(el).innerText = text
-	},
-
 	select (el) {
 		El.get(el).select()
 	},
@@ -138,6 +130,10 @@ const El = {
 
 	is_empty (el) {
 		return El.get(el).innerHTML == ''
+	},
+
+	count (el) {
+		return El.get(el, 'selectorAll').length
 	},
 
 	value (el, value = null) {

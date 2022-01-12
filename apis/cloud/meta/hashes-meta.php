@@ -22,6 +22,8 @@
 			break;
 			
 		default:
+			Headers::setHttpCode(404);
+			Headers::setContentType('application/json');
 			echo json_encode([ 'error' => 'Argument invalid...' ]);
 			break;
 	}

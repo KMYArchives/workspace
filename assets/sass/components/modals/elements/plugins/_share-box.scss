@@ -1,7 +1,7 @@
 .share-box{
 	display: none;
 	width: 18.55em;
-	overflow: auto;
+	overflow: hidden;
 	z-index: 99999999;
 	position: absolute;
 	text-align: center;
@@ -76,13 +76,13 @@
 		display: none;
 		width: 23.2em;
 		overflow: auto;
-		position: fixed;
 		max-height: 16em;
+		position: sticky;
+		z-index: 999999999;
 		font-size: $smallFont;
 		background: $firstColor;
 		border-top: $border_size solid $borderColor;
 		border-right: $border_size solid $borderColor;
-		border-bottom: $border_size solid $borderColor;
 
 		.option{
 			cursor: pointer;

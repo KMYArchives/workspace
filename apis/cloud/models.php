@@ -12,7 +12,7 @@
 			break;
 
 		case 'list':
-			Request::protect([ 'col', 'slug', 'offset', 'filter', 'username' ]);
+			Request::protect([ 'col', 'term', 'slug', 'offset', 'filter', 'username' ]);
 			$models->list();
 			break;
 
@@ -28,6 +28,8 @@
 			break;
 			
 		default:
+			Headers::setHttpCode(404);
+			Headers::setContentType('application/json');
 			echo json_encode([ 'error' => 'Argument invalid...' ]);
 			break;
 	}

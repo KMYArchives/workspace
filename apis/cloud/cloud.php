@@ -17,6 +17,10 @@
 			include_once 'hashes.php';
 			break;
 
+		case 'plugins':
+			include_once 'plugins.php';
+			break;
+
 		case 'history':
 			include_once 'history.php';
 			break;
@@ -34,6 +38,8 @@
 			break;
 		
 		default:
+			Headers::setHttpCode(404);
+			Headers::setContentType('application/json');
 			echo json_encode([ 'error' => 'Argument invalid...' ]);
 			break;
 	}

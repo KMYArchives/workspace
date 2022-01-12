@@ -2,19 +2,15 @@
 
 	class Request {
 
-		private static function error($debug) {
-			switch ($debug['type']) {
-				case 'empty':
-					echo "Empty parameter: " . $debug['param'] . " (mode: " . strtoupper($debug['mode']) . ")\n";
-					break;
-					
-				case 'missing':
-					echo "Missing parameter: " . $debug['param'] . " (mode: " . strtoupper($debug['mode']) . ")\n";
-					break;
-			}
+		private static function _error(array $debug) {
+			echo match ($debug['type']) {
+				'cookie'	=>	"Missing cookie: " . $debug['param'] . " (mode: " . strtoupper($debug['mode']) . ")\n",
+				'empty'		=>	"Empty parameter: " . $debug['param'] . " (mode: " . strtoupper($debug['mode']) . ")\n",
+				'missing'	=>	"Missing parameter: " . $debug['param'] . " (mode: " . strtoupper($debug['mode']) . ")\n",
+			};
 		}
 		
-		public static function protect($param) {
+		public static function protect(array $param): string {
 			foreach ($param as $sql) {
 				$sql	=	$_GET[$sql] ?-> $_POST[$sql];
 				$sql	=	trim($sql);
@@ -25,25 +21,27 @@
 			}
 		}
 
-		public static function get($values, $options = null) {
+		public static function get(array $values): void {
 			foreach ($values as $value) {
 				self::protect([$value]);
 
 				if (!isset($_GET[$value])) {
-					self::error([
+					Headers::setHttpCode(403);
+
+					self::_error([
 						'mode'	=>	'get',
 						'param'	=>	$value,
 						'type'	=>	'missing',
-						'debug'	=>	$options['debug'],
 					]);
 
 					die;
 				} else if (empty($_GET[$value])) {
-					self::error([
+					Headers::setHttpCode(403);
+					
+					self::_error([
 						'mode'	=>	'get',
 						'param'	=>	$value,
 						'type'	=>	'empty',
-						'debug'	=>	$options['debug'],
 					]);
 
 					die;
@@ -51,25 +49,41 @@
 			}
 		}
 
-		public static function post($values, $options = null) {
+		public static function post(array $values): void {
 			foreach ($values as $key => $value) {
 				self::protect([$value]);
 
 				if (!isset($_POST[$value])) {
-					self::error([
+					self::_error([
 						'mode'	=>	'post',
 						'param'	=>	$value,
 						'type'	=>	'missing',
-						'debug'	=>	$options['debug'],
 					]);
 				} else if (empty($_POST[$value])) {
-					self::error([
+					self::_error([
 						'mode'	=>	'post',
 						'param'	=>	$value,
 						'type'	=>	'empty',
-						'debug'	=>	$options['debug'],
 					]);
 				}
+			}
+		}
+
+		public static function validate_request (string $cookie, array $params, string $mode): bool {
+			if (Cookies::has($cookie)) {
+				if ($mode == 'get') {
+					self::get($params);
+				} else {
+					self::post($params);
+				}
+			} else {
+				self::_error([
+					'param'	=>	$cookie,
+					'mode'	=>	'cookie',
+					'type'	=>	'cookie',
+				]);
+
+				die;
 			}
 		}
 

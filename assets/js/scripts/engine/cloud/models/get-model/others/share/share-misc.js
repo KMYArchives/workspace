@@ -1,25 +1,25 @@
 const ShareMisc = {
 
-	links (item, el) {
-		var value
-
+	_values (item) {
 		switch (item) {
-			case 'cli': 
-				value = this.import_cli()
-				break
-
-			case 'raw':
-				value = this.link_raw()
-				break
-
-			case 'direct':
-				value = this.link_direct()
-				break
+			case 'raw': return this.link_raw()
+			case 'cli': return this.import_cli()
+			case 'direct': return this.link_direct()
 		}
-		
+	},
+
+	links (item, el) {
 		ShareModel.toggle_sub_options()
-		El.value(share_code_box + ' > .links > input', value)
-		El.text(share_code_box + ' > .options > .text', El.text('#' + el.id))
+		
+		El.value(
+			share_code_box + ' > .links > input', this._values(item)
+		)
+
+		El.text(
+			share_code_box + ' > .options > .text', El.text(
+				'#' + el.id
+			)
+		)
 	},
 
 	social_media (social) {

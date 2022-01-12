@@ -22,7 +22,7 @@ const ShareModel = {
 			</div>
 
 			<div class='links'>
-				<input type='text' value='${ ShareMisc.link_direct() }' onclick="Misc.copy_input(this)" readonly>
+				<input type='text' value='${ ShareMisc.link_direct() }' id='share-model-input' onclick="Copy.input(this)" readonly>
 			</div>
 		`)
 	},
@@ -36,7 +36,7 @@ const ShareModel = {
 		], act_class)
 
 		Classes.toggle('#share-model', act_class)
-		if (El.is_visible('#share-model')) {
+		if (El.is_visible(share_code_box)) {
 			El.hide(share_code_box)
 		} else {
 			El.show(share_code_box)
@@ -61,10 +61,10 @@ const ShareModel = {
 		], 'animate__animated animate__zoomIn animate__faster')
 
 		Classes.toggle('.options', act_class)
-		if (Classes.has('.options', act_class)) {
-			El.show('.sub-options')
-		} else {
+		if (El.is_visible('.sub-options')) {
 			El.hide('.sub-options')
+		} else {
+			El.show('.sub-options')
 		}
 	}
 

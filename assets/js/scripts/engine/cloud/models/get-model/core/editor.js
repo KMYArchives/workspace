@@ -22,21 +22,29 @@ const Editor = {
 				}
 			)
 
-			ISE.loader()
-			this.auto_refresh()
+			SDM.loader()
+			
+			setTimeout( e => {
+				editor.refresh()
+				this.auto_refresh()
+			}, anim_time / 2)
 		}
 	},
 
 	auto_refresh () {
 		setInterval( e => { 
-			if (editor != null || editor != undefined) { editor.refresh() }
-		}, anim_time)
+			if (editor != null || editor != undefined) {
+				editor.refresh()
+			}
+		}, anim_time * 2)
 	},
 
 	content (content) {
 		if (editor.getDoc().getValue() == '' || editor.getDoc().getValue() != content) {
 			editor.getDoc().setValue(content) 
 		}
-	}
+	},
+
+	select () { return editor.getSelection() },
 
 }

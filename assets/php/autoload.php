@@ -12,7 +12,7 @@
 		'account/', 
 		'security/',
 		'cloud/meta/',
-		'system/minify/',
+		'cloud/plugins/',
 	] as $p) {
 		foreach (scandir(__DIR__ . '/' . $p) as $file) {
 			if (!in_array(
@@ -51,3 +51,6 @@
 	$models_meta	=	new ModelsMeta;
 	$hashes_meta	=	new HashesMeta;
 	$diagrams_meta	=	new DiagramsMeta;
+
+	// Plugins
+	$sql_minidoc	=	new SqlMiniDoc;
