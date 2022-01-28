@@ -32,6 +32,7 @@
 				$this->clients->get_id($_GET['username'])
 			]) as $data);
 
+			Headers::setHttpCode(200);
 			Headers::setContentType('application/json');
 			echo json_encode([
 				'name'				=>	$data['name'],
@@ -50,7 +51,7 @@
 			$offset		=	($_GET['offset']) ? Clean::numbers($_GET['offset']) : 0;
 
 			$where		=	$this->term() . " " . $this->filter();
-			foreach ($this->db->query("SELECT slug, name, size, added_in, collection FROM ws_hashes WHERE username = ? $where LIMIT $offset, $sql_max", [
+			foreach ($this->db->query("SELECT slug, name, size, added_in FROM ws_hashes WHERE username = ? $where LIMIT $offset, $sql_max", [
 				$this->clients->get_id($_GET['username'])
 			]) as $data) {
 				$list[]			=	[
@@ -58,10 +59,10 @@
 					'name'		=>	$data['name'],
 					'size'		=>	$data['size'],
 					'added_in'	=>	$data['added_in'],
-					'collation'	=>	$data['collation'],
 				];
 			}
 
+			Headers::setHttpCode(200);
 			Headers::setContentType('application/json');
 			echo json_encode([
 				'list'	=>	$list,
@@ -77,10 +78,10 @@
 		}
 
 		public function create(): mixed {
-			$slug	=	Random::slug([ 36, 48 ]);
-			$file	=	Random::string(36, true, true, true);
+			$slug		=	Random::slug([ 36, 48 ]);
+			$json_file	=	Random::string(36, true, true, true);
 
-			if (File::create(Values::$assets['hashes'] . $file, $_POST['content'])) {
+			if (File::create(Values::$assets['hashes'] . $json_file, $_POST['content'])) {
 				if ($this->db->query("INSERT INTO ws_hashes(slug, json_file, name, type, username) VALUES(?, ?, ?, ?, ?)", [
 					$slug,
 					$json_file,
@@ -89,11 +90,14 @@
 
 					$this->clients->get_id($_POST['username'])
 				])) {
+					Headers::setHttpCode(200);
 					echo json_encode([ 'return'	=> 'success' ]);
 				} else {
+					Headers::setHttpCode(500);
 					echo json_encode([ 'return' => 'error-db-create-hash' ]);
 				}
 			} else {
+				Headers::setHttpCode(500);
 				echo json_encode([ 'return' => 'error-file-create-hash' ]);
 			}
 		}

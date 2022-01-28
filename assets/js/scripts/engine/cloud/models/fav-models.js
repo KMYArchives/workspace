@@ -40,9 +40,13 @@ const FavModels = {
 		).then( callback => {
 			El.text(total_items, `Total: ${ callback.total } item's`)
 			
-			_.forEach(_.orderBy(callback.list, 'product', 'asc'), model => {
-				ListModels.row_layout(model)
-			})
+			_.forEach(
+				_.orderBy(
+					callback.list, 'product', 'asc'
+				), model => {
+					ListModels.row_layout(model)
+				}
+			)
 		})
 		
 	},

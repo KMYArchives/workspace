@@ -32,6 +32,7 @@
 				$this->clients->get_id($_GET['username'])
 			]) as $data);
 
+			Headers::setHttpCode(200);
 			Headers::setContentType('application/json');
 			echo json_encode([
 				'name'			=>	$data['name'],
@@ -67,6 +68,7 @@
 				];
 			}
 
+			Headers::setHttpCode(200);
 			Headers::setContentType('application/json');
 			echo json_encode([
 				'list'	=>	$list,
@@ -80,6 +82,7 @@
 			$slug	=	Random::slug([ 36, 48 ]);
 			$imgur	=	$this->imgur->upload($_POST['image']);
 
+			Headers::setContentType('application/json');
 			if ($this->db->query("INSERT INTO ws_diagrams(slug, name, image_id, image, size, mime, delete_hash, username) VALUES(?, ?, ?, ?, ?, ?, ?, ?)", [
 				$slug,
 				Clean::sql($_POST['name']),
@@ -98,6 +101,7 @@
 					);
 				}
 
+				Headers::setHttpCode(200);
 				echo json_encode([ 
 					'slug'		=>	$slug,
 					'return'	=> 'success',
@@ -105,6 +109,7 @@
 					'id'		=>	$this->diagrams_meta->get_data($slug, 'id'),
 				]);
 			} else {
+				Headers::setHttpCode(500);
 				echo json_encode([ 'return' => 'error-db-create-diagram' ]);
 			}
 		}
@@ -122,8 +127,10 @@
 					$data['slug'], 
 					$this->clients->get_id() 
 				])) {
+					Headers::setHttpCode(200);
 					echo json_encode([ 'return' => 'success' ]);
 				} else {
+					Headers::setHttpCode(500);
 					echo json_encode([ 'return' => 'error-db-unlink-diagram' ]);
 				}
 			}

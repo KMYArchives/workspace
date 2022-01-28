@@ -11,7 +11,9 @@
 		null, 'tasks', 'models', 'hashes', 'history', 'diagrams', 'contacts'
 	])) {
 		include_once Values::$assets['pages'] . 'page.php';
-	} else if (in_array($urlE[0], [ 'raw', 'yuki', 'apis' ])) {
+	} else if (in_array($urlE[0], [
+		'raw', 'yuki', 'apis'
+	])) {
 		if ($urlE[0] == 'apis') {
 			include_once 'apis/apis.php';
 		} else {

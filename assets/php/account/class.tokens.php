@@ -26,6 +26,7 @@
 				$this->clients->get_id()
 			]) as $data);
 
+			Headers::setHttpStatus(200);
 			Headers::setContentType('application/json');
 			echo json_encode([
 				'name'		=>	$data['name'],
@@ -50,6 +51,7 @@
 				];
 			}
 
+			Headers::setHttpStatus(200);
 			Headers::setContentType('application/json');
 			echo json_encode([
 				'list'	=>	$list,
@@ -73,12 +75,14 @@
 				$token,
 				Clean::default($_POST['name']),
 			])) {
+				Headers::setHttpStatus(200);
 				echo json_encode([
 					'result'	=>	true,
 					'slug'		=>	$slug,
 					'token'		=>	$token,
 				]);
 			} else {
+				Headers::setHttpStatus(500);
 				echo json_encode([ 'result' => 'error-db-create-token' ]);
 			}
 		}
@@ -90,8 +94,10 @@
 				Clean::slug($_POST['slug']),
 				$this->clients->get_id(),
 			])) {
+				Headers::setHttpStatus(200);
 				echo json_encode([ 'result' => true ]);
 			} else {
+				Headers::setHttpStatus(500);
 				echo json_encode([ 'result' => 'error-db-delete-token' ]);
 			}
 		}

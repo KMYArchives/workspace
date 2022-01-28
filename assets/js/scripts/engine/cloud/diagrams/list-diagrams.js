@@ -3,10 +3,14 @@ const ListDiagrams = {
 	list () {
 		if (Find.in_array(Params.get_last(), [ 'diagrams' ])) {
 			this.list_table()
-			GetDiagram.modal()
+			GetDiagramModal.layout()
 
 			Navbar.actived('tab-diagrams')
-			if (Queries.has('i')) { GetDiagram.get() }
+			if (Queries.has('i')) {
+				setTimeout( e => {
+					GetDiagram.get()
+				}, anim_time * 2)
+			}
 		}
 	},
 
@@ -64,9 +68,13 @@ const ListDiagrams = {
 				).then( callback => {
 					El.text(total_items, `Total: ${ callback.total } item's`)
 
-					_.forEach(_.orderBy(callback.list, 'name', 'asc'), diagram => {
-						this.row_layout(diagram)
-					})
+					_.forEach(
+						_.orderBy(
+							callback.list, 'name', 'asc'
+						), diagram => {
+							this.row_layout(diagram)
+						}
+					)
 				})
 
 				loaded = true

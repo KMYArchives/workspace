@@ -2,15 +2,21 @@
 
 	class File {
 
-		public static function delete($file) {
-			if (file_exists($file)) {
-				if (unlink($file)) {
-					return true;
-				} else {
-					throw new \InvalidArgumentException('File not deleted');
-				}
+		private static function _del_file(string $path): void {
+			if (file_exists($path)) {
+				unlink($path);
 			} else {
 				throw new \InvalidArgumentException('File not found');
+			}
+		}
+
+		public static function delete(string|array $file): bool {
+			if (array($file)) {
+				foreach ($file as $f) {
+					self::_del_file($f);
+				}
+			} else {
+				self::_del_file($file);
 			}
 		}
 

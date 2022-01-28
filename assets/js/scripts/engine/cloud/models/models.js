@@ -39,7 +39,7 @@ const Models = {
 		}
 
 		this.side_box()
-		ListModels.list()
+		setTimeout( e => ListModels.list(), anim_time * 2)
 	},
 
 }

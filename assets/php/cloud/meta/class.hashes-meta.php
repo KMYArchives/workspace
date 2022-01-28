@@ -23,8 +23,11 @@
 				$this->clients->get_id() 
 			])) {
 				$this->delete_file($data);
+				
+				Headers::setHttpCode(200);
 				echo json_encode([ 'return' => 'success' ]);
 			} else {
+				Headers::setHttpCode(500);
 				echo json_encode([ 'return' => 'error-db-unlink-hash' ]);
 			}
 		}
@@ -47,11 +50,13 @@
 				$data['slug'],
 				$data['username'],
 			])) {
-				echo json_encode([ 
+				Headers::setHttpCode(200);
+				echo json_encode([
 					'return'	=>	'success',
 					'favorited'	=>	$favorited
 				]);
 			} else {
+				Headers::setHttpCode(500);
 				echo json_encode([ 'return' => 'error-favorite-hash' ]);
 			}
 		}
@@ -79,13 +84,15 @@
 				$data['slug'],
 				$data['username'],
 			])) {
+				Headers::setHttpCode(200);
 				echo json_encode([ 'return' => 'success' ]);
 			} else {
+				Headers::setHttpCode(500);
 				echo json_encode([ 'return' => 'error-change-privacy-model' ]);
 			}
 		}
 
-		public function change_collection($col = null) {
+		public function change_collection(int|string $col = null) {
 			if (!$col) { $col = Clean::numbers($_POST['col']); }
 
 			Headers::setContentType('application/json');
@@ -99,7 +106,8 @@
 					$this->clients->get_id() 
 				]) as $data);
 
-				echo json_encode([ 
+				Headers::setHttpCode(200);
+				echo json_encode([
 					'return'		=>	'success',
 					'collection'	=>	[
 						'id'		=>	$col,
@@ -107,6 +115,7 @@
 					]
 				]);
 			} else {
+				Headers::setHttpCode(500);
 				echo json_encode([ 'return' => 'error-change-collection' ]);
 			}
 		}

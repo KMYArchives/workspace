@@ -6,6 +6,7 @@
 	z-index: 9999999999;
 	width: $header_size;
 	background: $secondColor;
+	@include backdrop-blur($padding2);
 	border-right: $border_size solid $borderColor;
 
 	hr{
@@ -22,7 +23,7 @@
 		margin-top: $padding_base;
 		margin-left: -$padding3 / 3;
 		margin-bottom: $padding_base;
-		&:hover, &:focus{ @include filter(grayscale, 100%); }
+		&:hover, &:focus{ @include filter-grayscale(100%); }
 	}
 
 	.actived{
@@ -88,5 +89,5 @@
 		}
 	}
 
-	.logo-actived{ @include filter(grayscale, 100%); }
+	.logo-actived{ @include filter-grayscale(100%); }
 }

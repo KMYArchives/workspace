@@ -24,7 +24,7 @@ const ListModels = {
 
 	list () {
 		if (Find.in_array(Params.get_last(), [ 'models' ])) {
-			GetModel.modal()
+			GetModelModal.layout()
 			
 			if (Queries.get('filter') != 'favorites') {
 				this.list_table(
@@ -36,8 +36,9 @@ const ListModels = {
 
 			Editor.loader()
 			Navbar.actived('tab-models')
-
-			if (Queries.has('i')) { GetModel.get() }
+			if (Queries.has('i')) {
+				setTimeout( e => GetModel.get(), anim_time * 2)
+			}
 		}
 	},
 
@@ -103,9 +104,13 @@ const ListModels = {
 				).then( callback => {
 					El.text(total_items, `Total: ${ callback.total } item's`)
 					
-					_.forEach(_.orderBy(callback.list, 'name', 'asc'), model => {
-						this.row_layout(model)
-					})
+					_.forEach(
+						_.orderBy(
+							callback.list, 'name', 'asc'
+						), model => {
+							this.row_layout(model)
+						}
+					)
 				})
 
 				loaded = true

@@ -57,7 +57,6 @@
 
 			Headers::setHttpCode(200);
 			Headers::setContentType('application/json');
-
 			echo json_encode([
 				'list'		=>	$list,
 				'offset'	=>	intval($offset),

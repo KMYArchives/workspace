@@ -39,7 +39,7 @@ const Hashes = {
 		}
 
 		this.side_box()
-		ListHashes.list()
+		setTimeout( e => ListHashes.list(), anim_time * 2)
 	},
 
 }

@@ -1,0 +1,91 @@
+@mixin rotate($angle) {
+	transform: rotate($angle + deg);
+	-o-transform: rotate($angle + deg);
+	-o-transform: rotate($angle + deg);
+	-ms-transform: rotate($angle + deg);
+	-webkit-transform: rotate($angle + deg);
+}
+
+@mixin rotate-x($angle) {
+	transform: rotateX($angle + deg);
+	-o-transform: rotateX($angle + deg);
+	-o-transform: rotateX($angle + deg);
+	-ms-transform: rotateX($angle + deg);
+	-webkit-transform: rotateX($angle + deg);
+}
+
+@mixin rotate-y($angle) {
+	transform: rotateY($angle + deg);
+	-o-transform: rotateY($angle + deg);
+	-o-transform: rotateY($angle + deg);
+	-ms-transform: rotateY($angle + deg);
+	-webkit-transform: rotateY($angle + deg);
+}
+
+@mixin rotate-z($angle) {
+	transform: rotateZ($angle + deg);
+	-o-transform: rotateZ($angle + deg);
+	-o-transform: rotateZ($angle + deg);
+	-ms-transform: rotateZ($angle + deg);
+	-webkit-transform: rotateZ($angle + deg);
+}
+
+@mixin rotate-3d($x, $y, $z, $angle) {
+	transform: rotate3d($x, $y, $z, $angle + deg);
+	-o-transform: rotate3d($x, $y, $z, $angle + deg);
+	-o-transform: rotate3d($x, $y, $z, $angle + deg);
+	-ms-transform: rotate3d($x, $y, $z, $angle + deg);
+	-webkit-transform: rotate3d($x, $y, $z, $angle + deg);
+}
+
+@mixin rotate-x-origin($origin, $angle) {
+	transform-origin: $origin;
+	-o-transform-origin: $origin;
+	-o-transform-origin: $origin;
+	-ms-transform-origin: $origin;
+	-webkit-transform-origin: $origin;
+	transform: rotateX($angle + deg);
+	-o-transform: rotateX($angle + deg);
+	-o-transform: rotateX($angle + deg);
+	-ms-transform: rotateX($angle + deg);
+	-webkit-transform: rotateX($angle + deg);
+}
+
+@mixin rotate-y-origin($origin, $angle) {
+	transform-origin: $origin;
+	-o-transform-origin: $origin;
+	-o-transform-origin: $origin;
+	-ms-transform-origin: $origin;
+	-webkit-transform-origin: $origin;
+	transform: rotateY($angle + deg);
+	-o-transform: rotateY($angle + deg);
+	-o-transform: rotateY($angle + deg);
+	-ms-transform: rotateY($angle + deg);
+	-webkit-transform: rotateY($angle + deg);
+}
+
+@mixin rotate-z-origin($origin, $angle) {
+	transform-origin: $origin;
+	-o-transform-origin: $origin;
+	-o-transform-origin: $origin;
+	-ms-transform-origin: $origin;
+	-webkit-transform-origin: $origin;
+	transform: rotateZ($angle + deg);
+	-o-transform: rotateZ($angle + deg);
+	-o-transform: rotateZ($angle + deg);
+	-ms-transform: rotateZ($angle + deg);
+	-webkit-transform: rotateZ($angle + deg);
+}
+
+@mixin rotate-3d-origin($origin, $x, $y, $z, $angle) {
+	transform-origin: $origin;
+	-o-transform-origin: $origin;
+	-o-transform-origin: $origin;
+	-ms-transform-origin: $origin;
+	-webkit-transform-origin: $origin;
+	transform: rotate3d($x, $y, $z, $angle + deg);
+	-o-transform: rotate3d($x, $y, $z, $angle + deg);
+	-o-transform: rotate3d($x, $y, $z, $angle + deg);
+	-ms-transform: rotate3d($x, $y, $z, $angle + deg);
+	-webkit-transform: rotate3d($x, $y, $z, $angle + deg);
+}

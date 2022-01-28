@@ -23,7 +23,7 @@
 
 	.actived{
 		background: $firstColor;
-		.avatar{ @include filter(grayscale, 100%); }
+		.avatar{ @include filter-grayscale(100%); }
 	}
 
 	.username{
@@ -46,7 +46,7 @@
 		
 		@include hover($firstColor);
 		&:hover, &:focus{
-			.avatar{ @include filter(grayscale, 100%); }
+			.avatar{ @include filter-grayscale(100%); }
 		}
 	}
 }

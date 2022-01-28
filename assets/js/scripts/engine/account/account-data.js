@@ -3,24 +3,15 @@ const AccountData = {
 	details () {
 		setTimeout( e => {
 			this.request_details()
-		}, anim_time)
+		}, anim_time * 3)
 	},
 
 	request_details () {
-		var loaded = false
-
-		var Interval = setInterval( e => {
-			if (loaded != true) {
-				fetch(`${ Apis.core() }account/details`).then( 
-					json => json.json() 
-				).then( callback => {
-					loaded = true
-					this.get_data(callback)
-				})
-			} else {
-				clearInterval(Interval)
-			}
-		}, anim_time * 2)
+		fetch(`${ Apis.core() }account/details`).then( 
+			json => json.json() 
+		).then( callback => {
+			this.get_data(callback)
+		})
 	},
 
 	get_data (callback) {

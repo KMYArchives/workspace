@@ -5,8 +5,8 @@
 	display: none;
 	z-index: 999999;
 	position: absolute;
-	@include box-shadow;
 	box-sizing: border-box;
+	@include drop-shadow-sm;
 	margin-right: $padding2;
 	background: $firstColor;
 	line-height: $padding_base + $padding2;

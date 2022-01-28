@@ -1,13 +1,14 @@
 .send-to-box{
 	display: none;
-	width: 18.6em;
+	width: 18.7em;
+	overflow: hidden;
 	z-index: 99999999;
 	position: absolute;
 	text-align: center;
-	box-sizing: border-box;
 	background: $firstColor;
-	border-right: $border_size solid $borderColor;
-	border-bottom: $border_size solid $borderColor;
+	border-top: 0 !important;
+	border: $border_size solid $borderColor;
+	margin-left: $padding_base * 2.75 + $border_size;
 
 	.list{
 		overflow: auto;

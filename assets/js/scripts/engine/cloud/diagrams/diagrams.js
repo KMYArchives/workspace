@@ -47,7 +47,7 @@ const Diagrams = {
 		}
 
 		this.side_box()
-		ListDiagrams.list()
+		setTimeout( e => ListDiagrams.list(), anim_time * 2)
 	},
 
 }

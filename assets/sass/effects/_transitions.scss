@@ -1,0 +1,63 @@
+@mixin transition($transition) {
+	transition: $transition;
+	-o-transition: -o-#{$transition};
+	-ms-transition: -ms-#{$transition};
+	-moz-transition: -moz-#{$transition};
+	-webkit-transition: -webkit-#{$transition};
+}
+
+@mixin transition-delay($transition) {
+	transition-delay: $transition;
+	-o-transition-delay: -o-#{$transition};
+	-ms-transition-delay: -ms-#{$transition};
+	-moz-transition-delay: -moz-#{$transition};
+	-webkit-transition-delay: -webkit-#{$transition};
+}
+
+@mixin transition-property($transition) {
+	transition-property: $transition;
+	-o-transition-property: -o-#{$transition};
+	-ms-transition-property: -ms-#{$transition};
+	-moz-transition-property: -moz-#{$transition};
+	-webkit-transition-property: -webkit-#{$transition};
+}
+
+@mixin transition-duration($transition) {
+	transition-duration: $transition;
+	-o-transition-duration: -o-#{$transition};
+	-ms-transition-duration: -ms-#{$transition};
+	-moz-transition-duration: -moz-#{$transition};
+	-webkit-transition-duration: -webkit-#{$transition};
+}
+
+@mixin transition-timing-function($transition) {
+	transition-timing-function: $transition;
+	-o-transition-timing-function: -o-#{$transition};
+	-ms-transition-timing-function: -ms-#{$transition};
+	-moz-transition-timing-function: -moz-#{$transition};
+	-webkit-transition-timing-function: -webkit-#{$transition};
+}
+
+@mixin transition-transform($transition) {
+	transition-transform: $transition;
+	-o-transition-transform: -o-#{$transition};
+	-ms-transition-transform: -ms-#{$transition};
+	-moz-transition-transform: -moz-#{$transition};
+	-webkit-transition-transform: -webkit-#{$transition};
+}
+
+@mixin transition-all($transition) {
+	transition: $transition;
+	-o-transition: -o-#{$transition};
+	-ms-transition: -ms-#{$transition};
+	-moz-transition: -moz-#{$transition};
+	-webkit-transition: -webkit-#{$transition};
+}
+
+@mixin transition-none($transition) {
+	transition: $transition;
+	-o-transition: -o-#{$transition};
+	-ms-transition: -ms-#{$transition};
+	-moz-transition: -moz-#{$transition};
+	-webkit-transition: -webkit-#{$transition};
+}

@@ -4,6 +4,8 @@
 
 		private $db, $clients;
 
+		public function list() {}
+
 		public function create() {}
 
 		public function delete() {}

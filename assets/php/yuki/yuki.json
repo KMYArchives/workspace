@@ -15,6 +15,7 @@
 		"lodash",
 		"lozad",
 		"xss",
+		"axios",
 		"platform",
 		"html2canvas",
 		"codemirror/codemirror",

@@ -44,9 +44,13 @@
 			);
 		}
 
-		private function delete_files(array $data): mixed {
-			File::delete(Values::$assets['models']['sql']. $data['sql_file']);
-			File::delete(Values::$assets['models']['json']. $data['json_file']);
+		private function delete_files(array $data): void {
+			$base_path	=	Values::$assets['models'];
+			
+			File::delete([
+				$base_path['sql'] . $data['sql_file'],
+				$base_path['json'] . $data['json_file'],
+			]);
 		}
 
 		public function get(): mixed {
@@ -100,15 +104,14 @@
 				];
 			}
 
-			$items		=	[
+			Headers::setHttpCode(200);
+			Headers::setContentType('application/json');
+			echo json_encode([
 				'list'	=>	$list,
 				'total'	=>	$this->db->query("SELECT COUNT(*) FROM ws_models WHERE username = ? $where", [
 					$username
 				])[0]['COUNT(*)'],
-			];
-
-			Headers::setContentType('application/json');
-			echo json_encode($items);
+			]);
 		}
 
 		public function create(): mixed {
@@ -127,17 +130,21 @@
 
 						$this->clients->get_id($_POST['username']),
 					])) {
+						Headers::setHttpCode(200);
 						echo json_encode([
 							'slug'		=>	$slug,
 							'return'	=>	'success',
 						]);
 					} else {
+						Headers::setHttpCode(500);
 						echo json_encode([ 'return' => 'error-db-create-model' ]);
 					}
 				} else {
+					Headers::setHttpCode(500);
 					echo json_encode([ 'return' => 'error-file-create-json' ]);
 				}
 			} else {
+				Headers::setHttpCode(500);
 				echo json_encode([ 'return' => 'error-file-create-sql' ]);
 			}
 		}
@@ -155,8 +162,11 @@
 				$data['username']
 			])) {
 				$this->delete_files($data);
+				
+				Headers::setHttpCode(200);
 				echo json_encode([ 'return' => 'success' ]);
 			} else {
+				Headers::setHttpCode(500);
 				echo json_encode([ 'return' => 'error-db-unlink-model' ]);
 			}
 		}

@@ -5,19 +5,15 @@
 		private $db, $clients;
 
 		private function filter() {
-			switch (Clean::string($_GET['filter'], 'az')) {
-				case 'public':
-					return "AND privacy = 'public'"; 
-					break;
-
-				case 'private':
-					return "AND privacy = 'private'"; 
-					break;
-
-				default:
-					return "AND privacy = 'public'"; 
-					break;
-			}
+			return match(
+				Clean::string(
+					$_GET['filter'], 'az'
+				)
+			) {
+				default		=>	"AND privacy = 'public'",
+				'public'	=>	"AND privacy = 'public'",
+				'private'	=>	"AND privacy = 'private'",
+			};
 		}
 
 		public function get() {
@@ -48,6 +44,8 @@
 		}
 
 		public function edit() {
+			Headers::setContentType('application/json');
+
 			if ($this->db->query("UPDATE ws_collections SET name = ?, collation = ?, privacy = ? WHERE slug = ? AND username = ?", [
 				Clean::sql($_POST['name']),
 				Clean::default($_POST['collation']),
@@ -56,11 +54,14 @@
 				Clean::slug($_POST['slug']),
 				$this->clients->get_id(),
 			])) {
+				Headers::setHttpCode(200);
+
 				echo json_encode([ 
 					'return' 	=> 'success',
 					'privacy'	=>	Clean::string($_POST['privacy'], 'az'),
 				]);
 			} else {
+				Headers::setHttpCode(500);
 				echo json_encode([ 'return' => 'error-db-edited-collection' ]);
 			}
 		}
@@ -76,8 +77,10 @@
 
 				$this->clients->get_id(),
 			])) {
+				Headers::setHttpCode(200);
 				echo json_encode([ 'return'	=> 'success' ]);
 			} else {
+				Headers::setHttpCode(500);
 				echo json_encode([ 'return' => 'error-db-create-cllections' ]);
 			}
 		}
@@ -94,8 +97,10 @@
 				$data['slug'], 
 				$data['username'],
 			])) {
+				Headers::setHttpCode(200);
 				echo json_encode([ 'return' => 'success' ]);
 			} else {
+				Headers::setHttpCode(500);
 				echo json_encode([ 'return' => 'error-db-unlink-collection' ]);
 			}
 		}

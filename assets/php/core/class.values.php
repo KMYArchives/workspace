@@ -5,6 +5,7 @@
 		static $basic	=	[
 			'def_lang'	=>	'en-US',
 			'charset'	=>	'UTF-8',
+			'author'	=>	'Colisoft',
 			'name'		=>	'Colisoft Workspace',
 			'etag'		=>	'91242c4a4111df4cd6be844dfa3b89b5',
 		];

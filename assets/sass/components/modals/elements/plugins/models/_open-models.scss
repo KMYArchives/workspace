@@ -1,0 +1,10 @@
+.open-models{
+	width: 18em;
+	height: 21em;
+	display: none;
+	overflow: auto;
+	background: $firstColor;
+	border-top: none !important;
+	border-left: none !important;
+	border: $border_size solid $borderColor;
+}

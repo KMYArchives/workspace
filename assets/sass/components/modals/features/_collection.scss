@@ -8,6 +8,7 @@
 	margin-left: -11em;
 	margin-top: -11.5em;
 	z-index: 99999999999;
+	@include drop-shadow-sm;
 	background: $firstColor;
 
 	.body{

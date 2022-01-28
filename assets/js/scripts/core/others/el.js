@@ -49,11 +49,12 @@ const El = {
 	},
 
 	html (el) {
-		El.get(el).innerHTML
+		return El.get(el).innerHTML
 	},
 
 	toggle (el) {
 		var status
+
 		var i = setInterval( e => {
 			if (status) {
 				clearInterval(i)

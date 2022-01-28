@@ -1,0 +1,13 @@
+.menu-box{
+	width: 16em;
+	height: 18em;
+	display: none;
+	overflow: hidden;
+	z-index: 99999999;
+	position: absolute;
+	text-align: center;
+	background: $firstColor;
+	border-top: 0 !important;
+	border-left: 0 !important;
+	border: $border_size solid $borderColor;
+}

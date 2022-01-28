@@ -28,11 +28,13 @@
 				$data['slug'],
 				$data['username'],
 			])) {
+				Headers::setHttpCode(200);
 				echo json_encode([ 
 					'return'	=>	'success',
 					'favorited'	=>	$favorited
 				]);
 			} else {
+				Headers::setHttpCode(500);
 				echo json_encode([ 'return' => 'error-favorite-diagram' ]);
 			}
 		}
@@ -43,6 +45,7 @@
 				$this->clients->get_id(),
 			]) as $data);
 
+			Headers::setHttpCode(200);
 			Headers::setContentType('application/json');
 			echo json_encode([
 				'privacy'			=>	$data['privacy'],
@@ -71,8 +74,10 @@
 				$data['slug'],
 				$data['username'],
 			])) {
+				Headers::setHttpCode(200);
 				echo json_encode([ 'return' => 'success' ]);
 			} else {
+				Headers::setHttpCode(500);
 				echo json_encode([ 'return' => 'error-change-privacy-diagram' ]);
 			}
 		}
@@ -99,6 +104,7 @@
 					$this->clients->get_id() 
 				]) as $data);
 
+				Headers::setHttpCode(200);
 				echo json_encode([ 
 					'return'		=>	'success',
 					'collection'	=>	[
@@ -107,6 +113,7 @@
 					]
 				]);
 			} else {
+				Headers::setHttpCode(500);
 				echo json_encode([ 'return' => 'error-change-collection-diagram' ]);
 			}
 		}

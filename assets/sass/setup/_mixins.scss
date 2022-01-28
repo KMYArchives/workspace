@@ -95,11 +95,10 @@
 }
 
 @mixin hover($background: $secondColor, $color: inherit, $border-color: $borderColor, $transition: 1.2s) {
-	&:hover, &:focus {
+	&:hover, &:focus{
 		outline: none;
 		color: $color;
 		border-color: $border-color;
 		background-color: $background;
-		@include transition(background-color $transition);
 	}
 }

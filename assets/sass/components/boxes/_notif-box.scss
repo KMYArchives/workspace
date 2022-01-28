@@ -5,7 +5,7 @@
 	display: none;
 	position: fixed;
 	z-index: 999999999;
-	@include box-shadow;
+	@include drop-shadow-sm;
 	background: $firstColor;
 	border-right: 0 !important;
 	margin-top: $padding_base * 3;

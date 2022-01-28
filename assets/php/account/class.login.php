@@ -7,6 +7,7 @@
 		public function sign_out() {
 			Cookies::delete('user');
 
+			Headers::setHttpCode(200);
 			Headers::setContentType('application/json');
 			echo json_encode([ 'logoff' => true ]);
 		}
@@ -14,6 +15,7 @@
 		public function check_logged() {
 			Headers::setContentType('application/json');
 			
+			Headers::setHttpCode(200);
 			if ($this->clients->get_id()) {
 				echo json_encode([ 'logged' => true ]);
 			} else {

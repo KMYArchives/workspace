@@ -40,11 +40,13 @@
 				$data['slug'],
 				$data['username'],
 			])) {
+				Headers::setHttpCode(200);
 				echo json_encode([ 
 					'return'	=>	'success',
 					'favorited'	=>	$favorited
 				]);
 			} else {
+				Headers::setHttpCode(500);
 				echo json_encode([ 'return' => 'error-favorite-model' ]);
 			}
 		}
@@ -57,6 +59,7 @@
 				$this->clients->get_id(),
 			]) as $data);
 
+			Headers::setHttpCode(200);
 			Headers::setContentType('application/json');
 			echo json_encode([
 				'privacy'		=>	$data['privacy'],
@@ -85,8 +88,10 @@
 				$data['slug'],
 				$data['username'],
 			])) {
+				Headers::setHttpCode(200);
 				echo json_encode([ 'return' => 'success' ]);
 			} else {
+				Headers::setHttpCode(500);
 				echo json_encode([ 'return' => 'error-change-privacy-model' ]);
 			}
 		}
@@ -98,13 +103,15 @@
 				Clean::slug($_POST['model']), 
 				$this->clients->get_id() 
 			])) {
+				Headers::setHttpCode(200);
 				echo json_encode([ 'return' => 'success' ]);
 			} else {
+				Headers::setHttpCode(500);
 				echo json_encode([ 'return' => 'error-change-diagram-model' ]);
 			}
 		}
 
-		public function change_collection(int|string $col = null): string {
+		public function change_collection(int $col = null): string {
 			if (!$col) { $col = Clean::numbers($_POST['col']); }
 
 			Headers::setContentType('application/json');
@@ -119,6 +126,7 @@
 					$this->clients->get_id() 
 				]) as $data);
 
+				Headers::setHttpCode(200);
 				echo json_encode([ 
 					'return'		=>	'success',
 					'collection'	=>	[
@@ -127,6 +135,7 @@
 					]
 				]);
 			} else {
+				Headers::setHttpCode(500);
 				echo json_encode([ 'return' => 'error-change-collection-model' ]);
 			}
 		}

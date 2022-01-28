@@ -6,7 +6,7 @@
 	position: fixed;
 	z-index: 9999999;
 	text-align: center;
-	@include box-shadow;
+	@include drop-shadow-sm;
 	background: $firstColor;
 	margin-top: $padding_base * 11;
 	border: $border_size solid $borderColor;
