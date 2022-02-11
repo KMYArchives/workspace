@@ -32,18 +32,14 @@ const Collections = {
 	},
 
 	get (item) {
-		setTimeout( e => {
-			fetch(`${ Apis.core() }cloud/collections/get?slug=${ Attr.get(item, 'slug') }`).then( 
-				json => json.json() 
-			).then( callback => {
-				El.append(user_container + ' > .filter-area', `
-					<div class='filter' title='Remove filter' onclick='Collections.check_page()'>
-						${ callback.name }
-						<div class='fas fa-filter'></div>
-					</div>
-				`)
-			})
-		}, anim_time)
+		axios.get(`${ Apis.core() }cloud/collections/get?slug=${ Attr.get(item, 'slug') }`).then( callback => {
+			El.append(user_container + ' > .filter-area', `
+				<div class='filter' title='Remove filter' onclick='Collections.check_page()'>
+					${ callback.data.name }
+					<div class='fas fa-filter'></div>
+				</div>
+			`)
+		})
 	},
 
 }

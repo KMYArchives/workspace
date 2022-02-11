@@ -16,23 +16,17 @@ const GetModel = {
 	},
 
 	delete () {
-		var delete_data = new FormData()
-		delete_data.append('slug', Queries.get('i'))
-
-		fetch(`${ Apis.core() }cloud/models/delete`, {
-			method: 'POST', 
-			body: delete_data
-		}).then(
-			json => json.json()
-		).then( callback => {
-			if (callback.return == 'success') {
+		axios.post(`${ Apis.core() }cloud/models/delete`, {
+			slug: Queries.get('i'),
+		}).then( callback => {
+			if (callback.data.return == 'success') {
 				Models.list()
 				Modals.close_all()
 			} else {
-				GUI.message(code_view_message, callback.return)
+				GUI.message(code_view_message, callback.data.return)
 			}
 		}).catch( callback => {
-			GUI.message(code_view_message, callback.return)
+			GUI.message(code_view_message, callback.data.return)
 		})
 	},
 
@@ -63,9 +57,7 @@ const GetModel = {
 			}, true)
 		}
 
-		fetch(`${ Apis.core() }cloud/models/get?slug=${ Queries.get('i') }`).then( 
-			json => json.json() 
-		).then( callback => {
+		axios.get(`${ Apis.core() }cloud/models/get?slug=${ Queries.get('i') }`).then( callback => {
 			this._effects()
 
 			OptionsModel.get()
@@ -75,14 +67,14 @@ const GetModel = {
 			SendToModel.layout()
 			ModelsLinked.layout()
 
-			CodeDiagramRun.get(callback)
-			Editor.content(callback.content)
-			PropsTable.get(callback.metadata)
-			VisualMode.fields(callback.colunms)
-			El.text(header_code + ' > .label', callback.name)
+			CodeDiagramRun.get(callback.data)
+			Editor.content(callback.data.content)
+			PropsTable.get(callback.data.metadata)
+			VisualMode.fields(callback.data.colunms)
+			El.text(header_code + ' > .label', callback.data.name)
 
-			FavModels.check(callback)
 			Modals.show(code_view_modal)
+			FavModels.check(callback.data)
 		})
 	},
 

@@ -29,6 +29,9 @@
 		}
 	}
 
+	// System
+	$core			=	new Core;
+
 	// Account
 	$login			=	new Login;
 	$stats			=	new Stats;

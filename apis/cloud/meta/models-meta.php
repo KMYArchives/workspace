@@ -1,11 +1,6 @@
 <?php
 
 	switch ($urlE[4]) {
-		case 'delete':
-			Request::post([ 'slug' ]);
-			$models_meta->delete();
-			break;
-
 		case 'download':
 			Request::get([ 'slug' ]);
 			$models_meta->download();

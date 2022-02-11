@@ -7,10 +7,8 @@ const AccountData = {
 	},
 
 	request_details () {
-		fetch(`${ Apis.core() }account/details`).then( 
-			json => json.json() 
-		).then( callback => {
-			this.get_data(callback)
+		axios.get(`${ Apis.core() }account/details`).then( callback => {
+			this.get_data(callback.data)
 		})
 	},
 

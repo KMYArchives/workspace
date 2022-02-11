@@ -140,4 +140,13 @@
 			}
 		}
 
+		public function get_data(int $item_id, string $field, string $owner = null): string {
+			foreach ($this->db->query("SELECT * FROM ws_models WHERE id = ? AND username = ?", [
+				$item_id, 
+				$this->clients->get_id(),
+			]) as $data);
+
+			return $data[$field];
+		}
+
 	}

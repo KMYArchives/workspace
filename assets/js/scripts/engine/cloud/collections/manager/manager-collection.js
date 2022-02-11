@@ -1,7 +1,7 @@
 const ManagerCollection = {
 
 	modal () {
-		El.append(collection_modal)
+		El.empty(collection_modal)
 		El.append(collection_modal, `
 			<div class='title'>
 				<div class='label'></div>
@@ -43,13 +43,14 @@ const ManagerCollection = {
 	edit_modal (slug) {
 		Storage.save('col-slug', slug)
 
-		fetch(`${ Apis.core() }cloud/collections/get?slug=${ Storage.get('col-slug') }`).then( 
-			json => json.json() 
-		).then( callback => {
+		axios({
+			method: 'get',
+			url: `${ Apis.core() }cloud/collections/get?slug=${ Storage.get('col-slug') }`,
+		}).then( callback => {
 			El.text('#col-submit', 'Save')
-			El.value('#col-name', callback.name)
-			El.value('#col-privacy', callback.privacy)
-			El.value('#col-collation', callback.collation)
+			El.value('#col-name', callback.data.name)
+			El.value('#col-privacy', callback.data.privacy)
+			El.value('#col-collation', callback.data.collation)
 
 			El.text(collection_modal + ' > .title > .label', 'Edit collection')
 			Attr.set(collection_modal + ' > .body > .btn', 'onclick', 'ManagerCollectionPost.edit()')
@@ -58,14 +59,13 @@ const ManagerCollection = {
 	},
 
 	list_collations () {
-		fetch(
-			Apis.npoint('eaefe2d125e52b56f863')
-		).then(
-			json => json.json()
-		).then(callback => {
+		axios({
+			method: 'get',
+			url: Apis.npoint('eaefe2d125e52b56f863'),
+		}).then( callback => {
 			El.empty('#col-collation')
 
-			_.forEach(callback, item => {
+			_.forEach(callback.data, item => {
 				El.append('#col-collation', `
 					<option value='${ item }'>
 						${ item }

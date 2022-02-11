@@ -4,19 +4,17 @@ const OptionsModel = {
 		this.layout()
 		El.remove(options_model + ' > #model-privacy > .fas')
 
-		fetch(`${ Apis.core() }cloud/models/meta/get-options?slug=${ Queries.get('i') }`).then( 
-			json => json.json() 
-		).then( callback => {
-			StatusModel.privacy(callback.privacy)
-			StatusModel.collection(callback.collection)
+		axios.get(`${ Apis.core() }cloud/models/meta/get-options?slug=${ Queries.get('i') }`).then( callback => {
+			StatusModel.privacy(callback.data.privacy)
+			StatusModel.collection(callback.data.collection)
 
-			if (callback.privacy == 'public') {
+			if (callback.data.privacy == 'public') {
 				El.append(options_model + ' > #model-privacy', `
 					<div class='fas fa-check'></div>
 				`)
 			}
 
-			ListCollectionsModel.list(callback.collection.id)
+			ListCollectionsModel.list(callback.data.collection.id)
 		})
 	},
 
@@ -42,9 +40,9 @@ const OptionsModel = {
 
 		if (El.is_visible(options_model)) {
 			El.hide(options_model)
-		} else [
+		} else {
 			El.show(options_model)
-		]
+		}
 	},
 	
 }

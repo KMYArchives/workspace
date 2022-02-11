@@ -25,10 +25,6 @@ const GetModelModal = {
 							<div class='fas fa-book-open'></div>
 						</div>
 
-						<div class='item icon' id='code-notes-model' onclick='CodeNotes.toggle()' title='Code Notes'>
-							<div class='fas fa-sticky-note'></div>
-						</div>
-
 						<div class='item icon' id='download-model' onclick='GetModel.download()' title='Download'>
 							<div class='fas fa-download'></div>
 						</div>

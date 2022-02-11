@@ -77,6 +77,12 @@
 				'colunms'			=>	File::read(Values::$assets['models']['json'] . $data['json_file'], [
 					'json_decode'	=>	true
 				]),
+
+				'owner'				=>	[
+					'name'			=>	$this->clients->get_data($data['username'], 'name'),
+					'username'		=>	$this->clients->get_data($data['username'], 'username'),
+					'avatar'		=>	$this->clients->get_data($data['username'], 'gravatar_link'),
+				]
 			]);
 		}
 

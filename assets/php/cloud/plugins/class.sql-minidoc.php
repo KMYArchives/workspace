@@ -6,6 +6,7 @@
 
 		private function term(): string {
 			$term			=	$_GET['term'];
+			
 			$pattern		=	match($_GET['pattern']) {
 				'like'		=>	"= '$term'",
 				'%like'		=>	"LIKE '%$term'",

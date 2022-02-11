@@ -7,8 +7,13 @@
 			break;
 
 		case 'list':
-			Request::protect([ 'term', 'filter' ]);
+			Request::protect([ 'filter' ]);
 			$notifications->list();
+			break;
+
+		case 'delete':
+			Request::post([ 'slug' ]);
+			$notifications->delete();
 			break;
 
 		case 'update':

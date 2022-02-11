@@ -9,19 +9,17 @@ const LoginVerify = {
 
 		if (Find.search(URL.get_url_base(), 'localhost')) {
 			url = Find.replace_all(
-				url, 'workspace', 'website'
+				url, 'workspace', 'colisoft'
 			)
 		}
 
-		if (URL.has('i')) { url = `${ url }&i=${ Queries.get('i') }` }
+		if (Queries.has('i')) { url = `${ url }&i=${ Queries.get('i') }` }
 		return `${ url }&w=true`
 	},
 
 	check_logged () {
-		fetch(`${ Apis.core() }login/check-logged`).then( 
-			json => json.json() 
-		).then( callback => {
-			if (callback.logged != true) {
+		axios.get(`${ Apis.core() }login/check-logged`).then( callback => {
+			if (callback.data.logged != true) {
 				URL.open_url(
 					this.url(), false
 				)

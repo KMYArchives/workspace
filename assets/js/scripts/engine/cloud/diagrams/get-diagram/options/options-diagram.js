@@ -4,16 +4,17 @@ const OptionsDiagram = {
 		this.layout()
 		El.remove(options_dgr + ' > #diagram-privacy > .fas')
 
-		fetch(`${ Apis.core() }cloud/diagrams/meta/get-options?slug=${ Queries.get('i') }`).then( 
-			json => json.json() 
-		).then( callback => {
-			if (callback.privacy == 'public') {
+		axios({
+			method: 'get',
+			url: `${ Apis.core() }cloud/diagrams/meta/get-options?slug=${ Queries.get('i') }`,
+		}).then( callback => {
+			if (callback.data.privacy == 'public') {
 				El.append(options_dgr + ' > #diagram-privacy', `
 					<div class='fas fa-check'></div>
 				`)
 			}
 
-			ListCollectionsDiagram.list(callback.collection.id)
+			ListCollectionsDiagram.list(callback.data.collection.id)
 		})
 	},
 

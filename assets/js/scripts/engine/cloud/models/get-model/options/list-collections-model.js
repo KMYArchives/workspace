@@ -13,34 +13,27 @@ const ListCollectionsModel = {
 	list (col_id) {
 		El.empty(options_model + ' > .collection > .list')
 
-		var loaded = false
-		var Interval = setInterval( e => {
-			if (loaded != true) {
-				fetch(`${ Apis.core() }cloud/collections/list`).then( 
-					json => json.json() 
-				).then( callback => {
-					if (callback.total > 0) {
-						El.show('#remove-col')
+		axios.get(`${ Apis.core() }cloud/collections/list`).then( callback => {
+			if (callback.data.total > 0) {
+				El.show('#remove-col')
 
-						_.forEach(_.orderBy(callback.list, 'name', 'asc'), item => {
-							this.item_layout(item, col_id)
-						})
-					} else {
-						El.hide('#remove-col')
-
-						El.append(options_model + ' > .collection > .list', `
-							<div class='none'>
-								You no have collections
-							</div>
-						`)
+				_.forEach(
+					_.orderBy(
+						callback.data.list, 'name', 'asc'
+					), item => {
+						this.item_layout(item, col_id)
 					}
-				})
-
-				loaded = true
+				)
 			} else {
-				clearInterval(Interval)
+				El.hide('#remove-col')
+
+				El.append(options_model + ' > .collection > .list', `
+					<div class='none'>
+						You no have collections
+					</div>
+				`)
 			}
-		}, anim_time)
+		})
 	},
 
 	item_layout (item, col_id) {

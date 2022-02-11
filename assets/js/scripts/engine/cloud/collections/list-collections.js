@@ -49,31 +49,26 @@ const ListCollections = {
 		Collections.layout()
 		ManagerCollection.modal()
 		El.empty(collections_box + ' > .list')
+		
+		axios.get(`${ Apis.core() }cloud/collections/list${ this.privacy(privacy) }`).then( callback => {
+			El.text(collections_box + ' > .header > .total', `Total: ${ callback.data.total } item's`)
 
-		var loaded = false
-		var Interval = setInterval( e => {
-			if (loaded != true) {
-				fetch(`${ Apis.core() }cloud/collections/list${ this.privacy(privacy) }`).then( 
-					json => json.json() 
-				).then( callback => {
-					El.text(collections_box + ' > .header > .total', `Total: ${ callback.total } item's`)
-
-					if (callback.total > 0) {
-						_.forEach(_.orderBy(callback.list, 'name', 'asc'), item => { this.item_layout(item) })
-					} else {
-						El.append(collections_box + ' > .list', `
-							<div class='none'>
-								You no have collections
-							</div>
-						`)
+			if (callback.data.total > 0) {
+				_.forEach(
+					_.orderBy(
+						callback.data.list, 'name', 'asc'
+					), item => {
+						this.item_layout(item)
 					}
-				})
-
-				loaded = true
+				)
 			} else {
-				clearInterval(Interval)
+				El.append(collections_box + ' > .list', `
+					<div class='none'>
+						You no have collections
+					</div>
+				`)
 			}
-		}, anim_time * 2)
+		})
 	},
 
 }

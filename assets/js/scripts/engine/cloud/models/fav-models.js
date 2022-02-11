@@ -3,23 +3,17 @@ const FavModels = {
 	execute () {
 		var item = Queries.get('i')
 
-		var fav_data = new FormData()
-		fav_data.append('slug', item)
-
 		Queries.add({
 			filter: 'favorites',
 			i: item,
 		})
 
-		fetch(`${ Apis.core() }cloud/models/meta/favorite`, {
-			method: 'POST', 
-			body: fav_data
-		}).then(
-			json => json.json()
-		).then( callback => {
-			if (callback.return == 'success') {
+		axios.post(`${ Apis.core() }cloud/models/meta/favorite`, {
+			slug: item,
+		}).then( callback => {
+			if (callback.data.return == 'success') {
 				this.list_table()
-				this.check(callback)
+				this.check(callback.data)
 			}
 		})
 	},
@@ -35,20 +29,20 @@ const FavModels = {
 		}
 	
 		ListModels.table_layout()
-		fetch(`${ Apis.core() }cloud/models/list?filter=favorites`).then( 
-			json => json.json() 
-		).then( callback => {
-			El.text(total_items, `Total: ${ callback.total } item's`)
-			
-			_.forEach(
-				_.orderBy(
-					callback.list, 'product', 'asc'
-				), model => {
-					ListModels.row_layout(model)
-				}
-			)
-		})
 		
+		setTimeout( e => {
+			axios.get(`${ Apis.core() }cloud/models/list?filter=favorites`).then( callback => {
+				El.text(total_items, `Total: ${ callback.data.total } item's`)
+				
+				_.forEach(
+					_.orderBy(
+						callback.data.list, 'product', 'asc'
+					), model => {
+						ListModels.row_layout(model)
+					}
+				)
+			})
+		}, anim_time * 2)
 	},
 
 	check (callback) {

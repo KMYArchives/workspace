@@ -11,7 +11,7 @@ const SDMMisc = {
 	_clear () {
 		El.empty(
 			sdm_get + ' > .header',
-			sdm_get + ' > .get-def',
+			sdm_get + ' > .get-def'
 		)
 	},
 

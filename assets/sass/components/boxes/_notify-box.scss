@@ -1,0 +1,128 @@
+.notify-box{
+	top: 0;
+	right: 0;
+	width: 25em;
+	display: none;
+	position: fixed;
+	z-index: 999999999;
+	@include drop-shadow-sm;
+	background: $firstColor;
+	border-right: 0 !important;
+	margin-top: $padding_base * 3;
+	border: $border_size solid $borderColor;
+
+	.list{
+		overflow: auto;
+		max-height: 20em;
+		font-size: $smallFont + .05;
+		
+		.none{
+			opacity: .8;
+			display: block;
+			text-align: center;
+			margin: $padding_base;
+			background: $secondColor;
+			height: $padding_base * 3;
+			line-height: $padding_base * 3;
+		}
+
+		.item{
+			display: block;
+			color: inherit;
+			cursor: pointer;
+			table-layout: fixed;
+			text-decoration: none;
+			background: $firstColor;
+			height: $padding_base * 7.8;
+			border-bottom: $border_size solid $borderColor;
+
+			.btn{
+				width: 50%;
+				float: left;
+				cursor: pointer;
+				text-align: center;
+				box-sizing: border-box;
+				font-size: $smallFont + .05;
+				line-height: $padding_base * 2.5;
+				border-right: $border_size solid $borderColor;
+
+				@include hover($blueColor);
+				&:last-child{ border-right: 0; }
+			}
+
+			.text{
+				display: block;
+				cursor: pointer;
+				font-size: $smallFont + .1;
+				line-height: $padding_base * 3.8;
+				border-bottom: $border_size solid $borderColor;
+			}
+
+			.header{
+				font-size: $smallFont + .05;
+				height: $padding_base * 2.5;
+				line-height: $padding_base * 2.5;
+
+				.info{
+					.name{
+						float: left;
+						outline: none;
+						text-decoration: none;
+						padding-left: $padding2;
+						&:hover, &:focus{ text-decoration: underline; }
+					}
+
+					.time{
+						float: right;
+						padding-right: $padding_base;
+					}
+				}
+
+				.avatar{
+					float: left;
+					margin: $padding2;
+					width: $padding4 * 2;
+					height: $padding4 * 2;
+					@include border-radius(50%);
+				}
+			}
+
+			@include hover($secondColor);
+			&:last-child{ border-bottom: 0; }
+		}
+
+		@include scrollbar;
+	}
+
+	.header{
+		display: block;
+		font-size: $smallFont;
+		height: $padding_base * 3;
+		line-height: $padding_base * 3;
+		border-bottom: $border_size solid $borderColor;
+
+		.right{
+			right: 0;
+			line-height: $header_size;
+
+			.far, .fas{
+				float: left;
+				cursor: pointer;
+				text-align: center;
+				width: $padding_base * 3;
+				line-height: $padding_base * 3;
+				@include hover($blueColor);
+			}
+		}
+
+		.label{
+			float: left;
+			padding-left: $padding_base;
+		}
+
+		.total{
+			float: right;
+			padding-right: $padding_base;
+		}
+	}
+}

@@ -66,11 +66,11 @@ const Navbar = {
 			actived_class
 
 		_.forEach(items, item => {
-			item_id = item.id.replace('#', '')
+			item_id = Find.replace(item.id, '#', '')
 			if (append != true) { this.clean() }
 
 			if (item.click != undefined) {
-				click =  `onclick="${
+				click = `onclick="${
 					item.click
 				}"`
 			}

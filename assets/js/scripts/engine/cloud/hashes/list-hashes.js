@@ -57,21 +57,17 @@ const ListHashes = {
 		Classes.remove('#list-cols', act_class)
 		El.remove(user_container + ' > .filter-area > .filter')
 
-		var loaded = false
-		var Interval = setInterval( e => {
-			if (loaded != true) {
-				fetch(`${ Apis.core() }cloud/hashes/list${ this.params(filter, col_id) }`).then( 
-					json => json.json() 
-				).then( callback => {
-					El.text(total_items, `Total: ${ callback.total } item's`)
-					_.forEach(_.orderBy(callback.list, 'name', 'asc'), hash => { this.row_layout(hash) })
-				})
+		axios.get(`${ Apis.core() }cloud/hashes/list${ this.params(filter, col_id) }`).then( callback => {
+			El.text(total_items, `Total: ${ callback.data.total } item's`)
 
-				loaded = true
-			} else {
-				clearInterval(Interval)
-			}
-		}, anim_time)
+			_.forEach(
+				_.orderBy(
+					callback.data.list, 'name', 'asc'
+				), hash => {
+					this.row_layout(hash)
+				}
+			)
+		})
 	},
 
 }

@@ -1,6 +1,10 @@
 <?php
 
 	switch ($urlE[1]) {
+		case 'core':
+			include_once 'system/core.php';
+			break;
+
 		case 'sync':
 			include_once 'system/sync.php';
 			break;

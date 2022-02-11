@@ -21,20 +21,24 @@
 			'sql_max'		=>	50,
 			'render'		=>	'yuki/',
 			'pages'			=>	'pages/',
+			'files'			=>	'files/',
+			'assets'		=>	'assets/',
 			'sync'			=>	'uploads/sync/',
 			'share'			=>	'uploads/share/',
 			'hashes'		=>	'uploads/hashes/',
-			'core'			=>	'https://localhost/website/',
+			'core'			=>	'https://localhost/colisoft/',
 			'link'			=>	'https://localhost/workspace/',
 			'models'		=>	[
 				'sql'		=>	'uploads/models/sql/', 
-				'json'		=>	'uploads/models/json/' 
+				'json'		=>	'uploads/models/json/'
 			],
 		];
 
-		static $images	=	[
-			'logo'		=>	'https://i.imgur.com/h9yIPc8.png',	
-			'favicon'	=>	'https://i.imgur.com/tV8qJH8.png',
+		static $images			=	[
+			'logo'				=>	'https://i.imgur.com/h9yIPc8.png',
+			'favicon'			=>	'https://i.imgur.com/tV8qJH8.png',
+			'logo_company'		=>	"https://i.imgur.com/CICxg8O.png",
+			'favicon_company'	=>	"https://i.imgur.com/epW8oR6.png",
 		];
 
 	}

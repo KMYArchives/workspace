@@ -10,7 +10,6 @@ const SDMLayout = {
 			<div class='footer'>
 				<div class='list-link' onclick="SDMList.show()">${ SDM.name }</div>
 				<div class='fas fa-copy' title='Copy definition' onclick="SDMMisc._copy()"></div>
-				<div class='far fa-bookmark' title='Save bookmark' onclick="SDMBookmarks.create()"></div>
 			</div>
 		`)
 	},
@@ -20,7 +19,6 @@ const SDMLayout = {
 		El.append(sdm_list, `
 			<div class='nav-right'>
 				<div class='fas fa-home actived'></div>
-				<div class='fas fa-bookmark'></div>
 				<div class='fas fa-sort-amount-down-alt'></div>
 			</div>
 

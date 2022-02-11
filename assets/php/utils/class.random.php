@@ -18,7 +18,7 @@
 			);
 		}
 
-		public static function slug(array $size): string {
+		public static function slug(int|array $size): string {
 			$string		=	'0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
 			if (is_array($size)) {

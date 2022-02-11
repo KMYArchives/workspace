@@ -1,19 +1,17 @@
 const FavHashes = {
 
 	execute () {
-		var fav_data = new FormData()
-		fav_data.append('slug', Queries.get('i'))
-
-		fetch(`${ Apis.core() }cloud/hashes/favorite`, {
-			method: 'POST', 
-			body: fav_data
-		}).then(
-			json => json.json()
-		).then( callback => {
-			if (callback.return == 'success') {
+		axios.post(`${ Apis.core() }cloud/hashes/favorite`, {
+			slug: Queries.get('i'),
+		}).then( callback => {
+			if (callback.data.return == 'success') {
 				this.list_table()
-				this.check(callback)
+				this.check(callback.data)
+			} else {
+				console.log(callback.data)
 			}
+		}).catch( callback => {
+			console.log(callback.data)
 		})
 	},
 	
@@ -22,14 +20,16 @@ const FavHashes = {
 		Classes.remove([ '#list-privated', '#list-public' ], act_class)
 	
 		ListHashes.table_layout()
-		fetch(`${ Apis.core() }cloud/hashes/list?filter=favorites`).then( 
-			json => json.json() 
-		).then( callback => {
-			El.text(total_items, `Total: ${ callback.total } item's`)
+		axios.get(`${ Apis.core() }cloud/hashes/list?filter=favorites`).then( callback => {
+			El.text(total_items, `Total: ${ callback.data.total } item's`)
 
-			_.forEach(_.orderBy(callback.list, 'product', 'asc'), hash => {
-				Models.row_layout(hash)
-			})
+			_.forEach(
+				_.orderBy(
+					callback.data.list, 'product', 'asc'
+				), hash => {
+					Hashes.row_layout(hash)
+				}
+			)
 		})
 		
 	},
