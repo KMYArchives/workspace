@@ -31,7 +31,7 @@
 		padding-bottom: $border_size / 2;
 	}
 
-	.fab, .far, .fas{
+	@include icons{
 		float: right;
 		cursor: pointer;
 		margin-right: $padding_base;

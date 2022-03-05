@@ -27,7 +27,8 @@ gulp.task('sass-compiler', e => {
 	return gulp.src('assets/sass/**/*.{scss, sass}')
 		.pipe(
 			sass.sync({
-				outputStyle: 'compressed'
+				outputStyle: 'compressed',
+				comments: false,
 			}).on('error', sass.logError)
 		)
 		.pipe(gulp.dest('assets/css'))

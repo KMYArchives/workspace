@@ -20,10 +20,10 @@ const Layout = {
 	modals () {
 		El.append('body', `
 			<div class='mask'></div>
-			<div class='code-mdl modal' id='${ Find.replace(code_view_modal, '#', '') }'></div>
-			<div class='diagram-mdl modal' id='${ Find.replace(diagram_modal, '#', '') }'></div>
-			<div class='confirm-mdl modal' id='${ Find.replace(confirm_modal, '#', '') }'></div>
-			<div class='collection-mdl modal' id='${ Find.replace(collection_modal, '#', '') }'></div>
+			<div class='code-mdl ${ Find.replace(modal, '.', '') }' id='${ Find.replace(code_view_modal, '#', '') }'></div>
+			<div class='diagram-mdl ${ Find.replace(modal, '.', '') }' id='${ Find.replace(diagram_modal, '#', '') }'></div>
+			<div class='confirm-mdl ${ Find.replace(modal, '.', '') }' id='${ Find.replace(confirm_modal, '#', '') }'></div>
+			<div class='collection-mdl ${ Find.replace(modal, '.', '') }' id='${ Find.replace(collection_modal, '#', '') }'></div>
 		`)
 	},
 
@@ -38,7 +38,7 @@ const Layout = {
 			{
 				title: 'Hashes',
 				id: 'tab-hashes',
-				icon: 'fas fa-fingerprint',
+				icon: 'fa-solid fa-fingerprint',
 				click: "Hashes.page_load()",
 			},
 			{

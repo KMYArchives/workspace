@@ -23,7 +23,7 @@
 			font-size: $smallFont + .05;
 			padding-right: $padding_base;
 
-			.far, .fas{
+			@include icons{
 				float: left;
 				text-align: center;
 				width: $header_size;
@@ -39,7 +39,7 @@
 			font-size: $smallFont + .05;
 			padding-right: $padding_base;
 
-			.far, .fas{
+			@include icons{
 				float: left;
 				text-align: center;
 				width: $header_size;

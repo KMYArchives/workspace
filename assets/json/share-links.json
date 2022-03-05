@@ -1,0 +1,26 @@
+[
+	{
+		"name": "Facebook",
+		"url": "https://www.facebook.com/sharer.php?u=${url}",
+		"icon": "fa-brands fa-facebook",
+		"type": [ "diagrams", "models" ]
+	},
+	{
+		"name": "Twitter",
+		"url": "https://twitter.com/intent/tweet?url=${url}",
+		"icon": "fa-brands fa-twitter",
+		"type": [ "diagrams", "models" ]
+	},
+	{
+		"name": "Reddit",
+		"url": "https://www.reddit.com/submit?url=${url}",
+		"icon": "fa-brands fa-reddit",
+		"type": [ "diagrams", "models" ]
+	},
+	{
+		"name": "Pinterest",
+		"url": "https://pinterest.com/pin/create/link?media=${url}",
+		"icon": "fa-brands fa-pinterest",
+		"type": [ "diagrams" ]
+	}
+]

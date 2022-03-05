@@ -10,7 +10,7 @@
 		right: 0;
 		position: fixed;
 
-		.far, .fas{
+		@include icons{
 			float: left;
 			cursor: pointer;
 			text-align: center;

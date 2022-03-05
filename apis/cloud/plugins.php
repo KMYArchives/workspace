@@ -1,6 +1,10 @@
 <?php
 
 	switch ($urlE[3]) {
+		case 'scraper':
+			$scraper->execute();
+			break;
+
 		case 'sql-minidoc':
 			include_once 'plugins/sql-minidoc.php';
 			break;
@@ -14,8 +18,6 @@
 			break;
 		
 		default:
-			Headers::setHttpCode(404);
-			Headers::setContentType('application/json');
-			echo json_encode([ 'error' => 'Argument invalid...' ]);
+			Callback::json(404, [ 'error' => 'Argument invalid...' ]);
 			break;
 	}

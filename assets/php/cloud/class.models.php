@@ -59,9 +59,7 @@
 				$this->clients->get_id($_GET['username'])
 			]) as $data);
 
-			Headers::setHttpCode(200);
-			Headers::setContentType('application/json');
-			echo json_encode([
+			Callback::json(200, [
 				'name'				=>	$data['name'],
 				'driver'			=>	$data['driver'],
 				'added_in'			=>	$data['added_in'],
@@ -77,6 +75,21 @@
 				'colunms'			=>	File::read(Values::$assets['models']['json'] . $data['json_file'], [
 					'json_decode'	=>	true
 				]),
+
+				'files_size'		=>	[
+					'sql'			=>	FileProperties::size(Values::$assets['models']['sql'] . $data['sql_file']),
+					'json'			=>	FileProperties::size(Values::$assets['models']['json'] . $data['json_file']),
+				],
+
+				'hashes'			=>	[
+					'sql'			=>	FileProperties::hashes(Values::$assets['models']['sql'] . $data['sql_file'], [
+						'md5', 'sha1', 'sha256',
+					]),
+
+					'json'			=>	FileProperties::hashes(Values::$assets['models']['json'] . $data['json_file'], [
+						'md5', 'sha1', 'sha256',
+					]),
+				],
 
 				'owner'				=>	[
 					'name'			=>	$this->clients->get_data($data['username'], 'name'),
@@ -110,9 +123,7 @@
 				];
 			}
 
-			Headers::setHttpCode(200);
-			Headers::setContentType('application/json');
-			echo json_encode([
+			Callback::json(200, [
 				'list'	=>	$list,
 				'total'	=>	$this->db->query("SELECT COUNT(*) FROM ws_models WHERE username = ? $where", [
 					$username
@@ -136,28 +147,22 @@
 
 						$this->clients->get_id($_POST['username']),
 					])) {
-						Headers::setHttpCode(200);
-						echo json_encode([
+						Callback::json(200, [
 							'slug'		=>	$slug,
 							'return'	=>	'success',
 						]);
 					} else {
-						Headers::setHttpCode(500);
-						echo json_encode([ 'return' => 'error-db-create-model' ]);
+						Callback::json(500, [ 'return' => 'error-db-create-model' ]);
 					}
 				} else {
-					Headers::setHttpCode(500);
-					echo json_encode([ 'return' => 'error-file-create-json' ]);
+					Callback::json(500, [ 'return' => 'error-file-create-json' ]);
 				}
 			} else {
-				Headers::setHttpCode(500);
-				echo json_encode([ 'return' => 'error-file-create-sql' ]);
+				Callback::json(500, [ 'return' => 'error-file-create-sql' ]);
 			}
 		}
 
 		public function delete(): mixed {
-			Headers::setContentType('application/json');
-
 			foreach ($this->db->query("SELECT sql_file, json_file, username FROM ws_models WHERE slug = ? AND username = ?", [
 				Clean::slug($_POST['slug']), 
 				$this->clients->get_id($_POST['username']),
@@ -168,12 +173,9 @@
 				$data['username']
 			])) {
 				$this->delete_files($data);
-				
-				Headers::setHttpCode(200);
-				echo json_encode([ 'return' => 'success' ]);
+				Callback::json(200, [ 'return' => 'success' ]);
 			} else {
-				Headers::setHttpCode(500);
-				echo json_encode([ 'return' => 'error-db-unlink-model' ]);
+				Callback::json(500, [ 'return' => 'error-db-unlink-model' ]);
 			}
 		}
 

@@ -1,5 +1,4 @@
-var editor, 
-	menu_items
+var editor
 
 var mask = '.mask',
 	modal = '.modal',
@@ -51,6 +50,7 @@ var	sdm_get = code_view_modal + ' > #ise-get',
 	send_to_box = code_view_modal + ' > #send-to-box',
 	toolbar_code = code_view_modal + ' > #toolbar-snp',
 	properties = code_view_modal + ' > #properties-snp',
+	link_scraper = code_view_modal + ' > #link-scraper',
 	code_diagram = code_view_modal + ' > #code-diagram',
 	table_render_visual = visual_mode + ' > #tbl-render',
 	code_view_message = toolbar_code + ' > #cvm-message',

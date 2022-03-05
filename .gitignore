@@ -22,6 +22,8 @@ node_modules/
 *lock.json
 
 # Files
+*.DS_Store
+blackweb.txt
 [Tt]es[Tt].php
 [Tt]es[Tt].jpg
 [Tt]es[Tt].png

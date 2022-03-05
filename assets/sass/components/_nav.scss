@@ -41,8 +41,8 @@
 		text-decoration: none;
 		line-height: $header_size;
 		font-size: $smallFont + .05;
-
-		.fab, .far, .fas{
+		
+		@include icons{
 			text-align: center;
 			width: $header_size;
 			line-height: $header_size;

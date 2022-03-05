@@ -6,7 +6,7 @@ const Contacts = {
 				<div class='title'>
 					<div class='label'>Contact's</div>
 
-					<div class='fas fa-plus'></div>
+					<div class='fa-solid fa-plus'></div>
 					<div class='total'>0 item's</div>
 				</div>
 

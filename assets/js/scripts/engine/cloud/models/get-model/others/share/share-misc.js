@@ -24,7 +24,6 @@ const ShareMisc = {
 
 	social_media (social) {
 		switch (social) {
-			case 'vk': return `https://vk.com/share.php?url=${ this.link_direct() }`
 			case 'reddit': return `https://www.reddit.com/submit?url=${ this.link_direct() }`
 			case 'twitter': return `https://twitter.com/intent/tweet?url=${ this.link_direct() }`
 			case 'facebook': return `https://www.facebook.com/sharer.php?u=${ this.link_direct() }`

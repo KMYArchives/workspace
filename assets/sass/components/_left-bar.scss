@@ -30,7 +30,7 @@
 		height: $header_size - $padding2;
 		line-height: $header_size - $padding2;
 
-		.far, .fas{
+		@include icons{
 			float: left;
 			text-align: center;
 			width: $header_size;

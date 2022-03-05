@@ -117,7 +117,7 @@
 				.value{ float: right; }
 				
 				&:last-child{ border-bottom: 0 !important; }
-				.fas, .far, .fab{ @include hover(inherit, $blueColor); }
+				@include icons{ @include hover(inherit, $blueColor); }
 			}
 		}
 

@@ -9,7 +9,7 @@ const LoginVerify = {
 
 		if (Find.search(URL.get_url_base(), 'localhost')) {
 			url = Find.replace_all(
-				url, 'workspace', 'colisoft'
+				url, 'workspace', 'website'
 			)
 		}
 
@@ -20,9 +20,7 @@ const LoginVerify = {
 	check_logged () {
 		axios.get(`${ Apis.core() }login/check-logged`).then( callback => {
 			if (callback.data.logged != true) {
-				URL.open_url(
-					this.url(), false
-				)
+				console.log('not logged')
 			}
 		})
 	},

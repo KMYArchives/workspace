@@ -16,7 +16,7 @@
 		@include border-radius($padding3);
 		border: $border_size solid inherit;
 
-		.far, .fas{
+		@include icons{
 			float: left;
 			text-align: center;
 			width: $padding_base * 3;

@@ -44,7 +44,7 @@
 			&:hover, &:focus{ text-decoration: underline; }
 		}
 
-		.far, .fas{
+		@include icons{
 			float: right;
 			cursor: pointer;
 			margin-right: $padding_base;

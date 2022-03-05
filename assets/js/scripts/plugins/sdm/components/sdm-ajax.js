@@ -1,7 +1,7 @@
 const SDMAjax = {
 
 	get (text) {
-		if (text) {
+		if (text && !Validation.url(text)) {
 			SDMGet.clear()
 			
 			axios.get(`${ Apis.core() }cloud/plugins/sql-minidoc/get?slug=${ text }`).then( callback => {

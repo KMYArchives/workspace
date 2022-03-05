@@ -1,7 +1,7 @@
 .sdm-list{
 	top: 0;
 	right: 0;
-	width: 22em;
+	width: 18em;
 	display: none;
 	z-index: 99999999;
 	position: absolute;
@@ -18,7 +18,6 @@
 		overflow: auto;
 		position: relative;
 		font-size: $smallFont;
-		margin-right: $padding_base * 3.8;
 		border-top: $border_size solid $borderColor;
 
 		.item{
@@ -47,7 +46,7 @@
 			padding-left: $padding_base;
 		}
 		
-		.far, .fas{
+		@include icons{
 			float: right;
 			cursor: pointer;
 			margin-right: $padding_base;
@@ -56,33 +55,8 @@
 		}
 	}
 
-	.nav-right{
-		right: 0;
-		height: 15.6em;
-		position: absolute;
-		background: $firstColor;
-		width: $padding_base * 3;
-		margin-top: $padding_base * 2.4;
-		border-top: $border_size solid $borderColor;
-		border-left: $border_size solid $borderColor;
-
-		.far, .fas{
-			width: 100%;
-			display: block;
-			cursor: pointer;
-			text-align: center;
-			font-size: $smallFont;
-			margin-right: $padding_base;
-			line-height: $padding_base * 3.5;
-			border-bottom: $border_size solid $borderColor;
-			@include hover($secondColor);
-		}
-
-		.actived{ background: $secondColor; }
-	}
-
 	.search-area{
-		width: 76%;
+		width: 90%;
 		border: none;
 		outline: none;
 		color: inherit;
@@ -91,7 +65,6 @@
 		font-size: $smallFont;
 		background: $firstColor;
 		line-height: $padding_base * 2.5;
-		margin-right: $padding_base * 3.2;
 		border-top: $border_size solid $borderColor;
 
 		@include placeholder;

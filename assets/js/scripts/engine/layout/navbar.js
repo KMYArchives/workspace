@@ -85,7 +85,7 @@ const Navbar = {
 				<a class='btn-item ${ item_id + ' ' + actived_class }' id='${ item_id }' ${ click }'>
 					<div class='${ item.icon }'></div>
 
-					<span class='hovercard animate__animated animate__slideInLeft animate__faster'>
+					<span class='hovercard animate__animated animate__slideInLeft animate__fa-solidter'>
 						<div class='text'>${ item.title }</div>
 					</span>
 				</a>

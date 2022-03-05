@@ -20,7 +20,6 @@
 // Model's
 @import 'elements/plugins/models/visual-mode';
 @import 'elements/plugins/models/open-models';
-@import 'elements/plugins/models/link-preview';
 @import 'elements/plugins/models/properties-menu';
 @import 'elements/plugins/models/diagram/code-diagram';
 @import 'elements/plugins/models/diagram/model-diagram';
@@ -28,3 +27,6 @@
 // SQL miniDoc
 @import 'elements/plugins/models/sql-minidoc/sdm-get';
 @import 'elements/plugins/models/sql-minidoc/sdm-list';
+
+// Link Scraper
+@import 'elements/plugins/models/link-scraper';

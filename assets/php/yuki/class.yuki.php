@@ -88,6 +88,32 @@
 			}
 		}
 
+		public function json($input) {
+			header('Content-type: application/json');
+
+			echo file_get_contents(
+				$this->configs()['paths']['json'] . $input . '.json'
+			);
+		}
+
+		public function image($input) {
+			$ext	=	end(
+				explode(
+					'.', $input
+				)
+			);
+
+			$size	=	filesize(
+				$this->configs()['paths']['image'] . $input
+			);
+
+			if (is_dir($this->configs()['paths']['image'])) {
+				header("Content-Type: image/$ext");
+				header("Content-Length: " . $size);
+				readfile($this->configs()['paths']['image'] . $input);
+			}
+		}
+
 		public function __construct() {
 			$this->js	=	new Minify\JS;
 			$this->css	=	new Minify\CSS;

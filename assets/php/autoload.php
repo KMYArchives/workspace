@@ -56,4 +56,5 @@
 	$diagrams_meta	=	new DiagramsMeta;
 
 	// Plugins
+	$scraper		=	new Scraper;
 	$sql_minidoc	=	new SqlMiniDoc;

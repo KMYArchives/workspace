@@ -3,7 +3,8 @@
 	"paths": {
 		"css": "assets/css/",
 		"js": "assets/js/",
-		"bundle": "bundle/"
+		"bundle": "bundle/",
+		"json": "assets/json/"
 	},
 	"options": {
 		"level": 9,

@@ -9,7 +9,7 @@ const Notifications = {
 					<div class='label'>Notification's</div>
 
 					<div class='right'>
-						<div class='fas fa-check-circle'></div>
+						<div class='fa-solid fa-check-circle'></div>
 					</div>
 
 					<div class='total'>0 item's</div>

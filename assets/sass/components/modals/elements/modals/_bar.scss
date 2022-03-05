@@ -16,7 +16,7 @@
 		border-right: $border_size solid $borderColor;
 
 		@include hover($firstColor);
-		.fas, .far, .fab{ width: $header_size; }
+		@include icons{ width: $header_size; }
 	}
 
 	.item{

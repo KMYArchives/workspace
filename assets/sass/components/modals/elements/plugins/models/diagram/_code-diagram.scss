@@ -2,11 +2,11 @@
 	right: 0;
 	display: none;
 	overflow: auto;
-	height: 27.23em;
+	height: 27.22em;
 	z-index: 99999999;
 	position: absolute;
+	box-sizing: border-box;
 	background: $firstColor;
-	border-right: 0 !important;
 	margin-bottom: $border_size * 2;
 	border-left: $border_size solid $borderColor;
 	border-bottom: $border_size solid $borderColor;
@@ -45,7 +45,7 @@
 		font-size: $smallFont + .05;
 		border-left: $border_size solid $borderColor;
 
-		.far, .fas{
+		@include icons{
 			display: block;
 			cursor: pointer;
 			text-align: center;

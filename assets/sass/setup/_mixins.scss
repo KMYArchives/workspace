@@ -1,3 +1,17 @@
+@mixin icons{
+	.fab, 
+	.far, 
+	.fas, 
+	.fa-thin, 
+	.fa-solid, 
+	.fa-light, 
+	.fa-brands, 
+	.fa-regular, 
+	.fa-duotone{
+		@content;
+	}
+}
+
 @mixin table {
 	table{
 		width: 100%;
@@ -40,12 +54,30 @@
 	-webkit-appearance: none;
 }
 
+@mixin scrollbar {
+	&::-webkit-scrollbar {
+		position: fixed;
+		width: $padding5;
+		z-index: 9999999;
+		background: $firstColor;
+	}
+
+	&::-webkit-scrollbar-thumb { background: $borderColor; }
+}
+
 @mixin placeholder {
 	@include input-placeholder {
 		opacity: .7;
 		font-weight: 500;
 		color: $fontColor;
 	}
+}
+
+@mixin no-text-select {
+	user-select: none;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
 }
 
 @mixin input-placeholder {
@@ -64,37 +96,7 @@
 	-webkit-border-radius: $radius;
 }
 
-@mixin no-text-select($important: false) {
-	@if $important {
-		user-select: none !important;
-		-ms-user-select: none !important;
-		-moz-user-select: none !important;
-		-webkit-user-select: none !important;
-	} @else {
-		user-select: none;
-		-ms-user-select: none;
-		-moz-user-select: none;
-		-webkit-user-select: none;
-	}
-}
-
-@mixin scrollbar($bdr-top: false, $bdr-bot: false, $bdr-rig: false, $bdr-lef: true) {
-	&::-webkit-scrollbar {
-		position: fixed;
-		width: $padding5;
-		z-index: 9999999;
-		background: $firstColor;
-
-		@if $bdr-top { border-top: $border_size solid $borderColor; }
-		@if $bdr-lef { border-left: $border_size solid $borderColor; }
-		@if $bdr-rig { border-right: $border_size solid $borderColor; }
-		@if $bdr-bot { border-bottom: $border_size solid $borderColor; }
-	}
-
-	&::-webkit-scrollbar-thumb { background: $borderColor; }
-}
-
-@mixin hover($background: $secondColor, $color: inherit, $border-color: $borderColor, $transition: 1.2s) {
+@mixin hover($background: $secondColor, $color: inherit, $border-color: $borderColor) {
 	&:hover, &:focus{
 		outline: none;
 		color: $color;

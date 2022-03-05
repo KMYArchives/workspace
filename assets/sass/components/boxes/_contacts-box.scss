@@ -61,7 +61,7 @@
 			.right{
 				float: right;
 
-				.far, .fas{
+				@include icons{
 					float: left;
 					cursor: pointer;
 					text-align: center;
@@ -97,7 +97,7 @@
 			padding-right: $padding_base;
 		}
 
-		.far, .fas{
+		@include icons{
 			float: right;
 			cursor: pointer;
 			text-align: center;

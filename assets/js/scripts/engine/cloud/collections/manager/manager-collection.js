@@ -5,7 +5,7 @@ const ManagerCollection = {
 		El.append(collection_modal, `
 			<div class='title'>
 				<div class='label'></div>
-				<div class='fas fa-times' onclick='Modals.close_all()'></div>
+				<div class='fa-solid fa-times' onclick='Modals.close_all()'></div>
 			</div>
 
 			<div class='body'>
@@ -43,10 +43,7 @@ const ManagerCollection = {
 	edit_modal (slug) {
 		Storage.save('col-slug', slug)
 
-		axios({
-			method: 'get',
-			url: `${ Apis.core() }cloud/collections/get?slug=${ Storage.get('col-slug') }`,
-		}).then( callback => {
+		axios.get(`${ Apis.core() }cloud/collections/get?slug=${ Storage.get('col-slug') }`).then( callback => {
 			El.text('#col-submit', 'Save')
 			El.value('#col-name', callback.data.name)
 			El.value('#col-privacy', callback.data.privacy)
@@ -59,10 +56,9 @@ const ManagerCollection = {
 	},
 
 	list_collations () {
-		axios({
-			method: 'get',
-			url: Apis.npoint('eaefe2d125e52b56f863'),
-		}).then( callback => {
+		axios.get(
+			Apis.json('charsets')
+		).then( callback => {
 			El.empty('#col-collation')
 
 			_.forEach(callback.data, item => {

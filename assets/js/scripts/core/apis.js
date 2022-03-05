@@ -2,7 +2,7 @@ const Apis = {
 
 	core () { return `${ URL.get_url_base() }apis/` },
 
-	npoint (slug) { return `https://api.npoint.io/${ slug }` },
+	json (file) { return `${ URL.get_url_base() }yuki/json/${ file }` },
 
 	gravatar (gravatar, size = 300) { return `https://s.gravatar.com/avatar/${ gravatar }?s=${ size }` },
 

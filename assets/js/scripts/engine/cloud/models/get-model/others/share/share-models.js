@@ -3,12 +3,7 @@ const ShareModel = {
 	layout () {
 		El.empty(share_code_box)
 		El.append(share_code_box, `
-			<div class='social'>
-				<a href="${ ShareMisc.social_media('facebook') }" target='_blank' class='fab fa-facebook'></a>
-				<a href="${ ShareMisc.social_media('twitter') }" target='_blank' class='fab fa-twitter'></a>
-				<a href="${ ShareMisc.social_media('reddit') }" target='_blank' class='fab fa-reddit'></a>
-				<a href="${ ShareMisc.social_media('vk') }" target='_blank' class='fab fa-vk'></a>
-			</div>
+			<div class='social'></div>
 
 			<div class='options' onclick="ShareModel.toggle_sub_options()">
 				<div class='text'>Direct</div>
@@ -25,6 +20,8 @@ const ShareModel = {
 				<input type='text' value='${ ShareMisc.link_direct() }' id='share-model-input' onclick="Copy.input(this)" readonly>
 			</div>
 		`)
+
+		Share.loader(URL.get_url_base() + Queries.get('i'), 'models')
 	},
 
 	toggle () {

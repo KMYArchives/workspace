@@ -4,12 +4,7 @@ const ShareDiagram = {
 		setTimeout( e => {
 			El.empty(share_dgr_box)
 			El.append(share_dgr_box, `
-				<div class='social'>
-					<a href="${ EmbedDiagram.social_media('facebook') }" target='_blank' class='fab fa-facebook'></a>
-					<a href="${ EmbedDiagram.social_media('twitter') }" target='_blank' class='fab fa-twitter'></a>
-					<a href="${ EmbedDiagram.social_media('reddit') }" target='_blank' class='fab fa-reddit'></a>
-					<a href="${ EmbedDiagram.social_media('pinterest') }" target='_blank' class='fab fa-pinterest'></a>
-				</div>
+				<div class='social'></div>
 
 				<div class='options' onclick="ShareDiagram.toggle_sub_options()">
 					<div class='text'>Page</div>
@@ -28,6 +23,10 @@ const ShareDiagram = {
 					<input type='text' value='${ EmbedDiagram.page() }' onclick="Misc.copy_input(this)" readonly>
 				</div>
 			`)
+
+			Share.loader(
+				Attr.get(diagram_modal + ' > .viewer > img', 'src'), 'diagrams'
+			)
 		}, anim_time)
 	},
 

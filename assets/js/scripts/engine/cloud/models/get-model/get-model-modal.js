@@ -22,15 +22,19 @@ const GetModelModal = {
 
 					<div class='right'>
 						<div class='item icon' id='sql-minidoc' onclick='SDMList.toggle()' title='${ SDM.name }'>
-							<div class='fas fa-book-open'></div>
+							<div class='fa-solid fa-book-open'></div>
+						</div>
+
+						<div class='item icon' id='link-scraper' onclick='LS.show()'>
+							<div class='fa-solid fa-shield-blank'></div>
 						</div>
 
 						<div class='item icon' id='download-model' onclick='GetModel.download()' title='Download'>
-							<div class='fas fa-download'></div>
+							<div class='fa-solid fa-download'></div>
 						</div>
 
 						<div class='item icon no-bdr-rig' id='get-options-model' onclick='OptionsModel.toggle()' title="Option's">
-							<div class='fas fa-cog'></div>
+							<div class='fa-solid fa-cog'></div>
 						</div>
 					</div>
 
@@ -39,17 +43,6 @@ const GetModelModal = {
 
 				<div class='menu-box'></div>
 
-				<div class='link-scraper'>
-					<div class='lk-header'>
-						<img class='lk-preview' src=''>
-
-						<div class='lk-title'>
-							<img class='lk-favicon' src=''>
-							<div class='lk-site'></div>
-						</div>
-					</div>
-				</div>
-
 				<div class='sdm-get' id='${ Find.replace_all(sdm_get, code_view_modal + ' > #', '') }'></div>
 				<div class='sdm-list' id='${ Find.replace_all(sdm_list, code_view_modal + ' > #', '') }'></div>
 				<div class='send-to-box' id='${ Find.replace(send_to_box, code_view_modal + ' > #', '') }'></div>
@@ -57,6 +50,7 @@ const GetModelModal = {
 				<div class='code-diagram' id='${ Find.replace(code_diagram, code_view_modal + ' > #', '') }'></div>
 				<div class='options-box' id='${ Find.replace(options_model, code_view_modal + ' > #', '') }'></div>
 				<div class='properties-menu' id='${ Find.replace(properties, code_view_modal + ' > #', '') }'></div>
+				<div class='link-scraper' id='${ Find.replace_all(link_scraper, code_view_modal + ' > #', '') }'></div>
 				<div class='models-linked-box' id='${ Find.replace(models_linked_box, code_view_modal + ' > #', '') }'></div>
 				
 				<div class='visual-mode' id='${ Find.replace(visual_mode, code_view_modal + ' > #', '') }'>

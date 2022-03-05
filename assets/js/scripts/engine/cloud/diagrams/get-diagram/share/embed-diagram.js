@@ -50,7 +50,6 @@ const EmbedDiagram = {
 		var link = EmbedDiagram.direct()
 
 		switch (social) {
-			case 'vk': return `https://vk.com/share.php?url=${ link }`
 			case 'reddit': return `https://www.reddit.com/submit?url=${ link }`
 			case 'twitter': return `https://twitter.com/intent/tweet?url=${ link }`
 			case 'facebook': return `https://www.facebook.com/sharer.php?u=${ link }`

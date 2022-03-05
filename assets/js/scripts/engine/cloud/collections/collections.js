@@ -16,7 +16,7 @@ const Collections = {
 			<div class='header'>
 				<div class='button' onclick='ManagerCollection.create_modal()'>
 					New
-					<div class='fas fa-plus'></div>
+					<div class='fa-solid fa-plus'></div>
 				</div>
 
 				<div class='total'></div>
@@ -36,7 +36,7 @@ const Collections = {
 			El.append(user_container + ' > .filter-area', `
 				<div class='filter' title='Remove filter' onclick='Collections.check_page()'>
 					${ callback.data.name }
-					<div class='fas fa-filter'></div>
+					<div class='fa-solid fa-filter'></div>
 				</div>
 			`)
 		})

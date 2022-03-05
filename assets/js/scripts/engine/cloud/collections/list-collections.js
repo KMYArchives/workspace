@@ -38,8 +38,8 @@ const ListCollections = {
 				</div>
 				
 				<div class='right'>
-					<div class='fas fa-edit' onclick="ManagerCollection.edit_modal('${ item.slug }')"></div>
-					<div class='fas fa-trash-alt' onclick="Confirm.run('delete_collection', '${ item.slug }')"></div>
+					<div class='fa-solid fa-edit' onclick="ManagerCollection.edit_modal('${ item.slug }')"></div>
+					<div class='fa-solid fa-trash-alt' onclick="Confirm.run('delete_collection', '${ item.slug }')"></div>
 				</div>
 			</div>
 		`)

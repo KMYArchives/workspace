@@ -105,7 +105,7 @@
 			right: 0;
 			line-height: $header_size;
 
-			.far, .fas{
+			@include icons{
 				float: left;
 				cursor: pointer;
 				text-align: center;

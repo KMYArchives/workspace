@@ -17,11 +17,6 @@ const SDMLayout = {
 	list () {
 		El.empty(sdm_list)
 		El.append(sdm_list, `
-			<div class='nav-right'>
-				<div class='fas fa-home actived'></div>
-				<div class='fas fa-sort-amount-down-alt'></div>
-			</div>
-
 			<div class='header'>
 				<div class='label'>${ SDM.name }</div>
 				<div class='fas fa-times' onclick="SDMList.hide()"></div>

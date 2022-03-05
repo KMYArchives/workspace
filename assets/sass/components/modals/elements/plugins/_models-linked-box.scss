@@ -36,7 +36,7 @@
 			line-height: $padding_base * 3.5;
 			border-bottom: $border_size solid $borderColor;
 
-			.far, .fas{
+			@include icons{
 				float: right;
 				text-align: center;
 				width: $padding_base * 3;

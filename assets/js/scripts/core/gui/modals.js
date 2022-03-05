@@ -46,7 +46,7 @@ const Modals = {
 			if (Find.in_array(Params.get_last(), [ 
 				'licenses', 'devices', 'settings', 'orders', 'cloud', 'hashes', 'diagrams', 'settings', 'table-models'
 			]) != true) {
-				URL.remove_last_param()
+				Params.remove_last()
 			}
 		}
 		

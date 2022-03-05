@@ -39,9 +39,7 @@
 				$_GET['slug'],
 			]) as $data);
 
-			Headers::setHttpCode(200);
-			Headers::setContentType('application/json');
-			echo json_encode($data);
+			Callback::json(200, $data);
 		}
 
 		public function list(): mixed {
@@ -56,9 +54,7 @@
 				];
 			}
 
-			Headers::setHttpCode(200);
-			Headers::setContentType('application/json');
-			echo json_encode([
+			Callback::json(200, [
 				'list'		=>	$list,
 				'offset'	=>	intval($offset),
 				'total'		=>	$this->db->query("SELECT COUNT(*) FROM ws_sql_minidoc $where")[0]['COUNT(*)'],

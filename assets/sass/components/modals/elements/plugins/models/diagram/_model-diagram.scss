@@ -20,7 +20,7 @@
 		padding-bottom: $padding_base;
 	}
 
-	.far, .fas{
+	@include icons{
 		float: left;
 		text-align: center;
 		width: $padding_base;
