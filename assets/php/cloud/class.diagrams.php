@@ -32,9 +32,7 @@
 				$this->clients->get_id($_GET['username'])
 			]) as $data);
 
-			Headers::setHttpCode(200);
-			Headers::setContentType('application/json');
-			echo json_encode([
+			Callback::json(200, [
 				'name'			=>	$data['name'],
 				'size'			=>	$data['size'],
 				'mime'			=>	$data['mime'],
@@ -68,9 +66,7 @@
 				];
 			}
 
-			Headers::setHttpCode(200);
-			Headers::setContentType('application/json');
-			echo json_encode([
+			Callback::json(200, [
 				'list'	=>	$list,
 				'total'	=>	$this->db->query("SELECT count(*) FROM ws_diagrams WHERE username = ? $where", [
 					$this->clients->get_id($_GET['username'])
@@ -82,7 +78,6 @@
 			$slug	=	Random::slug([ 36, 48 ]);
 			$imgur	=	$this->imgur->upload($_POST['image']);
 
-			Headers::setContentType('application/json');
 			if ($this->db->query("INSERT INTO ws_diagrams(slug, name, image_id, image, size, mime, delete_hash, username) VALUES(?, ?, ?, ?, ?, ?, ?, ?)", [
 				$slug,
 				Clean::sql($_POST['name']),
@@ -101,16 +96,14 @@
 					);
 				}
 
-				Headers::setHttpCode(200);
-				echo json_encode([ 
+				Callback::json(200, [
 					'slug'		=>	$slug,
 					'return'	=> 'success',
 					'image'		=>	$imgur['data']['link'],
 					'id'		=>	$this->diagrams_meta->get_data($slug, 'id'),
 				]);
 			} else {
-				Headers::setHttpCode(500);
-				echo json_encode([ 'return' => 'error-db-create-diagram' ]);
+				Callback::json(500, [ 'return' => 'error-db-create-diagram' ]);
 			}
 		}
 
@@ -121,17 +114,13 @@
 			]) as $data);
 
 			if ($this->imgur->delete($data['delete_hash'])) {
-				Headers::setContentType('application/json');
-
 				if ($this->db->query("DELETE FROM ws_diagrams WHERE slug = ? AND username = ?" , [
 					$data['slug'], 
 					$this->clients->get_id() 
 				])) {
-					Headers::setHttpCode(200);
-					echo json_encode([ 'return' => 'success' ]);
+					Callback::json(200, [ 'return' => 'success' ]);
 				} else {
-					Headers::setHttpCode(500);
-					echo json_encode([ 'return' => 'error-db-unlink-diagram' ]);
+					Callback::json(500, [ 'return' => 'error-db-unlink-diagram' ]);
 				}
 			}
 		}

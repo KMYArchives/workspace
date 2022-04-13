@@ -20,13 +20,19 @@
 
 		private function title(): string {
 			return preg_match(
-				'/<title[^>]*>(.*?)<\/title>/ims', file_get_contents($this->url), $match
+				'/<title[^>]*>(.*?)<\/title>/ims', File::read($this->url, [
+					'remote'	=>	true,
+				]), $match
 			) ? $match[1] : null;
 		}
 
 		private function robots(): string {
-			if (file_get_contents($this->url . '/robots.txt') != '') {
-				return file_get_contents($this->url . '/robots.txt');
+			if (File::read($this->url . '/robots.txt', [
+				'remote'	=>	true,
+			]) != '') {
+				return File::read($this->url . '/robots.txt', [
+					'remote'	=>	true,
+				]);
 			}
 
 			return false;
@@ -48,7 +54,7 @@
 			return "https://s0.wp.com/mshots/v1/" . $this->url . "?w=" . $this->shot_w_size . "&h=" . $this->shot_h_size;
 		}
 
-		private function headers() { return get_headers($this->url); }
+		private function headers(): array { return get_headers($this->url); }
 
 		public function __construct() {
 			if (isset($_GET['link'])) {

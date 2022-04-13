@@ -132,9 +132,9 @@
 		}
 
 		public function create(): mixed {
+			$sql_file	=	Random::name(36);
+			$json_file	=	Random::name(36);
 			$slug		=	Random::slug([ 36, 48 ]);
-			$sql_file	=	Random::string(36, true, true, true);
-			$json_file	=	Random::string(36, true, true, true);
 
 			if (File::create(Values::$assets['models']['sql'] . $sql_file, $_POST['sql_content'])) {
 				if (File::create(Values::$assets['models']['json'] . $json_file, $_POST['json_content'])) {

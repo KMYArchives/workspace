@@ -6,20 +6,14 @@
 
 		public function sign_out() {
 			Cookies::delete('user');
-
-			Headers::setHttpCode(200);
-			Headers::setContentType('application/json');
-			echo json_encode([ 'logoff' => true ]);
+			Callback::json(200, [ 'logoff' => true ]);
 		}
 
 		public function check_logged() {
-			Headers::setContentType('application/json');
-			
-			Headers::setHttpCode(200);
 			if ($this->clients->get_id()) {
-				echo json_encode([ 'logged' => true ]);
+				Callback::json(200, [ 'logged' => true ]);
 			} else {
-				echo json_encode([ 'logged' => false ]);
+				Callback::json(200, [ 'logged' => false ]);
 			}
 		}
 

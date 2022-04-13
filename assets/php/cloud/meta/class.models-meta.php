@@ -34,20 +34,17 @@
 				$favorited	=	'true';
 			}
 
-			Headers::setContentType('application/json');
 			if ($this->db->query("UPDATE ws_models SET favorited = ? WHERE slug = ? AND username = ?", [
 				$favorited,
 				$data['slug'],
 				$data['username'],
 			])) {
-				Headers::setHttpCode(200);
-				echo json_encode([ 
+				Callback::json(200, [
 					'return'	=>	'success',
 					'favorited'	=>	$favorited
 				]);
 			} else {
-				Headers::setHttpCode(500);
-				echo json_encode([ 'return' => 'error-favorite-model' ]);
+				Callback::json(500, [ 'return' => 'error-favorite-model' ]);
 			}
 		}
 
@@ -59,9 +56,7 @@
 				$this->clients->get_id(),
 			]) as $data);
 
-			Headers::setHttpCode(200);
-			Headers::setContentType('application/json');
-			echo json_encode([
+			Callback::json(200, [
 				'privacy'		=>	$data['privacy'],
 				'collection'	=>	[
 					'id'		=>	$data['collection'],
@@ -82,17 +77,14 @@
 				$privacy	=	'public';
 			}
 
-			Headers::setContentType('application/json');
 			if ($this->db->query("UPDATE ws_models SET privacy = ? WHERE slug = ? AND username = ?", [
 				$privacy,
 				$data['slug'],
 				$data['username'],
 			])) {
-				Headers::setHttpCode(200);
-				echo json_encode([ 'return' => 'success' ]);
+				Callback::json(200, [ 'return' => 'success' ]);
 			} else {
-				Headers::setHttpCode(500);
-				echo json_encode([ 'return' => 'error-change-privacy-model' ]);
+				Callback::json(500, [ 'return' => 'error-change-privacy-model' ]);
 			}
 		}
 
@@ -103,18 +95,15 @@
 				Clean::slug($_POST['model']), 
 				$this->clients->get_id() 
 			])) {
-				Headers::setHttpCode(200);
-				echo json_encode([ 'return' => 'success' ]);
+				Callback::json(200, [ 'return' => 'success' ]);
 			} else {
-				Headers::setHttpCode(500);
-				echo json_encode([ 'return' => 'error-change-diagram-model' ]);
+				Callback::json(500, [ 'return' => 'error-change-diagram-model' ]);
 			}
 		}
 
 		public function change_collection(int $col = null): string {
 			if (!$col) { $col = Clean::numbers($_POST['col']); }
 
-			Headers::setContentType('application/json');
 			if ($this->db->query("UPDATE ws_models SET collection = ? WHERE slug = ? AND username = ?", [
 				$col,
 
@@ -126,8 +115,7 @@
 					$this->clients->get_id() 
 				]) as $data);
 
-				Headers::setHttpCode(200);
-				echo json_encode([ 
+				Callback::json(200, [
 					'return'		=>	'success',
 					'collection'	=>	[
 						'id'		=>	$col,
@@ -135,8 +123,7 @@
 					]
 				]);
 			} else {
-				Headers::setHttpCode(500);
-				echo json_encode([ 'return' => 'error-change-collection-model' ]);
+				Callback::json(500, [ 'return' => 'error-change-collection-model' ]);
 			}
 		}
 

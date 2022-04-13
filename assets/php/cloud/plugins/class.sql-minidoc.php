@@ -61,14 +61,6 @@
 			]);
 		}
 
-		public function get_ref(string $value): mixed {
-			foreach ($this->db->query("SELECT name, content, added_in, updated_in FROM ws_sql_minidoc WHERE slug = ?", [
-				Clean::slug($_GET['slug']), 
-			]) as $data);
-
-			return $data[$value];
-		}
-
 		public function __construct() { $this->db = new DB; }
 
 	}

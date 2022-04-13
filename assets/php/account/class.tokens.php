@@ -26,9 +26,7 @@
 				$this->clients->get_id()
 			]) as $data);
 
-			Headers::setHttpStatus(200);
-			Headers::setContentType('application/json');
-			echo json_encode([
+			Callback::json(200, [
 				'name'		=>	$data['name'],
 				'token'		=>	$data['token'],
 				'added_in'	=>	$data['added_in'],
@@ -51,9 +49,7 @@
 				];
 			}
 
-			Headers::setHttpStatus(200);
-			Headers::setContentType('application/json');
-			echo json_encode([
+			Callback::json(200, [
 				'list'	=>	$list,
 				'total'	=>	$this->db->query("SELECT count(*) FROM ws_tokens WHERE username = ? $where", [
 					$username
@@ -69,36 +65,29 @@
 			$token	=	$this->generate_token();
 			$slug	=	Random::string(36, true, true, true);
 
-			Headers::setContentType('application/json');
 			if ($this->db->query("INSERT INTO ws_tokens(slug, token, name) VALUES(?, ?, ?)", [
 				$slug,
 				$token,
 				Clean::default($_POST['name']),
 			])) {
-				Headers::setHttpStatus(200);
-				echo json_encode([
+				Callback::json(200, [
 					'result'	=>	true,
 					'slug'		=>	$slug,
 					'token'		=>	$token,
 				]);
 			} else {
-				Headers::setHttpStatus(500);
-				echo json_encode([ 'result' => 'error-db-create-token' ]);
+				Callback::json(500, [ 'result' => 'error-db-create-token' ]);
 			}
 		}
 
 		public function delete() {
-			Headers::setContentType('application/json');
-			
 			if ($this->db->query("DELETE FROM ws_tokens WHERE slug = ? AND username = ?", [
 				Clean::slug($_POST['slug']),
 				$this->clients->get_id(),
 			])) {
-				Headers::setHttpStatus(200);
-				echo json_encode([ 'result' => true ]);
+				Callback::json(200, [ 'result' => true ]);
 			} else {
-				Headers::setHttpStatus(500);
-				echo json_encode([ 'result' => 'error-db-delete-token' ]);
+				Callback::json(500, [ 'result' => 'error-db-delete-token' ]);
 			}
 		}
 

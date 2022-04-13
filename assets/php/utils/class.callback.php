@@ -2,10 +2,6 @@
 
 	class Callback {
 
-		public static function redirect(string $url): string {
-			Headers::setLocation($url);
-		}
-
 		public static function json(int $code, array $data): string {
 			Headers::setHttpCode($code);
 			Headers::setContentType('application/json');

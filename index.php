@@ -20,6 +20,7 @@
 			include_once $urlE[0] . '.php';
 		}
 	} else {
-		Headers::setHttpCode(404);
-		echo json_encode([ 'error' => '404: page not found.' ]);
+		Callback::json(404, [
+			'error'	=>	'404: page not found.'
+		]);
 	}

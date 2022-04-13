@@ -3,10 +3,7 @@
 	class Core {
 
 		public function basic() {
-			Headers::setHttpCode(200);
-			Headers::setContentType('application/json');
-
-			echo json_encode([
+			Callback::json(200, [
 				'name'				=>	Values::$basic['name'],
 				'etag'				=>	Values::$basic['etag'],
 				'company'			=>	Values::$basic['author'],

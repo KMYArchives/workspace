@@ -58,8 +58,7 @@
 				];
 			}
 
-			Headers::setContentType('application/json');
-			echo json_encode($contact);
+			Callback::json(200, $contact);
 		}
 
 		public function list() {
@@ -82,8 +81,7 @@
 				];
 			}
 
-			Headers::setContentType('application/json');
-			echo json_encode([
+			Callback::json(200, [
 				'list'	=>	$list,
 				'total'	=>	$this->db->query("SELECT count(*) FROM ws_contacts WHERE invite_accept = 'true' AND username = ? AND contact_id != ? $where LIMIT $offset, $sql_max", [
 					$username, $username
@@ -93,19 +91,15 @@
 
 		public function update() {
 			if (Clean::string($_POST['status'], 'az') == 'true') {
-				Headers::setContentType('application/json');
-
 				if ($this->db->query("UPDATE ws_contacts SET invite_accept = ? WHERE slug = ? AND username = ?", [
 					'true',
 
 					Clean::slug($_POST['slug']),
 					($_POST['username']) ? Clean::numbers($_POST['username']) : $this->clients->get_id(),
 				])) {
-					Headers::setHttpCode(200);
-					echo json_encode([ 'return' => 'success' ]);
+					Callback::json(200, [ 'return' => 'success' ]);
 				} else {
-					Headers::setHttpCode(500);
-					echo json_encode([ 'return' => 'error-db-edited-contact' ]);
+					Callback::json(500, [ 'return' => 'error-db-edited-contact' ]);
 				}
 			} else if (Clean::string($_POST['status'], 'az') == 'false') {
 				$this->delete();
@@ -116,7 +110,6 @@
 			$username	=	$this->clients->get_id();
 			if ($_POST['username']) { $username = Clean::numbers($_POST['username']); }
 
-			Headers::setContentType('application/json');
 			if ($this->check_exists($_POST['contact'], $username)) {
 				if ($this->db->query("INSERT INTO ws_cloud_share(slug, contact_id, username) VALUES(?, ?, ?)", [
 					Random::string(36, true, true, true),
@@ -124,30 +117,23 @@
 	
 					$username,
 				])) {
-					Headers::setHttpCode(200);
-					echo json_encode([ 'return'	=> 'success' ]);
+					Callback::json(200, [ 'return'	=> 'success' ]);
 				} else {
-					Headers::setHttpCode(500);
-					echo json_encode([ 'return' => 'error-db-create-contact' ]);
+					Callback::json(500, [ 'return' => 'error-db-create-contact' ]);
 				}
 			} else {
-				Headers::setHttpCode(500);
-				echo json_encode([ 'return' => 'error-exists-contact' ]);
+				Callback::json(500, [ 'return' => 'error-exists-contact' ]);
 			}
 		}
 
 		public function delete() {
-			Headers::setContentType('application/json');
-
 			if ($this->db->query("DELETE FROM ws_contacts WHERE slug = ? AND username = ?", [
 				Clean::slug($_POST['slug']),
 				($_POST['username']) ? Clean::numbers($_POST['username']) : $this->clients->get_id(),
 			])) {
-				Headers::setHttpCode(200);
-				echo json_encode([ 'return' => 'success' ]);
+				Callback::json(200, [ 'return' => 'success' ]);
 			} else {
-				Headers::setHttpCode(500);
-				echo json_encode([ 'return' => 'error-db-delete-contact' ]);
+				Callback::json(500, [ 'return' => 'error-db-delete-contact' ]);
 			}
 		}
 
@@ -163,20 +149,17 @@
 				$favorited	=	'true';
 			}
 
-			Headers::setContentType('application/json');
 			if ($this->db->query("UPDATE ws_contacts SET favorited = ? WHERE slug = ? AND username = ?", [
 				$favorited,
 				$data['slug'],
 				$data['username'],
 			])) {
-				Headers::setHttpCode(200);
-				echo json_encode([ 
+				Callback::json(200, [
 					'return'	=>	'success',
 					'favorited'	=>	$favorited
 				]);
 			} else {
-				Headers::setHttpCode(500);
-				echo json_encode([ 'return' => 'error-favorite-contacts' ]);
+				Callback::json(500, [ 'return' => 'error-favorite-contacts' ]);
 			}
 		}
 

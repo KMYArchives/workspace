@@ -32,9 +32,7 @@
 				$this->clients->get_id($_GET['username'])
 			]) as $data);
 
-			Headers::setHttpCode(200);
-			Headers::setContentType('application/json');
-			echo json_encode([
+			Callback::json(200, [
 				'name'				=>	$data['name'],
 				'size'				=>	$data['size'],
 				'type'				=>	$data['type'],
@@ -62,9 +60,7 @@
 				];
 			}
 
-			Headers::setHttpCode(200);
-			Headers::setContentType('application/json');
-			echo json_encode([
+			Callback::json(200, [
 				'list'	=>	$list,
 				'total'	=>	$this->db->query("SELECT count(*) FROM ws_hashes WHERE username = ? $where", [
 					$this->clients->get_id($_GET['username'])
@@ -90,15 +86,12 @@
 
 					$this->clients->get_id($_POST['username'])
 				])) {
-					Headers::setHttpCode(200);
-					echo json_encode([ 'return'	=> 'success' ]);
+					Callback::json(200, [ 'return'	=> 'success' ]);
 				} else {
-					Headers::setHttpCode(500);
-					echo json_encode([ 'return' => 'error-db-create-hash' ]);
+					Callback::json(500, [ 'return' => 'error-db-create-hash' ]);
 				}
 			} else {
-				Headers::setHttpCode(500);
-				echo json_encode([ 'return' => 'error-file-create-hash' ]);
+				Callback::json(500, [ 'return' => 'error-file-create-hash' ]);
 			}
 		}
 

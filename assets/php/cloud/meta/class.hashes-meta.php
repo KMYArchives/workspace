@@ -24,11 +24,9 @@
 			])) {
 				$this->delete_file($data);
 				
-				Headers::setHttpCode(200);
-				echo json_encode([ 'return' => 'success' ]);
+				Callback::json(200, [ 'return' => 'success' ]);
 			} else {
-				Headers::setHttpCode(500);
-				echo json_encode([ 'return' => 'error-db-unlink-hash' ]);
+				Callback::json(500, [ 'return' => 'error-db-unlink-hash' ]);
 			}
 		}
 
@@ -44,20 +42,17 @@
 				$favorited	=	'true';
 			}
 
-			Headers::setContentType('application/json');
 			if ($this->db->query("UPDATE ws_hashes SET favorited = ? WHERE slug = ? AND username = ?", [
 				$favorited,
 				$data['slug'],
 				$data['username'],
 			])) {
-				Headers::setHttpCode(200);
-				echo json_encode([
+				Callback::json(200, [
 					'return'	=>	'success',
 					'favorited'	=>	$favorited
 				]);
 			} else {
-				Headers::setHttpCode(500);
-				echo json_encode([ 'return' => 'error-favorite-hash' ]);
+				Callback::json(500, [ 'return' => 'error-favorite-hash' ]);
 			}
 		}
 
@@ -78,24 +73,20 @@
 				$privacy	=	'public';
 			}
 
-			Headers::setContentType('application/json');
 			if ($this->db->query("UPDATE ws_models SET privacy = ? WHERE slug = ? AND username = ?", [
 				$privacy,
 				$data['slug'],
 				$data['username'],
 			])) {
-				Headers::setHttpCode(200);
-				echo json_encode([ 'return' => 'success' ]);
+				Callback::json(200, [ 'return' => 'success' ]);
 			} else {
-				Headers::setHttpCode(500);
-				echo json_encode([ 'return' => 'error-change-privacy-model' ]);
+				Callback::json(500, [ 'return' => 'error-change-privacy-model' ]);
 			}
 		}
 
 		public function change_collection(int|string $col = null) {
 			if (!$col) { $col = Clean::numbers($_POST['col']); }
 
-			Headers::setContentType('application/json');
 			if ($this->db->query("UPDATE ws_hashes SET collection = ? WHERE slug = ? AND username = ?", [
 				$col,
 				Clean::slug($_POST['slug']), 
@@ -106,8 +97,7 @@
 					$this->clients->get_id() 
 				]) as $data);
 
-				Headers::setHttpCode(200);
-				echo json_encode([
+				Callback::json(200, [
 					'return'		=>	'success',
 					'collection'	=>	[
 						'id'		=>	$col,
@@ -115,8 +105,7 @@
 					]
 				]);
 			} else {
-				Headers::setHttpCode(500);
-				echo json_encode([ 'return' => 'error-change-collection' ]);
+				Callback::json(500, [ 'return' => 'error-change-collection' ]);
 			}
 		}
 

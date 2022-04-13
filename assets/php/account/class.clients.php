@@ -14,9 +14,7 @@
 				$data['username']		=	OpenSSL::decrypt($data['username']);
 			}
 
-			Headers::setHttpCode(200);
-			Headers::setContentType('application/json');
-			echo json_encode($data);
+			Callback::json(200, $data);
 		}
 
 		public function get_user(): string {

@@ -38,6 +38,17 @@
 			return $ret;
 		}
 
+		public static function name(int $size): string {
+			$string		=	'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+			for ($n = 1; $n <= $size; $n++) {
+				$rand	=	mt_rand(1, strlen($string));
+				$ret	.=	$string[$rand - 1];
+			}
+
+			return $ret;
+		}
+
 		public static function string(int $size, bool $low, bool $upp, bool $num, bool $sym = false): string {
 			$string		=	null;
 			$char		=	[

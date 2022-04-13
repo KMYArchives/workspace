@@ -44,9 +44,7 @@
 				$this->clients->get_id($_GET['username'])
 			]) as $data);
 
-			Headers::setHttpCode(200);
-			Headers::setContentType('application/json');
-			echo json_encode([
+			Callback::json(200, [
 				'slug'			=>	$data['slug'],
 				'opened'		=>	$data['opened'],
 				'message'		=>	$data['message'],
@@ -88,9 +86,7 @@
 				];
 			}
 
-			Headers::setHttpCode(200);
-			Headers::setContentType('application/json');
-			echo json_encode([
+			Callback::json(200, [
 				'list'	=>	$list,
 
 				'total'	=>	$this->db->query("SELECT COUNT(*) FROM ws_notifications WHERE username = ? $filter", [
