@@ -38,8 +38,8 @@
 			break;
 		
 		default:
-			Headers::setHttpCode(404);
-			Headers::setContentType('application/json');
-			echo json_encode([ 'error' => 'Argument invalid...' ]);
+			Cabllack::json(404, [
+				'error' => 'Argument invalid...'
+			]);
 			break;
 	}

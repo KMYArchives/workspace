@@ -33,6 +33,8 @@
 			return $data['id'];
 		}
 
+		public function __construct() { $this->db = new DB(true); }
+
 		public function get_data(int $user, string $field): string {
 			foreach ($this->db->query("SELECT * FROM ws_clients WHERE id = ?", [ 
 				$user
@@ -45,7 +47,5 @@
 
 			return $data[$field];
 		}
-
-		public function __construct() { $this->db = new DB(true); }
 
 	}

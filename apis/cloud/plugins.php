@@ -18,6 +18,8 @@
 			break;
 		
 		default:
-			Callback::json(404, [ 'error' => 'Argument invalid...' ]);
+			Cabllack::json(404, [
+				'error' => 'Argument invalid...'
+			]);
 			break;
 	}

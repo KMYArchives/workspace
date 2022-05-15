@@ -26,10 +26,10 @@
 			Request::post([ 'name', 'temporary', 'sql_content', 'json_content', 'engine', 'collation', 'row_format', 'auto_increment', 'username' ]);
 			$models->create();
 			break;
-			
+		
 		default:
-			Headers::setHttpCode(404);
-			Headers::setContentType('application/json');
-			echo json_encode([ 'error' => 'Argument invalid...' ]);
+			Cabllack::json(404, [
+				'error' => 'Argument invalid...'
+			]);
 			break;
 	}
