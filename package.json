@@ -10,8 +10,8 @@
 		"ipkg": "yarn add --dev sass gulp gulp-concat gulp-sass gulp-babel gulp-plumber gulp-uglify gulp-watch gulp-zip gulp-javascript-obfuscator @babel/core @babel/preset-env"
 	},
 	"devDependencies": {
-		"@babel/core": "^7.15.8",
-		"@babel/preset-env": "^7.15.8",
+		"@babel/core": "^7.17.12",
+		"@babel/preset-env": "^7.17.12",
 		"eslint": "^5.16.0",
 		"eslint-config-standard": "^12.0.0",
 		"eslint-plugin-import": "^2.17.2",
@@ -22,12 +22,12 @@
 		"gulp-concat": "^2.6.1",
 		"gulp-javascript-obfuscator": "^1.1.6",
 		"gulp-plumber": "^1.2.1",
-		"gulp-sass": "4.1.1",
+		"gulp-sass": "^5.1.0",
 		"gulp-strip-css-comments": "^2.0.0",
 		"gulp-uglify": "^3.0.2",
 		"gulp-watch": "^5.0.1",
 		"gulp-zip": "^5.1.0",
-		"sass": "^1.49.9"
+		"sass": "^1.51.0"
 	},
 	"dependencies": {}
 }

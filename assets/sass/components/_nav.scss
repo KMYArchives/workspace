@@ -1,3 +1,5 @@
+@use "sass:math";
+
 .nav{
 	top: 0;
 	left: 0;
@@ -21,8 +23,8 @@
 		text-decoration: none;
 		line-height: $header_size;
 		margin-top: $padding_base;
-		margin-left: -$padding3 / 3;
 		margin-bottom: $padding_base;
+		margin-left: math.div(-$padding3, 3);
 		&:hover, &:focus{ @include filter-grayscale(100%); }
 	}
 
@@ -54,8 +56,8 @@
 				opacity: 1;
 				display: inline;
 				transition: .5s;
+				margin-right: -.15em;
 				transition-delay: .1s;
-				margin-right: -$padding3 / 2;
 			}
 		}
 	}

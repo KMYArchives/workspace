@@ -4,9 +4,8 @@
 
 		private static function _error(array $debug) {
 			echo match ($debug['type']) {
-				'cookie'	=>	"Missing cookie: " . $debug['param'] . " (mode: " . strtoupper($debug['mode']) . ")\n",
-				'empty'		=>	"Empty parameter: " . $debug['param'] . " (mode: " . strtoupper($debug['mode']) . ")\n",
-				'missing'	=>	"Missing parameter: " . $debug['param'] . " (mode: " . strtoupper($debug['mode']) . ")\n",
+				'empty'		=>	"Empty request: " . $debug['param'] . " (mode: " . strtoupper($debug['mode']) . ")\n",
+				'missing'	=>	"Missing request: " . $debug['param'] . " (mode: " . strtoupper($debug['mode']) . ")\n",
 			};
 		}
 		
@@ -69,21 +68,43 @@
 			}
 		}
 
-		public static function validate_request (string $cookie, array $params, string $mode): bool {
-			if (Cookies::has($cookie)) {
-				if ($mode == 'get') {
-					self::get($params);
-				} else {
-					self::post($params);
-				}
-			} else {
-				self::_error([
-					'param'	=>	$cookie,
-					'mode'	=>	'cookie',
-					'type'	=>	'cookie',
-				]);
+		public static function cookie(array $values): void {
+			foreach ($values as $value) {
+				self::protect([$value]);
 
-				die;
+				if (!isset($_COOKIE[$value])) {
+					self::_error([
+						'param'	=>	$value,
+						'mode'	=>	'cookie',
+						'type'	=>	'missing',
+					]);
+				} else if (empty($_COOKIE[$value])) {
+					self::_error([
+						'param'	=>	$value,
+						'type'	=>	'empty',
+						'mode'	=>	'cookie',
+					]);
+				}
+			}
+		}
+
+		public static function header(array $values): void {
+			foreach ($values as $value) {
+				self::protect([$value]);
+
+				if (!isset($_SERVER['HTTP_' . $value])) {
+					self::_error([
+						'param'	=>	$value,
+						'mode'	=>	'header',
+						'type'	=>	'missing',
+					]);
+				} else if (empty($_SERVER['HTTP_' . $value])) {
+					self::_error([
+						'param'	=>	$value,
+						'type'	=>	'empty',
+						'mode'	=>	'header',
+					]);
+				}
 			}
 		}
 

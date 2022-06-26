@@ -1,10 +1,10 @@
 var gulp    	= 	require('gulp'), // Gulp
 	zip			=	require('gulp-zip'), // Zip
-	sass		=	require('gulp-sass'), // Sass
 	babel		= 	require('gulp-babel'), // Babel
 	uglify  	= 	require('gulp-uglify'), // Minify
 	concat  	= 	require('gulp-concat'), // Concate
-	plumber 	= 	require('gulp-plumber') // Lint the code
+	plumber 	= 	require('gulp-plumber'), // Lint the code
+	sass		=	require('gulp-sass')(require('sass')) // Sass
  
 // Minify e concate scripts
 gulp.task('js-compiler', e => {

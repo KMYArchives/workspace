@@ -27,8 +27,6 @@
 		font-size: $smallFont + .05;
 		padding-left: $padding_base;
 		padding-right: $padding_base;
-		padding-top: $border_size / 2;
-		padding-bottom: $border_size / 2;
 	}
 
 	@include icons{

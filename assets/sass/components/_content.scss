@@ -1,9 +1,9 @@
 .content{
-	top: 0;
+	width: 85vw;
+	margin: auto;
 	position: absolute;
 	margin-top: $padding_base * 3;
 	margin-left: $header_size + $left_box_size;
-	width: calc(100% - $header_size + $left_box_size);
 
 	.filter{
 		float: left;
